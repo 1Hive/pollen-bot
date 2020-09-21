@@ -1,0 +1,10 @@
+{
+    "name": "BeeGuard",
+    "description": "A discord bot to regulate BrightID links on public channels.",
+    "repository": "https://github.com/crisog/bee-guard",
+    "logo": "https://www.wholekidsfoundation.org/assets/images/Worker-Bee-Roles_Guard.png",
+    "keywords": ["node", "discord", "1Hive"],
+    "env": {
+      "DISCORD_API_TOKEN": "YOUR_DISCORD_API_TOKEN"
+    }
+  }
