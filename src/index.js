@@ -27,7 +27,7 @@ client.on('message', async message => {
           icon_url: 'https://www.wholekidsfoundation.org/assets/images/Worker-Bee-Roles_Guard.png'
         },
         color: 3447003,
-        description: 'You should not public BrightID connection links on public channels!',
+        description: 'You should not publish BrightID connection links on public channels!',
         fields: [{
           name: 'Want to get verified?',
           value: 'The best way is to join a verification party at https://www.brightid.org/meet.'
