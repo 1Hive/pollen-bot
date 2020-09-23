@@ -1,5 +1,9 @@
 const Discord = require('discord.js')
 const dotenv = require('dotenv')
+const detectHandler = require('./parser/detectHandler')
+const {
+  RequestHandlerError,
+} = require('./error-utils')
 const { log } = require('./utils')
 
 // Load this as early as possible, to init all the environment variables that may be needed
@@ -21,24 +25,38 @@ client.on('message', async message => {
       message.delete({ timeout: 500 })
 
       // Sends a PM to the user, letting them know it is agains't the rules.
-      message.author.send({embed: {
-        author: {
-          name: 'Bee Guard 🚨',
-          icon_url: 'https://www.wholekidsfoundation.org/assets/images/Worker-Bee-Roles_Guard.png'
-        },
-        color: 3447003,
-        description: 'You should not send BrightID connection links on public channels!',
-        fields: [{
-          name: 'Want to get verified?',
-          value: 'The best way is to join a verification party at https://www.brightid.org/meet.'
-        }
+      message.author.send({
+        'embeds': [
+          {
+            'title': 'Warning 🚨',
+            'description': 'You should not send BrightID connection links on public channels!',
+            'color': 16769024,
+            'fields': [
+              {
+                'name': 'Want to get verified?',
+                'value': 'The best way is to join a verification party at https://www.brightid.org/meet.'
+              }
+            ]
+          }
         ],
-      }})
+      })
         
       log(`Deleted message with BrightID connection link from ${message.author}.`)
+    } else {
+      const handler = detectHandler(message.content)
+      handler(message)
+      log(
+        `Served command ${message.content} successfully for ${message.author.username}.`,
+      )
     }
   } catch (err) {
-    log(`An error just happened: ${err}`)
+    if (err instanceof RequestHandlerError) {
+      message.reply(
+        'Could not find the requested command. Please use !ac help for more info.',
+      )
+    } else {
+      log(`An error just happened: ${err}`)
+    }
     // Sentry.captureException(err)
   }
 })
