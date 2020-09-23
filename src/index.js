@@ -52,7 +52,7 @@ client.on('message', async (message) => {
   } catch (err) {
     if (err instanceof RequestHandlerError) {
       await message.reply(
-        'Could not find the requested command. Please use !ac help for more info.',
+        'Could not find the requested command. Please use .hny help for more info.',
       )
     } else {
       log(`An error just happened: ${err}`)
