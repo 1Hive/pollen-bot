@@ -27,6 +27,10 @@ client.on('guildMemberAdd', (member) => {
           value: 'https://hackmd.io/ObCMUJUxTumG2z6FJ5cnkg',
         },
         {
+          name: 'Get free honey 🤑',
+          value: 'https://faucet.1hive.org/',
+        },
+        {
           name: 'Share your thoughts and feeling on our blog! 💭',
           value: 'https://forum.1hive.org/',
         },
