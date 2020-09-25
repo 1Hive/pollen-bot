@@ -19,19 +19,27 @@ client.on('guildMemberAdd', (member) => {
     embed: {
       title: 'Welcome to 1Hive! 🍯',
       description:
-        'Im going to be your assistant on this server, here are some valuable resources you may need.',
+        'Please say hi in #:wave:intros to share how you found us and what interests you!',
       color: 16769024,
       fields: [
         {
-          name: 'Frequently Asked Questions (FAQ)',
+          name: 'Frequently Asked Questions (FAQ) ❓',
           value: 'https://hackmd.io/ObCMUJUxTumG2z6FJ5cnkg',
         },
         {
-          name: 'Announcements and recaps of all the things',
+          name: 'Share your thoughts and feeling on our blog! 💭',
+          value: 'https://forum.1hive.org/',
+        },
+        {
+          name: 'Learn more about Honey (HNY) 🍯',
+          value: 'https://blog.1hive.org/honey/',
+        },
+        {
+          name: 'Announcements and recaps of all the things 📰',
           value: 'https://1hive.substack.com/ ',
         },
         {
-          name: 'Documentation of our DAO',
+          name: 'Documentation of our DAO 📝',
           value: 'https://about.1hive.org/docs/dao/',
         },
         {
