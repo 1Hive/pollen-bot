@@ -14,6 +14,36 @@ client.on('ready', () => {
   log(`Bot successfully started as ${client.user.tag} 🐝`)
 })
 
+client.on('guildMemberAdd', (member) => {
+  member.send({
+    embed: {
+      title: 'Welcome to 1Hive! 🍯',
+      description:
+        'Im going to be your assistant on this server, here are some valuable resources you may need.',
+      color: 16769024,
+      fields: [
+        {
+          name: 'Frequently Asked Questions (FAQ)',
+          value: 'https://hackmd.io/ObCMUJUxTumG2z6FJ5cnkg',
+        },
+        {
+          name: 'Announcements and recaps of all the things',
+          value: 'https://1hive.substack.com/ ',
+        },
+        {
+          name: 'Documentation of our DAO',
+          value: 'https://about.1hive.org/docs/dao/',
+        },
+        {
+          name: 'Detailed description all of our channels',
+          value:
+            'https://discordapp.com/channels/698287700834517064/758821739202347038/758886904078008363',
+        },
+      ],
+    },
+  })
+})
+
 client.on('message', async (message) => {
   if (message.author.bot) return
 
