@@ -10,13 +10,8 @@ module.exports = function detectHandler(message) {
     return noop()
   }
   const receivedHandler = handlers.get(requestedHandler)
-  if (requestedNamespace !== '!hny') {
-    throw new RequestHandlerError(
-      `Could not find command with flag ${requestedNamespace}`,
-    )
-  }
 
-  if (typeof receivedHandler !== 'function') {
+  if (typeof receivedHandler !== 'function' && requestedNamespace === '!hny') {
     throw new RequestHandlerError(
       `Could not find command with flag ${requestedHandler}`,
     )

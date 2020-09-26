@@ -20,31 +20,33 @@ client.on('guildMemberAdd', (member) => {
   member.send(welcomeEmbed())
 })
 
-client.on('message', async (message) => {
+client.on('message', (message) => {
   if (message.author.bot) return
 
   try {
     if (message.content.includes('app.brightid.org/connection-code')) {
       // Deletes the message inmediately.
-      await message.delete({ timeout: 500 })
+      message.delete({ timeout: 500 })
 
       // Sends a PM to the user, letting them know it is agains't the rules.
-      await message.author.send(brightidWarningEmbed())
+      message.author.send(brightidWarningEmbed())
 
       log(
         `Deleted message with BrightID connection link from ${message.author}.`,
       )
     } else {
-      const handler = await detectHandler(message.content)
-      await handler(message)
-      log(
-        `Served command ${message.content} successfully for ${message.author.username}.`,
-      )
+      const handler = detectHandler(message.content)
+      if (handler) {
+        handler(message)
+        log(
+          `Served command ${message.content} successfully for ${message.author.username}.`,
+        )
+      }
     }
   } catch (err) {
     if (err instanceof RequestHandlerError) {
-      await message.reply(
-        'Could not find the requested command. Please use .hny help for more info.',
+      message.reply(
+        'Could not find the requested command. Please use !hny help for more info.',
       )
     } else {
       log(`An error just happened: ${err}`)
