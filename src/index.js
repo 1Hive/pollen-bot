@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const dotenv = require('dotenv')
-// const detectHandler = require('./parser/detectHandler')
+const detectHandler = require('./parser/detectHandler')
 const { RequestHandlerError } = require('./error-utils')
 const { log } = require('./utils')
 
@@ -35,11 +35,11 @@ client.on('message', async (message) => {
         `Deleted message with BrightID connection link from ${message.author}.`,
       )
     } else {
-      // const handler = await detectHandler(message.content)
-      // await handler(message)
-      // log(
-      //   `Served command ${message.content} successfully for ${message.author.username}.`,
-      // )
+      const handler = await detectHandler(message.content)
+      await handler(message)
+      log(
+        `Served command ${message.content} successfully for ${message.author.username}.`,
+      )
     }
   } catch (err) {
     if (err instanceof RequestHandlerError) {

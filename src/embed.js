@@ -58,4 +58,19 @@ function brightidWarningEmbed() {
   }
 }
 
-module.exports = { welcomeEmbed, brightidWarningEmbed }
+function honeyAddy() {
+  return {
+    embed: {
+      title: '$HNY Token 🍯',
+      color: 16769024,
+      fields: [
+        {
+          name: 'Address',
+          value: '0x71850b7e9ee3f13ab46d67167341e4bdc905eef9',
+        },
+      ],
+    },
+  }
+}
+
+module.exports = { welcomeEmbed, brightidWarningEmbed, honeyAddy }
