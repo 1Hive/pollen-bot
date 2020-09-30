@@ -118,4 +118,4 @@ function honeyAddy() {
   }
 }
 
-module.exports = { welcomeEmbed, brightidWarningEmbed, helpEmbed, honeyAddy, }
+module.exports = { welcomeEmbed, brightidWarningEmbed, helpEmbed, honeyAddy }
