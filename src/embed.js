@@ -36,6 +36,10 @@ function welcomeEmbed() {
             'https://discordapp.com/channels/698287700834517064/758821739202347038/758886904078008363',
         },
       ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
     },
   }
 }
@@ -54,6 +58,43 @@ function brightidWarningEmbed() {
             'The best way is to join a verification party at https://www.brightid.org/meet.',
         },
       ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
+function helpEmbed() {
+  return {
+    embed: {
+      color: 16769024,
+      author: {
+        name: 'Assistant Bee',
+        url: 'https://github.com/crisog/assistant-bee'
+      },
+      description: 'Hi, my name\'s Assistant Bee, I\'m 1hive\'s helper. All my commands are prefixed by `!hny`. Refer to the list below for my full functionality!',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      fields: [
+        {
+          name: 'FAQ',
+          value: 'For a full overview on 1hive, HNY and brightID verification, please check out the [FAQ](https://forum.1hive.org/t/everything-about-1hive-in-one-place-newfaq-in-development/180).',
+        },
+        {
+          name: '!hny address',
+          value: 'Displays HNY\'s contract address',
+        },
+      ],
+      image: {
+        url: 'https://i.imgur.com/E7x8s0j.png',
+      },
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
     },
   }
 }
@@ -69,8 +110,12 @@ function honeyAddy() {
           value: '0x71850b7e9ee3f13ab46d67167341e4bdc905eef9',
         },
       ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
     },
   }
 }
 
-module.exports = { welcomeEmbed, brightidWarningEmbed, honeyAddy }
+module.exports = { welcomeEmbed, brightidWarningEmbed, helpEmbed, honeyAddy, }
