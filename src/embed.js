@@ -87,6 +87,10 @@ function helpEmbed() {
           name: '!hny address',
           value: 'Displays HNY\'s contract address',
         },
+        {
+          name: '!hny pollen',
+          value: '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) is a contributor rank used to recognize contributions to the Hive. Refer to the command for more information.',
+        },
       ],
       image: {
         url: 'https://i.imgur.com/E7x8s0j.png',
@@ -96,6 +100,39 @@ function helpEmbed() {
         text: 'about.1hive.org',
       },
     },
+  }
+}
+
+function pollenEmbed() {
+  return {
+    embed: {
+      color: 16769024,
+      author: {
+        name: 'Assistant Bee',
+        url: 'https://github.com/crisog/assistant-bee'
+      },
+      description: '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) is a contributor rank used to recognize contributions to 1hive’s discord, discourse, and github communities. These contributions are rewarded with weekly distributions of Honey.',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      fields: [
+        {
+          name: 'Signing up',
+          value: 'To sign up for Pollen, post in the <#708187332154753065> channel with your relevant IDs and a tag to the <#749003215940485180> channel. An example post is included in the image below.',
+        },
+        {
+          name: 'Future of Pollen',
+          value: 'Onboarding is currently done manually, in the future we will attempt to automate this process.',
+        }
+      ],
+      image: {
+        url: 'https://i.imgur.com/2OFG47E.png',
+      },
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    }
   }
 }
 
@@ -118,4 +155,4 @@ function honeyAddy() {
   }
 }
 
-module.exports = { welcomeEmbed, brightidWarningEmbed, helpEmbed, honeyAddy }
+module.exports = { welcomeEmbed, brightidWarningEmbed, helpEmbed, pollenEmbed, honeyAddy }
