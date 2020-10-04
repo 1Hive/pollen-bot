@@ -95,7 +95,7 @@ function brightidEmbed() {
         },
         {
           name: '3. Type the `!verify` command in the designated channel',
-          value: 'In the 1hive server you can type this command in the <insert bot channel>, or you can do this in any public channel in the BrightID discord which [you can access here](https://discord.gg/gH6qAUH).',
+          value: 'In the 1hive server you can type this command in <#762377613062701146>, or you can do this in any public channel in the BrightID discord which [you can access here](https://discord.gg/gH6qAUH).',
         },
         {
           name: '4. Scan the DM\'d QR Code',
