@@ -37,7 +37,7 @@ client.on('message', (message) => {
     } else {
       const handler = detectHandler(message.content)
       if (handler){
-        if (message.channel.name !== 'bot-commands') {
+        if (message.channel.id !== '762377613062701146') {
           message.delete({ timeout: 500 })
           message.author.send(wrongChannelWarningEmbed())
           return
