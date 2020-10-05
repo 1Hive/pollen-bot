@@ -37,15 +37,17 @@ client.on('message', (message) => {
     } else {
       const handler = detectHandler(message.content)
       if (handler){
-        if (message.channel.id !== '762377613062701146') {
+        // Checks if channel is #bot-commands or message is NOT from guild
+        if ((message.channel.id === '762377613062701146') || (message.guild === null)) {
+          handler(message)
+          log(
+            `Served command ${message.content} successfully for ${message.author.username}.`,
+          )
+        } else {
           message.delete({ timeout: 500 })
           message.author.send(wrongChannelWarningEmbed())
           return
         }
-        handler(message)
-        log(
-          `Served command ${message.content} successfully for ${message.author.username}.`,
-        )
       }
     }
   } catch (err) {
