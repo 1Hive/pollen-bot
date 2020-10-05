@@ -1,11 +1,11 @@
 // const getHoneyFlow = require('./getHoneyFlow')
-const getHoneyAddy = require('./getHoneyAddy')
+const address = require('./address')
 const help = require('./help')
 const pollen = require('./pollen')
 const brightid = require('./brightid')
 
 const handlers = new Map([
-  ['address', getHoneyAddy],
+  ['address', address],
   ['help', help],
   ['pollen', pollen],
   ['brightid', brightid],
