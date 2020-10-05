@@ -4,7 +4,7 @@ const detectHandler = require('./parser/detectHandler')
 const { RequestHandlerError } = require('./error-utils')
 const { log } = require('./utils')
 
-const { welcomeEmbed, brightidWarningEmbed } = require('./embed')
+const { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed } = require('./embed')
 
 // Load this as early as possible, to init all the environment variables that may be needed
 dotenv.config()
@@ -36,7 +36,12 @@ client.on('message', (message) => {
       )
     } else {
       const handler = detectHandler(message.content)
-      if (handler) {
+      if (handler){
+        if (message.channel.name !== 'bot-commands') {
+          message.delete({ timeout: 500 })
+          message.author.send(wrongChannelWarningEmbed())
+          return
+        }
         handler(message)
         log(
           `Served command ${message.content} successfully for ${message.author.username}.`,

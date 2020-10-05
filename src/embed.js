@@ -70,6 +70,28 @@ function brightidWarningEmbed() {
   }
 }
 
+function wrongChannelWarningEmbed() {
+  return {
+    embed: {
+      title: 'Warning 🚨',
+      description:
+        'Bot commands are only allowed in <#762377613062701146> channel!',
+      color: 16769024,
+      fields: [
+        {
+          name: 'Lets keep our discord server clean :)',
+          value:
+            'We encourage bees to use channels properly, if you ever feel lost check [this at #info](https://discordapp.com/channels/698287700834517064/758821739202347038/758886904078008363).',
+        }
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
 function brightidEmbed() {
   return {
     embed : {
@@ -207,4 +229,4 @@ function honeyAddy() {
   }
 }
 
-module.exports = { welcomeEmbed, brightidWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, honeyAddy }
+module.exports = { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, honeyAddy }
