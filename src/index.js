@@ -37,7 +37,7 @@ client.on('message', (message) => {
     } else {
       const handler = detectHandler(message.content)
       if (handler){
-        // Checks if channel is #bot-commands-here or message is NOT from guild
+        // Checks if channel is #bot-commands or message is NOT from guild
         if ((message.channel.id === '762377613062701146') || (message.guild === null)) {
           handler(message)
           log(
