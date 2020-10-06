@@ -7,6 +7,10 @@ function welcomeEmbed() {
       color: 16769024,
       fields: [
         {
+          name: 'Bot Commands :bee:',
+          value: 'Need help? Try `!hny help`'
+        },
+        {
           name: 'Frequently Asked Questions (FAQ) ❓',
           value: 'https://hackmd.io/ObCMUJUxTumG2z6FJ5cnkg',
         },
@@ -84,6 +88,31 @@ function wrongChannelWarningEmbed() {
             'We encourage bees to use channels properly, if you ever feel lost check [this at #info](https://discordapp.com/channels/698287700834517064/758821739202347038/758886904078008363).',
         }
       ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
+function walletWarningEmbed() {
+  return {
+    embed: {
+      title: 'Warning 🚨',
+      description:
+        'You are using the `!hny wallet` command incorrectly!',
+      color: 16769024,
+      fields: [
+        {
+          name: '`!hny wallet <address>`',
+          value:
+            'Correct usage of this command requires you to add your xdai wallet address. An example of how to properly use the command is included below!',
+        }
+      ],
+      image: {
+        url: 'https://i.imgur.com/E7x8s0j.png',
+      },
       timestamp: new Date(),
       footer: {
         text: 'about.1hive.org',
@@ -229,4 +258,4 @@ function honeyAddy() {
   }
 }
 
-module.exports = { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, honeyAddy }
+module.exports = { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed, walletWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, honeyAddy }
