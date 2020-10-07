@@ -6,6 +6,8 @@ const { log } = require('./utils')
 
 const { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed } = require('./embed')
 
+const externalCommands = ['!join', '!me', '!verify']
+
 // Load this as early as possible, to init all the environment variables that may be needed
 dotenv.config()
 // Sentry.init({ dsn: environment('SENTRY_DSN') })
@@ -22,18 +24,21 @@ client.on('guildMemberAdd', (member) => {
 
 client.on('message', (message) => {
   if (message.author.bot) return
-
   try {
     if (message.content.includes('app.brightid.org/connection-code')) {
       // Deletes the message inmediately.
       message.delete({ timeout: 500 })
 
-      // Sends a PM to the user, letting them know it is agains't the rules.
+      // Sends a PM to the user, letting them know it is against the rules.
       message.author.send(brightidWarningEmbed())
 
       log(
         `Deleted message with BrightID connection link from ${message.author}.`,
       )
+      // Check if external bot command && if channel is #bot-commands
+    } else if((externalCommands.indexOf(message.content) > -1) && (message.channel.id !== '762377613062701146')) {
+      message.delete({ timeout: 500 })
+      message.author.send(wrongChannelWarningEmbed())
     } else {
       const handler = detectHandler(message.content)
       if (handler){
