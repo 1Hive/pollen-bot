@@ -210,6 +210,36 @@ function pollenEmbed() {
   }
 }
 
+function newSwapEmbed(tknIn, tknInAmount, tknOut, tknOutAmount, amountUSD, txHash) {
+  return {
+    embed: {
+      title: 'New HNY/WXDAI Swap ⚡',
+      author: {
+        name: 'Assistant Bee',
+        url: 'https://github.com/crisog/assistant-bee'
+      },
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: `${tknInAmount} ${tknIn} for ${tknOutAmount} ${tknOut}`,
+          value: `Trade amount: USD$ ${amountUSD}`,
+        },
+        {
+          name: 'Transaction Hash',
+          value: `${txHash}`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'info.honeyswap.org',
+      },
+    },
+  }
+}
+
 function honeyAddy() {
   return {
     embed: {
@@ -229,4 +259,4 @@ function honeyAddy() {
   }
 }
 
-module.exports = { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, honeyAddy }
+module.exports = { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, newSwapEmbed, honeyAddy }

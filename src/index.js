@@ -1,10 +1,15 @@
 const Discord = require('discord.js')
 const dotenv = require('dotenv')
 const detectHandler = require('./parser/detectHandler')
+const listenSwaps = require('./handlers/listenSwaps')
 const { RequestHandlerError } = require('./error-utils')
 const { log } = require('./utils')
 
-const { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed } = require('./embed')
+const {
+  welcomeEmbed,
+  brightidWarningEmbed,
+  wrongChannelWarningEmbed,
+} = require('./embed')
 
 const externalCommands = ['!join', '!me', '!verify']
 
@@ -16,6 +21,8 @@ const client = new Discord.Client()
 
 client.on('ready', () => {
   log(`Bot successfully started as ${client.user.tag} 🐝`)
+  // Initialize swaps monitor
+  listenSwaps(client)
 })
 
 client.on('guildMemberAdd', (member) => {
