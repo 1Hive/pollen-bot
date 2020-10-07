@@ -14,5 +14,5 @@ class RequestHandlerError extends Error {
 
 module.exports = {
   EnvironmentError,
-  RequestHandlerError
+  RequestHandlerError,
 }

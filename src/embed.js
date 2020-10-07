@@ -82,7 +82,7 @@ function wrongChannelWarningEmbed() {
           name: 'Lets keep our discord server clean :)',
           value:
             'We encourage bees to use channels properly, if you ever feel lost check [this at #info](https://discordapp.com/channels/698287700834517064/758821739202347038/758886904078008363).',
-        }
+        },
       ],
       timestamp: new Date(),
       footer: {
@@ -94,43 +94,49 @@ function wrongChannelWarningEmbed() {
 
 function brightidEmbed() {
   return {
-    embed : {
+    embed: {
       title: 'How to get verified with Bright ID',
       url: 'https://www.brightid.org/',
       color: 16769024,
       author: {
         name: 'Assistant Bee',
-        url: 'https://github.com/crisog/assistant-bee'
+        url: 'https://github.com/crisog/assistant-bee',
       },
-      description: 'Here is a step-by-step guide to help you get verified with BrightID.',
+      description:
+        'Here is a step-by-step guide to help you get verified with BrightID.',
       thumbnail: {
         url: 'https://i.imgur.com/dRxtULu.png',
       },
       fields: [
         {
           name: '1. Get Verified in the BrightID app',
-          value: 'Getting verified requires you make connections with other trusted users. Given the concept is new and there are not many trusted users, this is currently being done through [Verification parties](https://www.brightid.org/meet "https://www.brightid.org/meet") that are hosted in the BrightID server and require members join a voice/video call.',
+          value:
+            'Getting verified requires you make connections with other trusted users. Given the concept is new and there are not many trusted users, this is currently being done through [Verification parties](https://www.brightid.org/meet "https://www.brightid.org/meet") that are hosted in the BrightID server and require members join a voice/video call.',
         },
         {
           name: '2. Link to a Sponsored App (like 1hive, gitcoin, etc)',
-          value: 'You can link to these [sponsored apps](https://apps.brightid.org/) once you are verified within the app.',
+          value:
+            'You can link to these [sponsored apps](https://apps.brightid.org/) once you are verified within the app.',
         },
         {
           name: '3. Type the `!verify` command in the designated channel',
-          value: 'In the 1hive server you can type this command in <#762377613062701146>, or you can do this in any public channel in the BrightID discord which [you can access here](https://discord.gg/gH6qAUH).',
+          value:
+            'In the 1hive server you can type this command in <#762377613062701146>, or you can do this in any public channel in the BrightID discord which [you can access here](https://discord.gg/gH6qAUH).',
         },
         {
           name: '4. Scan the DM\'d QR Code',
-          value: 'Open the BrightID app and scan the QR code. Mobile users can click the link that comes with it.',
+          value:
+            'Open the BrightID app and scan the QR code. Mobile users can click the link that comes with it.',
         },
         {
           name: '5. Type the `!me` command in the designated channel',
-          value: 'Once you have scanned the QR code you can return to the designated channels and type the `!me` command which should grant you the orange verified role.',
+          value:
+            'Once you have scanned the QR code you can return to the designated channels and type the `!me` command which should grant you the orange verified role.',
         },
       ],
       timestamp: new Date(),
       footer: {
-        text: 'Embed with thanks to our friends over at https://she.energy/'
+        text: 'Embed with thanks to our friends over at https://she.energy/',
       },
     },
   }
@@ -142,16 +148,18 @@ function helpEmbed() {
       color: 16769024,
       author: {
         name: 'Assistant Bee',
-        url: 'https://github.com/crisog/assistant-bee'
+        url: 'https://github.com/crisog/assistant-bee',
       },
-      description: 'Hi, my name\'s Assistant Bee, I\'m 1hive\'s helper. All my commands are prefixed by `!hny`. Refer to the list below for my full functionality!',
+      description:
+        'Hi, my name\'s Assistant Bee, I\'m 1hive\'s helper. All my commands are prefixed by `!hny`. Refer to the list below for my full functionality!',
       thumbnail: {
         url: 'https://i.imgur.com/dRxtULu.png',
       },
       fields: [
         {
           name: 'FAQ',
-          value: 'For a full overview on 1hive, HNY and brightID verification, please check out the [FAQ](https://forum.1hive.org/t/everything-about-1hive-in-one-place-newfaq-in-development/180).',
+          value:
+            'For a full overview on 1hive, HNY and brightID verification, please check out the [FAQ](https://forum.1hive.org/t/everything-about-1hive-in-one-place-newfaq-in-development/180).',
         },
         {
           name: '!hny address',
@@ -159,11 +167,13 @@ function helpEmbed() {
         },
         {
           name: '!hny pollen',
-          value: '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) is a contributor rank used to recognize contributions to the Hive. Refer to the command for more information.',
+          value:
+            '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) is a contributor rank used to recognize contributions to the Hive. Refer to the command for more information.',
         },
         {
           name: '!hny brightid',
-          value: 'Step-by-step guide on how to get verified with [BrightID](https://www.brightid.org)'
+          value:
+            'Step-by-step guide on how to get verified with [BrightID](https://www.brightid.org)',
         },
       ],
       image: {
@@ -183,21 +193,24 @@ function pollenEmbed() {
       color: 16769024,
       author: {
         name: 'Assistant Bee',
-        url: 'https://github.com/crisog/assistant-bee'
+        url: 'https://github.com/crisog/assistant-bee',
       },
-      description: '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) is a contributor rank used to recognize contributions to 1hive’s discord, discourse, and github communities. These contributions are rewarded with weekly distributions of Honey.',
+      description:
+        '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) is a contributor rank used to recognize contributions to 1hive’s discord, discourse, and github communities. These contributions are rewarded with weekly distributions of Honey.',
       thumbnail: {
         url: 'https://i.imgur.com/dRxtULu.png',
       },
       fields: [
         {
           name: 'Signing up',
-          value: 'To sign up for Pollen, post in the <#708187332154753065> channel with your relevant IDs and a tag to the <#749003215940485180> channel. An example post is included in the image below.',
+          value:
+            'To sign up for Pollen, post in the <#708187332154753065> channel with your relevant IDs and a tag to the <#749003215940485180> channel. An example post is included in the image below.',
         },
         {
           name: 'Future of Pollen',
-          value: 'Onboarding is currently done manually, in the future we will attempt to automate this process.',
-        }
+          value:
+            'Onboarding is currently done manually, in the future we will attempt to automate this process.',
+        },
       ],
       image: {
         url: 'https://i.imgur.com/2OFG47E.png',
@@ -206,17 +219,24 @@ function pollenEmbed() {
       footer: {
         text: 'about.1hive.org',
       },
-    }
+    },
   }
 }
 
-function newSwapEmbed(tknIn, tknInAmount, tknOut, tknOutAmount, amountUSD, txHash) {
+function newSwapEmbed(
+  tknIn,
+  tknInAmount,
+  tknOut,
+  tknOutAmount,
+  amountUSD,
+  txHash,
+) {
   return {
     embed: {
       title: 'New HNY/WXDAI Swap ⚡',
       author: {
         name: 'Assistant Bee',
-        url: 'https://github.com/crisog/assistant-bee'
+        url: 'https://github.com/crisog/assistant-bee',
       },
       thumbnail: {
         url: 'https://i.imgur.com/dRxtULu.png',
@@ -259,4 +279,13 @@ function honeyAddy() {
   }
 }
 
-module.exports = { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, newSwapEmbed, honeyAddy }
+module.exports = {
+  welcomeEmbed,
+  brightidWarningEmbed,
+  wrongChannelWarningEmbed,
+  helpEmbed,
+  pollenEmbed,
+  brightidEmbed,
+  newSwapEmbed,
+  honeyAddy,
+}

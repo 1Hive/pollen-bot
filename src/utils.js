@@ -7,7 +7,7 @@ function error(...args) {
 function log(...args) {
   console.log(`${Date.now()}:`, ...args)
 }
-  
+
 const Warned = new Map()
 function warnOnce(domain, ...args) {
   if (!Warned.get(domain)) {
@@ -15,5 +15,5 @@ function warnOnce(domain, ...args) {
     console.warn(`${Date.now()}:`, ...args)
   }
 }
-  
+
 module.exports = { error, log, warnOnce }
