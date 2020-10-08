@@ -4,7 +4,11 @@ const detectHandler = require('./parser/detectHandler')
 const { RequestHandlerError } = require('./error-utils')
 const { log } = require('./utils')
 
-const { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed } = require('./embed')
+const {
+  welcomeEmbed,
+  brightidWarningEmbed,
+  wrongChannelWarningEmbed,
+} = require('./embed')
 
 const externalCommands = ['!join', '!me', '!verify']
 
@@ -36,14 +40,20 @@ client.on('message', (message) => {
         `Deleted message with BrightID connection link from ${message.author}.`,
       )
       // Check if external bot command && if channel is #bot-commands
-    } else if((externalCommands.indexOf(message.content) > -1) && (message.channel.id !== '762377613062701146')) {
+    } else if (
+      externalCommands.indexOf(message.content) > -1 &&
+      message.channel.id !== '762377613062701146'
+    ) {
       message.delete({ timeout: 500 })
       message.author.send(wrongChannelWarningEmbed())
     } else {
       const handler = detectHandler(message.content)
-      if (handler){
+      if (handler) {
         // Checks if channel is #bot-commands or message is NOT from guild
-        if ((message.channel.id === '762377613062701146') || (message.guild === null)) {
+        if (
+          message.channel.id === '762553308916875294' ||
+          message.guild === null
+        ) {
           handler(message)
           log(
             `Served command ${message.content} successfully for ${message.author.username}.`,
@@ -57,11 +67,10 @@ client.on('message', (message) => {
     }
   } catch (err) {
     if (err instanceof RequestHandlerError) {
+      log(err)
       message.reply(
         'Could not find the requested command. Please use !hny help for more info.',
       )
-    } else {
-      log(`An error just happened: ${err}`)
     }
     // Sentry.captureException(err)
   }
