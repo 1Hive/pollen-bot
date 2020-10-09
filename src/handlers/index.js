@@ -4,6 +4,7 @@ const help = require('./help')
 const pollen = require('./pollen')
 const brightid = require('./brightid')
 const { verifyDiscourse, checkDiscourse } = require('./discourse')
+const { verifyGithub, checkGithub } = require('./github')
 
 const handlers = new Map([
   ['address', address],
@@ -12,6 +13,8 @@ const handlers = new Map([
   ['brightid', brightid],
   ['verify-discourse', verifyDiscourse],
   ['check-discourse', checkDiscourse],
+  ['verify-github', verifyGithub],
+  ['check-github', checkGithub],
 ])
 
 module.exports = handlers
