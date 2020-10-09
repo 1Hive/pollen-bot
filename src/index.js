@@ -43,7 +43,7 @@ client.on('message', (message) => {
       const handler = detectHandler(message.content)
       if (handler){
         // Checks if channel is #bot-commands or message is NOT from guild
-        if ((message.channel.id === '763087930059128832') || (message.guild === null)) {
+        if ((message.channel.id === '762377613062701146') || (message.guild === null)) {
           handler(message)
           log(
             `Served command ${message.content} successfully for ${message.author.username}.`,
