@@ -3,14 +3,14 @@ const address = require('./address')
 const help = require('./help')
 const pollen = require('./pollen')
 const brightid = require('./brightid')
-const wallet = require('./wallet')
+const save_wallet = require('./save_wallet')
 
 const handlers = new Map([
   ['address', address],
   ['help', help],
   ['pollen', pollen],
   ['brightid', brightid],
-  ['wallet', wallet],
+  ['save_wallet', save_wallet],
 ])
 
 module.exports = handlers
