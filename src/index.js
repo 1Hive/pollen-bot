@@ -50,7 +50,11 @@ client.on('message', (message) => {
           )
         } else {
           message.delete({ timeout: 500 })
-          message.author.send(wrongChannelWarningEmbed())
+          client.channels.fetch('762377613062701146')
+            .then(channel => {
+              channel.send(`<@${message.author.id}>`)
+              channel.send(wrongChannelWarningEmbed())
+            })
           return
         }
       }
