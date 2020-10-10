@@ -45,7 +45,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
     if(user.id === reaction.message.author.id) {
       reaction.users.remove(reaction.message.author)
       log(
-        `Deleted non partial self react from user with id: ${reaction.message.user.id}`
+        `Deleted non partial self react from user with id: ${reaction.message.author.id}`
       )
     }
   }
