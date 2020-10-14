@@ -1,10 +1,15 @@
+/* eslint-disable quotes */
 const Discord = require('discord.js')
 const dotenv = require('dotenv')
 const detectHandler = require('./parser/detectHandler')
 const { RequestHandlerError } = require('./error-utils')
 const { log } = require('./utils')
 
-const { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed } = require('./embed')
+const {
+  welcomeEmbed,
+  brightidWarningEmbed,
+  wrongChannelWarningEmbed,
+} = require('./embed')
 
 const externalCommands = ['!join', '!me', '!verify']
 
@@ -25,27 +30,26 @@ client.on('guildMemberAdd', (member) => {
 // Listen for reactions
 client.on('messageReactionAdd', async (reaction, user) => {
   // check if not yet cached
-  if(reaction.partial) {
+  if (reaction.partial) {
     try {
-      await reaction.fetch()
-        .then(reaction => {
-          if(user.id === reaction.message.author.id) {
-            reaction.users.remove(reaction.message.author)
-            log(
-              `Deleted partial self react from user with id: ${reaction.message.author.id}`
-            )
-          }
-        })
-    } catch(error) {
-      console.error('Uh oh, we couldn\'t fetch the message', error)
+      await reaction.fetch().then((reaction) => {
+        if (user.id === reaction.message.author.id) {
+          reaction.users.remove(reaction.message.author)
+          log(
+            `Deleted partial self react from user with id: ${reaction.message.author.id}`,
+          )
+        }
+      })
+    } catch (error) {
+      log(`Uh oh, we couldn't fetch the message`, error)
       return
     }
-  // if cached, handle here
-  } else if(!reaction.partial) {
-    if(user.id === reaction.message.author.id) {
+    // if cached, handle here
+  } else if (!reaction.partial) {
+    if (user.id === reaction.message.author.id) {
       reaction.users.remove(reaction.message.author)
       log(
-        `Deleted non partial self react from user with id: ${reaction.message.author.id}`
+        `Deleted non partial self react from user with id: ${reaction.message.author.id}`,
       )
     }
   }
@@ -65,25 +69,30 @@ client.on('message', (message) => {
         `Deleted message with BrightID connection link from ${message.author}.`,
       )
       // Check if external bot command && if channel is #bot-commands
-    } else if((externalCommands.indexOf(message.content) > -1) && (message.channel.id !== '762377613062701146')) {
+    } else if (
+      externalCommands.indexOf(message.content) > -1 &&
+      message.channel.id !== '762553308916875294'
+    ) {
       message.delete({ timeout: 500 })
       message.author.send(wrongChannelWarningEmbed())
     } else {
       const handler = detectHandler(message.content)
-      if (handler){
+      if (handler) {
         // Checks if channel is #bot-commands or message is NOT from guild
-        if ((message.channel.id === '762377613062701146') || (message.guild === null)) {
+        if (
+          message.channel.id === '762553308916875294' ||
+          message.guild === null
+        ) {
           handler(message)
           log(
             `Served command ${message.content} successfully for ${message.author.username}.`,
           )
         } else {
           message.delete({ timeout: 500 })
-          client.channels.fetch('762377613062701146')
-            .then(channel => {
-              channel.send(`<@${message.author.id}>`)
-              channel.send(wrongChannelWarningEmbed())
-            })
+          client.channels.fetch('762377613062701146').then((channel) => {
+            channel.send(`<@${message.author.id}>`)
+            channel.send(wrongChannelWarningEmbed())
+          })
           return
         }
       }
