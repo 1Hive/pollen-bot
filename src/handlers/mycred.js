@@ -9,7 +9,7 @@ const NodeAddress = sc.core.address.makeAddressModule({
   otherNonces: new Map().set('E', 'EdgeAddress'),
 })
 
-module.exports = async function getcred(message) {
+module.exports = async function mycred(message) {
   const credAccounts = await(
     await fetch('https://raw.githubusercontent.com/1Hive/pollen/gh-pages/output/accounts.json')
   ).json()

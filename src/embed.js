@@ -165,6 +165,10 @@ function helpEmbed() {
           name: '!hny brightid',
           value: 'Step-by-step guide on how to get verified with [BrightID](https://www.brightid.org)'
         },
+        {
+          name: '!hny mycred',
+          value: 'Shows your total cred and cred earned the past week.'
+        },
       ],
       image: {
         url: 'https://i.imgur.com/E7x8s0j.png',
