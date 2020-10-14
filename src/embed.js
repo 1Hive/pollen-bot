@@ -232,8 +232,11 @@ function honeyAddy() {
 function credEmbed(totalCred, length, cred) {
   return {
     embed: {
-      title: 'Your cred:',
       color: 16769024,
+      title: 'Your cred:',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
       fields: [
         {
           name: 'Total',
@@ -243,7 +246,11 @@ function credEmbed(totalCred, length, cred) {
           name: 'Last week',
           value: Math.round(cred[length - 1])
         },
-      ]
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
     }
   }
 }
