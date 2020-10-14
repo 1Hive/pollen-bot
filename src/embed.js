@@ -165,6 +165,10 @@ function helpEmbed() {
           name: '!hny brightid',
           value: 'Step-by-step guide on how to get verified with [BrightID](https://www.brightid.org)'
         },
+        {
+          name: '!hny mycred',
+          value: 'Shows your total cred and cred earned the past week.'
+        },
       ],
       image: {
         url: 'https://i.imgur.com/E7x8s0j.png',
@@ -229,4 +233,30 @@ function honeyAddy() {
   }
 }
 
-module.exports = { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, honeyAddy }
+function credEmbed(totalCred, length, cred) {
+  return {
+    embed: {
+      color: 16769024,
+      title: 'Your cred:',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      fields: [
+        {
+          name: 'Total',
+          value: Math.round(totalCred)
+        },
+        {
+          name: 'Last week',
+          value: Math.round(cred[length - 1])
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    }
+  }
+}
+
+module.exports = { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, honeyAddy, credEmbed }
