@@ -229,4 +229,23 @@ function honeyAddy() {
   }
 }
 
-module.exports = { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, honeyAddy }
+function credEmbed(totalCred, length, cred) {
+  return {
+    embed: {
+      title: 'Your cred:',
+      color: 16769024,
+      fields: [
+        {
+          name: 'Total',
+          value: Math.round(totalCred)
+        },
+        {
+          name: 'Last week',
+          value: Math.round(cred[length - 1])
+        },
+      ]
+    }
+  }
+}
+
+module.exports = { welcomeEmbed, brightidWarningEmbed, wrongChannelWarningEmbed, helpEmbed, pollenEmbed, brightidEmbed, honeyAddy, credEmbed }
