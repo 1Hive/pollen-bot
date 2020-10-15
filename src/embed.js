@@ -327,6 +327,9 @@ function honeyPriceEmbed(honeyPrice) {
   return {
     embed: {
       title: '$HNY',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
       color: 16769024,
       fields: [
         {
