@@ -80,7 +80,7 @@ client.on('message', (message) => {
       if (handler) {
         // Checks if channel is #bot-commands or message is NOT from guild
         if (
-          message.channel.id === '762553308916875294' ||
+          message.channel.id === '762377613062701146' ||
           message.guild === null
         ) {
           handler(message)
