@@ -323,6 +323,25 @@ function honeyAddy() {
   }
 }
 
+function honeyPriceEmbed(honeyPrice) {
+  return {
+    embed: {
+      title: '$HNY',
+      color: 16769024,
+      fields: [
+        {
+          name: 'Price 💰',
+          value: `$${honeyPrice}`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'info.honeyswap.org',
+      },
+    },
+  }
+}
+
 function credEmbed(totalCred, length, cred) {
   return {
     embed: {
@@ -357,6 +376,7 @@ module.exports = {
   pollenEmbed,
   brightidEmbed,
   honeyAddy,
+  honeyPriceEmbed,
   credEmbed,
   verifyDiscourseEmbed,
   successDiscourseVerificationEmbed,
