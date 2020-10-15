@@ -46,6 +46,6 @@ module.exports = async function mycred(message) {
     }
   } catch (err) {
     console.log('error:', err)
-    return message.reply('Alas, we cannot find you!')
+    message.channel.send('Alas, we cannot find you, try again tomorrow!')
   }
 }
