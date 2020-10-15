@@ -20,9 +20,10 @@
   "dependencies": {
     "@aragon/connect-thegraph": "^0.7.0",
     "@sentry/node": "^5.15.4",
-    "discord.js": "^12.1.1",
+    "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
-    "graphql-tag": "^2.11.0"
+    "graphql-tag": "^2.11.0",
+    "sourcecred": "^0.7.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

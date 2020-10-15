@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 function welcomeEmbed() {
   return {
     embed: {
@@ -124,7 +125,7 @@ function brightidEmbed() {
             'In the 1hive server you can type this command in <#762377613062701146>, or you can do this in any public channel in the BrightID discord which [you can access here](https://discord.gg/gH6qAUH).',
         },
         {
-          name: '4. Scan the DM\'d QR Code',
+          name: "4. Scan the DM'd QR Code",
           value:
             'Open the BrightID app and scan the QR code. Mobile users can click the link that comes with it.',
         },
@@ -151,7 +152,7 @@ function helpEmbed() {
         url: 'https://github.com/crisog/assistant-bee',
       },
       description:
-        'Hi, my name\'s Assistant Bee, I\'m 1hive\'s helper. All my commands are prefixed by `!hny`. Refer to the list below for my full functionality!',
+        "Hi, my name's Assistant Bee, I'm 1hive's helper. All my commands are prefixed by `!hny`. Refer to the list below for my full functionality!",
       thumbnail: {
         url: 'https://i.imgur.com/dRxtULu.png',
       },
@@ -163,7 +164,7 @@ function helpEmbed() {
         },
         {
           name: '!hny address',
-          value: 'Displays HNY\'s contract address',
+          value: "Displays HNY's contract address",
         },
         {
           name: '!hny pollen',
@@ -174,6 +175,10 @@ function helpEmbed() {
           name: '!hny brightid',
           value:
             'Step-by-step guide on how to get verified with [BrightID](https://www.brightid.org)',
+        },
+        {
+          name: '!hny mycred',
+          value: 'Shows your total cred and cred earned the past week.',
         },
       ],
       image: {
@@ -318,6 +323,32 @@ function honeyAddy() {
   }
 }
 
+function credEmbed(totalCred, length, cred) {
+  return {
+    embed: {
+      color: 16769024,
+      title: 'Your cred:',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      fields: [
+        {
+          name: 'Total',
+          value: Math.round(totalCred),
+        },
+        {
+          name: 'Last week',
+          value: Math.round(cred[length - 1]),
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
 module.exports = {
   welcomeEmbed,
   brightidWarningEmbed,
@@ -326,6 +357,7 @@ module.exports = {
   pollenEmbed,
   brightidEmbed,
   honeyAddy,
+  credEmbed,
   verifyDiscourseEmbed,
   successDiscourseVerificationEmbed,
   errorDiscourseVerificationEmbed,
