@@ -30,22 +30,26 @@ module.exports = async function mycred(message) {
       let totalCred = 0
       let length = 0
       let cred = 0
+      let id
 
       discordAliases.forEach(alias => {
-        const id = NodeAddress.toParts(alias.address)[4]
+        id = NodeAddress.toParts(alias.address)[4]
+
         if(id === message.author.id) {
           totalCred = accounts[i].totalCred
           length = accounts[i].cred.length
           cred = accounts[i].cred
         }
       })
-      if (totalCred === 0) continue
 
-      message.channel.send(`<@${message.author.id}>`)
-      message.channel.send(credEmbed(totalCred, length, cred))
+      // now also responds to users with EXACTLY 0 cred
+      if (totalCred !== 0 || id === message.author.id) {
+        message.channel.send(`<@${message.author.id}>`)
+        message.channel.send(credEmbed(totalCred, length, cred))
+      }
     }
   } catch (err) {
     console.log('error:', err)
-    return message.reply('Alas, we cannot find you!')
+    message.channel.send('Alas, we cannot find you, try again tomorrow!')
   }
 }
