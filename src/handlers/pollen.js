@@ -1,5 +1,6 @@
 const { pollenEmbed } = require('../embed')
 
-module.exports = async function help(message) {
-  message.author.send(pollenEmbed())
+module.exports = async function pollen(message) {
+  message.channel.send(`<@${message.author.id}>`)
+  message.channel.send(pollenEmbed())
 }
