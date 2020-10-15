@@ -16,7 +16,7 @@ const externalCommands = ['!join', '!me', '!verify']
 dotenv.config()
 // Sentry.init({ dsn: environment('SENTRY_DSN') })
 
-const client = new Discord.Client()
+const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] })
 
 client.on('ready', () => {
   log(`Bot successfully started as ${client.user.tag} 🐝`)
@@ -24,6 +24,35 @@ client.on('ready', () => {
 
 client.on('guildMemberAdd', (member) => {
   member.send(welcomeEmbed())
+})
+
+// Listen for reactions
+client.on('messageReactionAdd', async (reaction, user) => {
+  // check if not yet cached
+  if(reaction.partial) {
+    try {
+      await reaction.fetch()
+        .then(reaction => {
+          if(user.id === reaction.message.author.id) {
+            reaction.users.remove(reaction.message.author)
+            log(
+              `Deleted partial self react from user with id: ${reaction.message.author.id}`
+            )
+          }
+        })
+    } catch(error) {
+      console.error('Uh oh, we couldn\'t fetch the message', error)
+      return
+    }
+  // if cached, handle here
+  } else if(!reaction.partial) {
+    if(user.id === reaction.message.author.id) {
+      reaction.users.remove(reaction.message.author)
+      log(
+        `Deleted non partial self react from user with id: ${reaction.message.author.id}`
+      )
+    }
+  }
 })
 
 client.on('message', (message) => {
@@ -60,7 +89,11 @@ client.on('message', (message) => {
           )
         } else {
           message.delete({ timeout: 500 })
-          message.author.send(wrongChannelWarningEmbed())
+          client.channels.fetch('762377613062701146')
+            .then(channel => {
+              channel.send(`<@${message.author.id}>`)
+              channel.send(wrongChannelWarningEmbed())
+            })
           return
         }
       }
