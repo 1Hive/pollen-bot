@@ -176,6 +176,10 @@ function helpEmbed() {
           value:
             'Step-by-step guide on how to get verified with [BrightID](https://www.brightid.org)',
         },
+        {
+          name: '!hny mycred',
+          value: 'Shows your total cred and cred earned the past week.',
+        },
       ],
       image: {
         url: 'https://i.imgur.com/E7x8s0j.png',
@@ -224,6 +228,82 @@ function pollenEmbed() {
   }
 }
 
+function verifyDiscourseEmbed(verificationCode, discourseUsername) {
+  return {
+    embed: {
+      title: 'Verify discourse account',
+      description:
+        'Process to verify your account to opt-in for pollen distributions.',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: '1. Change your discourse name',
+          value: `Go to your [account preferences](https://forum.1hive.org/u/${discourseUsername}/preferences/account) and after that, 
+          change your 'Name' field temporarily into this: **${verificationCode}**.`,
+        },
+        {
+          name: '2. Complete the verification',
+          value: `Confirm the previous step using the following command: 
+          **!hny check-discourse ${verificationCode} ${discourseUsername}**`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
+function successDiscourseVerificationEmbed(discourseUsername) {
+  return {
+    embed: {
+      title: 'Congratulations!',
+      description: 'The verification process was completed successfully',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'All set!',
+          value: `Thanks for verifying your discourse account for pollen distributions, ${discourseUsername}!`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
+function errorDiscourseVerificationEmbed(errorMessage) {
+  return {
+    embed: {
+      title: 'Bad news!',
+      description: 'There was an error in the discourse verification process.',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'This is what happened',
+          value: `${errorMessage}`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
 function honeyAddy() {
   return {
     embed: {
@@ -262,6 +342,32 @@ function honeyPriceEmbed(honeyPrice) {
   }
 }
 
+function credEmbed(totalCred, length, cred) {
+  return {
+    embed: {
+      color: 16769024,
+      title: 'Your cred:',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      fields: [
+        {
+          name: 'Total',
+          value: Math.round(totalCred),
+        },
+        {
+          name: 'Last week',
+          value: Math.round(cred[length - 1]),
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
 module.exports = {
   welcomeEmbed,
   brightidWarningEmbed,
@@ -271,4 +377,8 @@ module.exports = {
   brightidEmbed,
   honeyAddy,
   honeyPriceEmbed,
+  credEmbed,
+  verifyDiscourseEmbed,
+  successDiscourseVerificationEmbed,
+  errorDiscourseVerificationEmbed,
 }

@@ -71,7 +71,7 @@ client.on('message', (message) => {
       // Check if external bot command && if channel is #bot-commands
     } else if (
       externalCommands.indexOf(message.content) > -1 &&
-      message.channel.id !== '762553308916875294'
+      message.channel.id !== '762377613062701146'
     ) {
       message.delete({ timeout: 500 })
       message.author.send(wrongChannelWarningEmbed())
@@ -80,7 +80,7 @@ client.on('message', (message) => {
       if (handler) {
         // Checks if channel is #bot-commands or message is NOT from guild
         if (
-          message.channel.id === '762553308916875294' ||
+          message.channel.id === '762377613062701146' ||
           message.guild === null
         ) {
           handler(message)
@@ -99,11 +99,10 @@ client.on('message', (message) => {
     }
   } catch (err) {
     if (err instanceof RequestHandlerError) {
+      log(err)
       message.reply(
         'Could not find the requested command. Please use !hny help for more info.',
       )
-    } else {
-      log(`An error just happened: ${err}`)
     }
     // Sentry.captureException(err)
   }
