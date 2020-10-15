@@ -5,9 +5,7 @@ const { honeyMetricsEmbed } = require('../embed')
 const UNISWAP_URL = 'https://api.thegraph.com/subgraphs/name/1hive/uniswap-v2'
 const HONEYSWAP_FACTORY_ID = '0xa818b4f111ccac7aa31d0bcc0806d64f2e0737d7'
 
-const graphqlClient = new GraphQLWrapper(UNISWAP_URL)
-
-const HNY_FACTORY_QUERY = gql`
+let HNY_FACTORY_QUERY = gql`
   query {
     uniswapFactory(id: "${HONEYSWAP_FACTORY_ID}") {
       totalVolumeUSD
@@ -18,16 +16,17 @@ const HNY_FACTORY_QUERY = gql`
 `
 
 module.exports = async function honeyPrice(message) {
-  const result = await graphqlClient.performQuery(HNY_FACTORY_QUERY)
+  let graphqlClient = new GraphQLWrapper(UNISWAP_URL)
+  let result = await graphqlClient.performQuery(HNY_FACTORY_QUERY)
 
   if (!result.data) {
     return
   }
 
-  const { uniswapFactory } = result.data
-  const honeyFactoryLiquidity = numberWithSpaces(Math.round(uniswapFactory.totalLiquidityUSD))
-  const honeyFactoryVolume = numberWithSpaces(Math.round(uniswapFactory.totalVolumeUSD))
-  const honeyFactoryFees = numberWithSpaces(Math.round(uniswapFactory.txCount))
+  let { uniswapFactory } = result.data
+  let honeyFactoryLiquidity = numberWithSpaces(Math.round(uniswapFactory.totalLiquidityUSD))
+  let honeyFactoryVolume = numberWithSpaces(Math.round(uniswapFactory.totalVolumeUSD))
+  let honeyFactoryFees = numberWithSpaces(Math.round(uniswapFactory.txCount))
   
   message.channel.send(`<@${message.author.id}>`)
   message.channel.send(honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFactoryFees))
