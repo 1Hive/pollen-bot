@@ -4,6 +4,7 @@ const help = require('./help')
 const pollen = require('./pollen')
 const brightid = require('./brightid')
 const price = require('./price')
+const metrics = require('./getMetrics')
 // const { verifyDiscourse, checkDiscourse } = require('./discourse')
 // const { verifyGithub, checkGithub } = require('./github')
 const mycred = require('./mycred')
@@ -14,6 +15,7 @@ const handlers = new Map([
   ['pollen', pollen],
   ['brightid', brightid],
   ['price', price],
+  ['metrics', metrics],
   // ['verify-discourse', verifyDiscourse],
   // ['check-discourse', checkDiscourse],
   // ['verify-github', verifyGithub],

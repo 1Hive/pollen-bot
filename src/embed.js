@@ -345,6 +345,36 @@ function honeyPriceEmbed(honeyPrice) {
   }
 }
 
+function honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFactoryFees) {
+  return {
+    embed: {
+      title: 'Metrics',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'Total Liquidity 💰',
+          value: `$${honeyFactoryLiquidity}`,
+        },
+        {
+          name: 'Total Volume (24h)',
+          value: `$${honeyFactoryVolume}`,
+        },
+        {
+          name: 'Total Fees (24h)',
+          value: `$${honeyFactoryFees}`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'info.honeyswap.org',
+      },
+    },
+  }
+}
+
 function credEmbed(totalCred, length, cred) {
   return {
     embed: {
@@ -379,6 +409,7 @@ module.exports = {
   pollenEmbed,
   brightidEmbed,
   honeyAddy,
+  honeyMetricsEmbed,
   honeyPriceEmbed,
   credEmbed,
   verifyDiscourseEmbed,
