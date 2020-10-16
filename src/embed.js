@@ -352,6 +352,7 @@ function honeyPriceEmbed(honeyPrice) {
     },
   }
 }
+
 function honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFactoryFees) {
   return {
     embed: {
