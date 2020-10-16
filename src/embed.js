@@ -180,6 +180,14 @@ function helpEmbed() {
           name: '!hny mycred',
           value: 'Shows your total cred and cred earned the past week.',
         },
+        {
+          name: '!hny price',
+          value: 'Show the current price of HNY.',
+        },
+        {
+          name: '!hny metrics',
+          value: 'Shows metrics of honeyswag.org (Liquidity, total volume & total fees).',
+        },
       ],
       image: {
         url: 'https://i.imgur.com/E7x8s0j.png',
@@ -344,7 +352,6 @@ function honeyPriceEmbed(honeyPrice) {
     },
   }
 }
-
 function honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFactoryFees) {
   return {
     embed: {
