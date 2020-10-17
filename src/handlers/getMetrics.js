@@ -26,8 +26,8 @@ module.exports = async function honeyPrice(message) {
   let { uniswapFactory } = result.data
   let honeyFactoryLiquidity = numberWithSpaces(Math.round(uniswapFactory.totalLiquidityUSD))
   let honeyFactoryVolume = numberWithSpaces(Math.round(uniswapFactory.totalVolumeUSD))
-  let honeyFactoryFees = numberWithSpaces(Math.round(uniswapFactory.txCount))
-  
+  let honeyFactoryFees = numberWithSpaces(Math.round(uniswapFactory.totalVolumeUSD * 0.0003))
+
   message.channel.send(`<@${message.author.id}>`)
   message.channel.send(honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFactoryFees))
 }
