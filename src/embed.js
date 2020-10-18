@@ -383,6 +383,37 @@ function honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFacto
   }
 }
 
+function officialAccountsEmbed() {
+  return {
+    embed: {
+      title: 'Official accounts',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'Reddit',
+          value: `http://reddit.com/r/HNY `,
+        },
+        {
+          name: ':bird: Twitter',
+          value: `https://twitter.com/Honeyswap`,
+        },
+        {
+          name: 'Youtube',
+          value: `https://www.youtube.com/channel/UCDgC-6bMv9YxJZJGuItr3NQ`,
+          
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'info.honeyswap.org',
+      },
+    },
+  }
+}
+
 function credEmbed(totalCred, length, cred) {
   return {
     embed: {
@@ -416,6 +447,7 @@ module.exports = {
   helpEmbed,
   pollenEmbed,
   brightidEmbed,
+  officialAccountsEmbed,
   honeyAddy,
   honeyMetricsEmbed,
   honeyPriceEmbed,
