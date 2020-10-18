@@ -8,6 +8,7 @@ const metrics = require('./getMetrics')
 // const { verifyDiscourse, checkDiscourse } = require('./discourse')
 // const { verifyGithub, checkGithub } = require('./github')
 const mycred = require('./mycred')
+const official = require('./getOfficialAccounts')
 
 const handlers = new Map([
   ['address', address],
@@ -21,6 +22,7 @@ const handlers = new Map([
   // ['verify-github', verifyGithub],
   // ['check-github', checkGithub],
   ['mycred', mycred],
+  ['official', official],
 ])
 
 module.exports = handlers
