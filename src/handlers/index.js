@@ -10,7 +10,7 @@ const metrics = require('./getMetrics')
 const mycred = require('./mycred')
 const official = require('./getOfficialAccounts')
 const xDai = require('./getxDai')
-const xDai = require('./ayuda')
+const ayuda = require('./ayuda')
 
 const handlers = new Map([
   ['address', address],
