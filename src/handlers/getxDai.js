@@ -1,6 +1,6 @@
-const { helpEmbed } = require('../embed')
+const { xDaiInfoEmbed } = require('../embed')
 
 module.exports = async function help(message) {
   message.channel.send(`<@${message.author.id}>`)
-  message.channel.send(helpEmbed())
+  message.channel.send(xDaiInfoEmbed())
 }
