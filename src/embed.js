@@ -386,7 +386,7 @@ function honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFacto
 function xDaiInfoEmbed() {
   return {
     embed: {
-      title: 'xDai',
+      title: 'xDai network',
       thumbnail: {
         url: 'https://miro.medium.com/max/400/1*evbI9uxxj2OkBaWNpWcssw.png',
       },
@@ -426,7 +426,7 @@ function officialAccountsEmbed() {
     embed: {
       title: 'Official accounts',
       thumbnail: {
-        url: 'https://i.imgur.com/dRxtULu.png',
+        url: 'https://audiologydesign.com/wp-content/uploads/2017/05/header-social.jpg',
       },
       color: 16769024,
       fields: [
@@ -435,8 +435,12 @@ function officialAccountsEmbed() {
           value: `http://reddit.com/r/HNY `,
         },
         {
-          name: ':bird: Twitter',
+          name: 'Twitter',
           value: `https://twitter.com/Honeyswap`,
+        },
+        {
+          name: 'Telegram',
+          value: `https://t.me/honeyswapofficial`,
         },
         {
           name: 'Youtube',
