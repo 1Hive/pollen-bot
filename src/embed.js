@@ -186,7 +186,15 @@ function helpEmbed() {
         },
         {
           name: '!hny metrics',
-          value: 'Shows metrics of honeyswag.org (Liquidity, total volume & total fees).',
+          value: 'Shows metrics of honeyswap.org (Liquidity, total volume & total fees).',
+        },
+        {
+          name: '!hny official',
+          value: 'Shows every official accounts for honey.',
+        },
+        {
+          name: '!hny network',
+          value: 'Shows the info about the xDai network.',
         },
       ],
       image: {
@@ -383,6 +391,79 @@ function honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFacto
   }
 }
 
+function xDaiInfoEmbed() {
+  return {
+    embed: {
+      title: 'xDai network',
+      thumbnail: {
+        url: 'https://miro.medium.com/max/400/1*evbI9uxxj2OkBaWNpWcssw.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'Network Name:',
+          value: `xDai`,
+        },
+        {
+          name: 'New RPC URL:',
+          value: `https://rpc.xdaichain.com/`,
+        },  
+        {
+          name: 'ChainID:',
+          value: `100`,
+        },
+        {
+          name: 'Symbol:',
+          value: `xDai`,
+        },
+        {
+          name: 'Block Explorer URL:',
+          value: `https://blockscout.com/poa/xdai`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'info.honeyswap.org',
+      },
+    },
+  }
+}
+
+function officialAccountsEmbed() {
+  return {
+    embed: {
+      title: 'Official accounts',
+      thumbnail: {
+        url: 'https://audiologydesign.com/wp-content/uploads/2017/05/header-social.jpg',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'Reddit',
+          value: `http://reddit.com/r/HNY `,
+        },
+        {
+          name: 'Twitter',
+          value: `https://twitter.com/Honeyswap`,
+        },
+        {
+          name: 'Telegram',
+          value: `https://t.me/honeyswapofficial`,
+        },
+        {
+          name: 'Youtube',
+          value: `https://www.youtube.com/channel/UCDgC-6bMv9YxJZJGuItr3NQ`,
+          
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'info.honeyswap.org',
+      },
+    },
+  }
+}
+
 function credEmbed(totalCred, length, cred) {
   return {
     embed: {
@@ -416,6 +497,7 @@ module.exports = {
   helpEmbed,
   pollenEmbed,
   brightidEmbed,
+  officialAccountsEmbed,
   honeyAddy,
   honeyMetricsEmbed,
   honeyPriceEmbed,
@@ -423,4 +505,5 @@ module.exports = {
   verifyDiscourseEmbed,
   successDiscourseVerificationEmbed,
   errorDiscourseVerificationEmbed,
+  xDaiInfoEmbed
 }
