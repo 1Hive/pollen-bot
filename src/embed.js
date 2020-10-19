@@ -188,6 +188,14 @@ function helpEmbed() {
           name: '!hny metrics',
           value: 'Shows metrics of honeyswag.org (Liquidity, total volume & total fees).',
         },
+        {
+          name: '!hny official',
+          value: 'Shows every official accounts for honey.',
+        },
+        {
+          name: '!hny network',
+          value: 'Shows the info about the xDai network.',
+        },
       ],
       image: {
         url: 'https://i.imgur.com/E7x8s0j.png',
