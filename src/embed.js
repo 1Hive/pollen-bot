@@ -208,6 +208,73 @@ function helpEmbed() {
   }
 }
 
+
+function helpEmbedES() {
+  return {
+    embed: {
+      color: 16769024,
+      author: {
+        name: 'Assistant Bee',
+        url: 'https://github.com/crisog/assistant-bee',
+      },
+      description:
+        "Hola, me llamo abeja asistente, Soy la ayudante de 1hive's. Todos mis comandos empiezan por `!hny`. En la siguiente lista podrás ver todas mis funcionalidades!",
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      fields: [
+        {
+          name: 'FAQ',
+          value:
+            'Para información completa sobre 1hive, HNY y la verificación de brightID, por favor revisa este link [FAQ](https://forum.1hive.org/t/todo-sobre-1hive-en-un-solo-lugar-nuevo-faq-en-desarrolo/272).',
+        },
+        {
+          name: '!hny address',
+          value: "Esto muestra la dirección de contrado de HNY",
+        },
+        {
+          name: '!hny pollen',
+          value:
+            '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) es un rango de colaborador que se usa para reconocer las contribuciones a la colmena (Hive). Consulta el comando para obtener más información.',
+        },
+        {
+          name: '!hny brightid',
+          value:
+            'Guía paso por paso de como verificarte con brightID [BrightID](https://www.brightid.org)',
+        },
+        {
+          name: '!hny mycred',
+          value: 'Te muestra el cred total y el cred de la semana pasada que llevas acumulado.',
+        },
+        {
+          name: '!hny price',
+          value: 'Muestra el precio actual de HNY.',
+        },
+        {
+          name: '!hny metrics',
+          value: 'Muestra las métricas de honeyswap.org (Liquidez, volumen total y comisiones totales).',
+        },
+        {
+          name: '!hny official',
+          value: 'Muestra todas las cuentas oficiales de Honey.',
+        },
+        {
+          name: '!hny network',
+          value: 'Muestra la información de la red xDai.',
+        },
+      ],
+      image: {
+        url: 'https://i.imgur.com/E7x8s0j.png',
+      },
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
+
 function pollenEmbed() {
   return {
     embed: {
@@ -505,5 +572,6 @@ module.exports = {
   verifyDiscourseEmbed,
   successDiscourseVerificationEmbed,
   errorDiscourseVerificationEmbed,
-  xDaiInfoEmbed
+  xDaiInfoEmbed,
+  helpEmbedES
 }
