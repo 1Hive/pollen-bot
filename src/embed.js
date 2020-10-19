@@ -383,6 +383,44 @@ function honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFacto
   }
 }
 
+function xDaiInfoEmbed() {
+  return {
+    embed: {
+      title: 'xDai',
+      thumbnail: {
+        url: 'https://miro.medium.com/max/400/1*evbI9uxxj2OkBaWNpWcssw.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'Network Name:',
+          value: `xDai`,
+        },
+        {
+          name: 'New RPC URL:',
+          value: `https://rpc.xdaichain.com/`,
+        },  
+        {
+          name: 'ChainID:',
+          value: `100`,
+        },
+        {
+          name: 'Symbol:',
+          value: `xDai`,
+        },
+        {
+          name: 'Block Explorer URL:',
+          value: `https://blockscout.com/poa/xdai`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'info.honeyswap.org',
+      },
+    },
+  }
+}
+
 function officialAccountsEmbed() {
   return {
     embed: {
@@ -455,4 +493,5 @@ module.exports = {
   verifyDiscourseEmbed,
   successDiscourseVerificationEmbed,
   errorDiscourseVerificationEmbed,
+  xDaiInfoEmbed
 }
