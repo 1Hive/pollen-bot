@@ -24,8 +24,7 @@ const handlers = new Map([
   // ['check-github', checkGithub],
   ['mycred', mycred],
   ['official', official],
-  ['xDai', xDai],
-  ['xdai', xDai],
+  ['network', xDai],
 ])
 
 module.exports = handlers
