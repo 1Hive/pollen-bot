@@ -186,7 +186,7 @@ function helpEmbed() {
         },
         {
           name: '!hny metrics',
-          value: 'Shows metrics of honeyswag.org (Liquidity, total volume & total fees).',
+          value: 'Shows metrics of honeyswap.org (Liquidity, total volume & total fees).',
         },
         {
           name: '!hny official',
