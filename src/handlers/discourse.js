@@ -1,12 +1,13 @@
 const {
   handleDiscourseVerify,
   handleDiscourseCheck,
-} = require('../lib/discourse-gatherer')
+} = require('../lib/discourse-verification')
 const {
   parseDiscourseVerification,
   parseDiscourseCheck,
 } = require('../parser/discourse')
 
+const db = require('../db/db')
 const { log } = require('../utils')
 
 async function verifyDiscourse(message) {
@@ -40,6 +41,7 @@ async function checkDiscourse(message) {
         username,
       )
       message.author.send(response.message)
+      db.handleData(message, username, null, null)
     }
   } catch (err) {
     log(err)

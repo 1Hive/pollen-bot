@@ -523,6 +523,7 @@ module.exports = {
   welcomeEmbed,
   brightidWarningEmbed,
   wrongChannelWarningEmbed,
+  walletWarningEmbed,
   helpEmbed,
   pollenEmbed,
   brightidEmbed,

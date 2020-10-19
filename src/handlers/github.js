@@ -4,6 +4,7 @@ const {
 } = require('../lib/github-verification')
 const { parseGithubCheck } = require('../parser/github')
 
+const db = require('../db/db')
 const { log } = require('../utils')
 
 async function verifyGithub(message) {
@@ -31,6 +32,7 @@ async function checkGithub(message) {
         username,
       )
       message.author.send(response.message)
+      db.handleData(message, null, username, null)
     }
   } catch (err) {
     log(err)
