@@ -11,7 +11,7 @@ const {
   wrongChannelWarningEmbed,
 } = require('./embed')
 
-const externalCommands = ['!join', '!me', '!verify']
+const externalCommands = ['!join', '!me', '!verify', '$faucet', '$ping']
 
 // Load this as early as possible, to init all the environment variables that may be needed
 dotenv.config()
