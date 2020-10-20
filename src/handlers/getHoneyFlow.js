@@ -15,16 +15,22 @@ const QUERY_24HR_TRANSFERS = gql`
   query TransfersData($timestamp: BigInt!) {
     transfers(where: { timestamp_gte: $timestamp }) {
       amount
-      token
     }
   }
 `
 
-const QUERY_24HR_DEPOSITS_ADDRESS = gql`
-  query DepositsData($timestamp: BigInt!, $address: String!) {
-    deposits(where: { timestamp_gte: $timestamp, id: $address }) {
+const QUERY_24HR_TRANSFERS_SOURCE_ADDRESS = gql`
+  query TransferData($timestamp: BigInt!, $address: String!) {
+    deposits(where: { timestamp_gte: $timestamp, source: $address }) {
       amount
-      token
+    }
+  }
+`
+
+const QUERY_24HR_TRANSFERS_DESTINATION_ADDRESS = gql`
+  query TransferData($timestamp: BigInt!, $address: String!) {
+    deposits(where: { timestamp_gte: $timestamp, destination: $address }) {
+      amount
     }
   }
 `
@@ -35,7 +41,7 @@ module.exports = async function getHoneyFlow(message) {
 
   // Inbound queries
   const { honeyMakerData } = await wrapper.performQuery(
-    QUERY_24HR_DEPOSITS_ADDRESS,
+    QUERY_24HR_TRANSFERS_SOURCE_ADDRESS,
     {
       timestamp,
       address: HONEY_MAKER_ADDRESS,
@@ -49,7 +55,7 @@ module.exports = async function getHoneyFlow(message) {
   }
 
   const { issuanceData } = await wrapper.performQuery(
-    QUERY_24HR_DEPOSITS_ADDRESS,
+    QUERY_24HR_TRANSFERS_DESTINATION_ADDRESS,
     {
       timestamp,
       address: ISSUER_ADDRESS,
