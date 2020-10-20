@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const model = 'User'
+require('../models/user')
 
 async function dbHandler(message, discourse_username, github_username, address) {
   const searchParameter = { discordId: message.author.id }
