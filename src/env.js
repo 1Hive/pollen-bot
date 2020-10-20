@@ -18,14 +18,9 @@ const ENV_VARS = {
     'YOUR_MONGODB_URI',
     true,
   ],
-  DB_NAME: [
-    process.env.DB_NAME,
-    'YOUR_DB_NAME',
-    true,
-  ],
-  COLL_NAME: [
-    process.env.COLL_NAME,
-    'YOUR_COLL_NAME',
+  CHANNEL_ID: [
+    process.env.CHANNEL_ID,
+    'YOUR_CHANNEL_ID',
     true,
   ],
   SENTRY_DSN: [process.env.SENTRY_DSN, '', false],
