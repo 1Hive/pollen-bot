@@ -1,7 +1,8 @@
 const Web3 = require('web3')
 const { walletWarningEmbed } = require('../embed')
 const dotenv = require('dotenv')
-const db = require('../db/db')
+const { dbHandler } = require('../utilities/db')
+
 
 dotenv.config()
 
@@ -13,7 +14,7 @@ module.exports = async function save_wallet(message) {
   if (typeof rawAddress !== 'undefined') {
     try {
       const xdaiAddress = web3.utils.toChecksumAddress(rawAddress)
-      db.handleData(message, null, null, xdaiAddress)
+      dbHandler(message, null, null, xdaiAddress)
       return
     } catch(e) {
       console.error('invalid ethereum address', e.message)

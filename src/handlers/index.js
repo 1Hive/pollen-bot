@@ -10,7 +10,7 @@ const { verifyGithub, checkGithub } = require('./github')
 const mycred = require('./mycred')
 const official = require('./getOfficialAccounts')
 const xDai = require('./getxDai')
-const saveWallet = require('./save_wallet')
+const saveWallet = require('./saveWallet')
 
 const handlers = new Map([
   ['address', address],

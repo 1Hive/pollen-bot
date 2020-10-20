@@ -349,6 +349,85 @@ function errorDiscourseVerificationEmbed(errorMessage) {
   }
 }
 
+function verifyGithubEmbed(verificationCode, githubUsername) {
+  return {
+    embed: {
+      title: 'Verify github account',
+      description:
+        'Process to verify your account to opt-in for pollen distributions.',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: '1. Create a public gist',
+          value: "Create a public gist called `pollen.md`",
+        },
+        {
+          name: `2. Set code ${verificationCode}`,
+          value: 'Place the code in the body of the gist'
+        },
+        {
+          name: '3. Complete the verification',
+          value: `Confirm the previous step using the following command:
+          **!hny check-github ${verificationCode} ${githubUsername}**`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
+function successGithubVerificationEmbed(githubUsername) {
+  return {
+    embed: {
+      title: 'Congratulations!',
+      description: 'The verification process was completed successfully',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'All set!',
+          value: `Thanks for verifying your github account for pollen distributions, ${githubUsername}!`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
+function errorGithubVerificationEmbed(errorMessage) {
+  return {
+    embed: {
+      title: 'Bad news!',
+      description: 'There was an error in the github verification process.',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'This is what happened',
+          value: `${errorMessage}`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
 function honeyAddy() {
   return {
     embed: {
@@ -535,5 +614,8 @@ module.exports = {
   verifyDiscourseEmbed,
   successDiscourseVerificationEmbed,
   errorDiscourseVerificationEmbed,
+  verifyGithubEmbed,
+  successGithubVerificationEmbed,
+  errorGithubVerificationEmbed,
   xDaiInfoEmbed
 }

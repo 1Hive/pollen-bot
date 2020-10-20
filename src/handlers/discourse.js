@@ -6,8 +6,8 @@ const {
   parseDiscourseVerification,
   parseDiscourseCheck,
 } = require('../parser/discourse')
+const { dbHandler } = require('../utilities/db')
 
-const db = require('../db/db')
 const { log } = require('../utils')
 
 async function verifyDiscourse(message) {
@@ -41,7 +41,7 @@ async function checkDiscourse(message) {
         username,
       )
       message.author.send(response.message)
-      db.handleData(message, username, null, null)
+      dbHandler(message, username, null, null)
     }
   } catch (err) {
     log(err)
