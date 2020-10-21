@@ -11,6 +11,7 @@ const mycred = require('./mycred')
 const official = require('./getOfficialAccounts')
 const xDai = require('./getxDai')
 const saveWallet = require('./saveWallet')
+const ayuda = require('./ayuda')
 
 const handlers = new Map([
   ['address', address],
@@ -27,6 +28,7 @@ const handlers = new Map([
   ['mycred', mycred],
   ['official', official],
   ['network', xDai],
+  ['ayuda', ayuda],
 ])
 
 module.exports = handlers
