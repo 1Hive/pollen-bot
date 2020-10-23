@@ -2,13 +2,13 @@ const Web3 = require('web3')
 const { walletWarningEmbed } = require('../embed')
 const dotenv = require('dotenv')
 const { dbHandler } = require('../utilities/db')
+const { error } = require('../utils')
 
 
 dotenv.config()
 
 var web3 = new Web3(process.env.WEB3_URL)
 
-//TODO: finish logic
 module.exports = async function save_wallet(message) {
   const rawAddress = message.content.split(' ')[2]
   if (typeof rawAddress !== 'undefined') {
@@ -17,9 +17,9 @@ module.exports = async function save_wallet(message) {
       dbHandler(message, null, null, xdaiAddress)
       message.channel.send(`<@${message.author.id}> wallet address succesfully saved.`)
       return
-    } catch(e) {
-      console.error('invalid ethereum address', e.message)
+    } catch(err) {
+      error(err)
+      message.channel.send(walletWarningEmbed())
     }
   }
-  message.channel.send(walletWarningEmbed())
 }
