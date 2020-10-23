@@ -15,6 +15,7 @@ module.exports = async function save_wallet(message) {
     try {
       const xdaiAddress = web3.utils.toChecksumAddress(rawAddress)
       dbHandler(message, null, null, xdaiAddress)
+      message.channel.send(`<@${message.author.id}> wallet address succesfully saved.`)
       return
     } catch(e) {
       console.error('invalid ethereum address', e.message)

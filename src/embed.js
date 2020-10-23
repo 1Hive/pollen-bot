@@ -201,6 +201,10 @@ function helpEmbed() {
             '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) is a contributor rank used to recognize contributions to the Hive. Refer to the command for more information.',
         },
         {
+          name: '!hny save-wallet <address>',
+          value: 'This command saves your wallet to a database to be used for pollen payouts.'
+        },
+        {
           name: '!hny brightid',
           value:
             'Step-by-step guide on how to get verified with [BrightID](https://www.brightid.org)',
@@ -681,7 +685,6 @@ module.exports = {
   verifyDiscourseEmbed,
   successDiscourseVerificationEmbed,
   errorDiscourseVerificationEmbed,
-  save-wallets
   verifyGithubEmbed,
   successGithubVerificationEmbed,
   errorGithubVerificationEmbed,
