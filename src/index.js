@@ -29,6 +29,7 @@ client.on('guildMemberAdd', (member) => {
 
 // Listen for reactions
 client.on('messageReactionAdd', async (reaction, user) => {
+  if (reaction.message.author.bot) return
   // check if not yet cached
   if (reaction.partial) {
     try {
