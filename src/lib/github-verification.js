@@ -5,9 +5,9 @@ const {
   errorGithubVerificationEmbed,
 } = require('../embed')
 
-async function handleGithubVerify(discord_id) {
+async function handleGithubVerify(discord_id, github_username) {
   const verification_code = createVerificationCode()
-  const message = verifyGithubEmbed(verification_code)
+  const message = verifyGithubEmbed(verification_code, github_username)
   tempStorage[discord_id] = verification_code
   return { discord: discord_id, message: message }
 }

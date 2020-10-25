@@ -8,6 +8,10 @@ function welcomeEmbed() {
       color: 16769024,
       fields: [
         {
+          name: 'Bot Commands :bee:',
+          value: 'Need help? Try `!hny help`'
+        },
+        {
           name: 'Frequently Asked Questions (FAQ) ❓',
           value: 'https://hackmd.io/ObCMUJUxTumG2z6FJ5cnkg',
         },
@@ -93,6 +97,31 @@ function wrongChannelWarningEmbed() {
   }
 }
 
+function walletWarningEmbed() {
+  return {
+    embed: {
+      title: 'Warning 🚨',
+      description:
+        'You are using the `!hny wallet` command incorrectly!',
+      color: 16769024,
+      fields: [
+        {
+          name: '`!hny wallet <address>`',
+          value:
+            'Correct usage of this command requires you to add your xdai wallet address. An example of how to properly use the command is included below!',
+        }
+      ],
+      image: {
+        url: 'https://i.imgur.com/E7x8s0j.png',
+      },
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
 function brightidEmbed() {
   return {
     embed: {
@@ -170,6 +199,10 @@ function helpEmbed() {
           name: '!hny pollen',
           value:
             '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) is a contributor rank used to recognize contributions to the Hive. Refer to the command for more information.',
+        },
+        {
+          name: '!hny save-wallet <address>',
+          value: 'This command saves your wallet to a database to be used for pollen payouts.'
         },
         {
           name: '!hny brightid',
@@ -324,12 +357,12 @@ function verifyDiscourseEmbed(verificationCode, discourseUsername) {
       fields: [
         {
           name: '1. Change your discourse name',
-          value: `Go to your [account preferences](https://forum.1hive.org/u/${discourseUsername}/preferences/account) and after that, 
+          value: `Go to your [account preferences](https://forum.1hive.org/u/${discourseUsername}/preferences/account) and after that,
           change your 'Name' field temporarily into this: **${verificationCode}**.`,
         },
         {
           name: '2. Complete the verification',
-          value: `Confirm the previous step using the following command: 
+          value: `Confirm the previous step using the following command:
           **!hny check-discourse ${verificationCode} ${discourseUsername}**`,
         },
       ],
@@ -369,6 +402,85 @@ function errorDiscourseVerificationEmbed(errorMessage) {
     embed: {
       title: 'Bad news!',
       description: 'There was an error in the discourse verification process.',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'This is what happened',
+          value: `${errorMessage}`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
+function verifyGithubEmbed(verificationCode, githubUsername) {
+  return {
+    embed: {
+      title: 'Verify github account',
+      description:
+        'Process to verify your account to opt-in for pollen distributions.',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: '1. Create a public gist',
+          value: "Create a public gist called `pollen.md`",
+        },
+        {
+          name: `2. Set code ${verificationCode}`,
+          value: 'Place the code in the body of the gist'
+        },
+        {
+          name: '3. Complete the verification',
+          value: `Confirm the previous step using the following command:
+          **!hny check-github ${verificationCode} ${githubUsername}**`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
+function successGithubVerificationEmbed(githubUsername) {
+  return {
+    embed: {
+      title: 'Congratulations!',
+      description: 'The verification process was completed successfully',
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      color: 16769024,
+      fields: [
+        {
+          name: 'All set!',
+          value: `Thanks for verifying your github account for pollen distributions, ${githubUsername}!`,
+        },
+      ],
+      timestamp: new Date(),
+      footer: {
+        text: 'about.1hive.org',
+      },
+    },
+  }
+}
+
+function errorGithubVerificationEmbed(errorMessage) {
+  return {
+    embed: {
+      title: 'Bad news!',
+      description: 'There was an error in the github verification process.',
       thumbnail: {
         url: 'https://i.imgur.com/dRxtULu.png',
       },
@@ -474,7 +586,7 @@ function xDaiInfoEmbed() {
         {
           name: 'New RPC URL:',
           value: `https://rpc.xdaichain.com/`,
-        },  
+        },
         {
           name: 'ChainID:',
           value: `100`,
@@ -520,7 +632,7 @@ function officialAccountsEmbed() {
         {
           name: 'Youtube',
           value: `https://www.youtube.com/channel/UCDgC-6bMv9YxJZJGuItr3NQ`,
-          
+
         },
       ],
       timestamp: new Date(),
@@ -561,6 +673,7 @@ module.exports = {
   welcomeEmbed,
   brightidWarningEmbed,
   wrongChannelWarningEmbed,
+  walletWarningEmbed,
   helpEmbed,
   pollenEmbed,
   brightidEmbed,
@@ -572,6 +685,9 @@ module.exports = {
   verifyDiscourseEmbed,
   successDiscourseVerificationEmbed,
   errorDiscourseVerificationEmbed,
+  verifyGithubEmbed,
+  successGithubVerificationEmbed,
+  errorGithubVerificationEmbed,
   xDaiInfoEmbed,
   helpEmbedES
 }

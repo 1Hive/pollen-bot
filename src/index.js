@@ -12,6 +12,7 @@ const {
 } = require('./embed')
 
 const externalCommands = ['!join', '!me', '!verify']
+require("./db/connection")
 
 // Load this as early as possible, to init all the environment variables that may be needed
 dotenv.config()
@@ -72,7 +73,7 @@ client.on('message', (message) => {
       // Check if external bot command && if channel is #bot-commands
     } else if (
       externalCommands.indexOf(message.content) > -1 &&
-      message.channel.id !== '762377613062701146'
+      message.channel.id !== process.env.CHANNEL_ID
     ) {
       message.delete({ timeout: 500 })
       message.author.send(wrongChannelWarningEmbed())
@@ -81,7 +82,7 @@ client.on('message', (message) => {
       if (handler) {
         // Checks if channel is #bot-commands or message is NOT from guild
         if (
-          message.channel.id === '762377613062701146' ||
+          message.channel.id === process.env.CHANNEL_ID ||
           message.guild === null
         ) {
           handler(message)
@@ -90,7 +91,7 @@ client.on('message', (message) => {
           )
         } else {
           message.delete({ timeout: 500 })
-          client.channels.fetch('762377613062701146').then((channel) => {
+          client.channels.fetch(process.env.CHANNEL_ID).then((channel) => {
             channel.send(`<@${message.author.id}>`)
             channel.send(wrongChannelWarningEmbed())
           })

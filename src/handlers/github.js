@@ -2,14 +2,24 @@ const {
   handleGithubVerify,
   handleGithubCheck,
 } = require('../lib/github-verification')
-const { parseGithubCheck } = require('../parser/github')
+const {
+  parseGithubVerification,
+  parseGithubCheck,
+} = require('../parser/github')
+const { dbHandler } = require('../utilities/db')
 
 const { log } = require('../utils')
 
 async function verifyGithub(message) {
   try {
-    const response = await handleGithubVerify(message.author.id)
-    message.author.send(response.message)
+    const [username] = parseGithubVerification(
+      message.content,
+      message.author.id,
+    )
+    if (username) {
+      const response = await handleGithubVerify(message.author.id, username)
+      message.author.send(response.message)
+    }
   } catch (err) {
     log(err)
     message.reply(
@@ -31,6 +41,7 @@ async function checkGithub(message) {
         username,
       )
       message.author.send(response.message)
+      dbHandler(message, null, username, null)
     }
   } catch (err) {
     log(err)
