@@ -12,7 +12,7 @@ const {
 } = require('./embed')
 
 const externalCommands = ['!join', '!me', '!verify']
-require("./db/connection")
+require('./db/connection')
 
 // Load this as early as possible, to init all the environment variables that may be needed
 dotenv.config()
@@ -30,11 +30,12 @@ client.on('guildMemberAdd', (member) => {
 
 // Listen for reactions
 client.on('messageReactionAdd', async (reaction, user) => {
-  if (reaction.message.author.bot) return
   // check if not yet cached
   if (reaction.partial) {
     try {
       await reaction.fetch().then((reaction) => {
+        if (reaction.message.author.bot) return
+
         if (user.id === reaction.message.author.id) {
           reaction.users.remove(reaction.message.author)
           log(
@@ -48,6 +49,8 @@ client.on('messageReactionAdd', async (reaction, user) => {
     }
     // if cached, handle here
   } else if (!reaction.partial) {
+    if (reaction.message.author.bot) return
+
     if (user.id === reaction.message.author.id) {
       reaction.users.remove(reaction.message.author)
       log(
