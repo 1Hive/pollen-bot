@@ -18,7 +18,7 @@ require('./db/connection')
 dotenv.config()
 // Sentry.init({ dsn: environment('SENTRY_DSN') })
 
-const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] })
+const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] }, { ws: { intents: 'GUILD_MEMBERS' }})
 
 client.on('ready', () => {
   log(`Bot successfully started as ${client.user.tag} 🐝`)
