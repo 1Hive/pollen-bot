@@ -10,7 +10,6 @@ const NodeAddress = sc.core.address.makeAddressModule({
 
 async function manageRoles(member, totalCred) {
   const roles = ['771534379696259133', '771534378110287913', '771534371588276274']
-  console.log(member.roles.cache)
   for(let i = 0; i < member.roles.cache.size; i++) {
     if(member.roles.cache.has(roles[i])) {
       member.roles.remove(roles[i])
