@@ -26,7 +26,7 @@ async function manageRoles(member, totalCred) {
 }
 
 module.exports = async function updateroles(message) {
-  if(message.author.id === '579830927287386126') {
+  if(message.channel.type !== 'dm' && message.author.id === '579830927287386126') {
     try {
       const credAccounts = await(
         await fetch('https://raw.githubusercontent.com/1Hive/pollen/gh-pages/output/accounts.json')
