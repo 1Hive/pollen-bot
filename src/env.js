@@ -28,6 +28,11 @@ const ENV_VARS = {
     'YOUR_POLLEN_ADMIN_ID',
     true,
   ],
+  GUILD_ID: [
+    process.env.GUILD_ID,
+    'YOUR_GUILD_ID',
+    true,
+  ],
   SENTRY_DSN: [process.env.SENTRY_DSN, '', false],
 }
 
