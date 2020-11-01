@@ -1,6 +1,9 @@
 const sc = require('sourcecred').default
 const fetch = require('node-fetch')
 const { error } = require('../utils')
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 const NodeAddress = sc.core.address.makeAddressModule({
   name: 'NodeAddress',
@@ -25,7 +28,8 @@ async function manageRoles(member, totalCred) {
 }
 
 module.exports = async function updateroles(message) {
-  if(message.channel.type !== 'dm' && message.author.id === '579830927287386126') {
+  if(message.channel.type !== 'dm' && message.author.id === process.env.POLLEN_ADMIN) {
+    let count = 0
     try {
       const credAccounts = await(
         await fetch('https://raw.githubusercontent.com/1Hive/pollen/gh-pages/output/accounts.json')
@@ -53,10 +57,11 @@ module.exports = async function updateroles(message) {
 
         const member = await message.guild.member(id)
         if(member) {
-          console.log('found a member with id: ', id)
           await manageRoles(member, totalCred)
+          count++
         }
       }
+      message.reply(`${count} users had their roles changed.`)
     } catch(err) {
       error(err)
       message.reply(`${err}`)

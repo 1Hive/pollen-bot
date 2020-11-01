@@ -23,6 +23,11 @@ const ENV_VARS = {
     'YOUR_CHANNEL_ID',
     true,
   ],
+  POLLEN_ADMIN: [
+    process.env.POLLEN_ADMIN,
+    'YOUR_POLLEN_ADMIN_ID',
+    true,
+  ],
   SENTRY_DSN: [process.env.SENTRY_DSN, '', false],
 }
 
