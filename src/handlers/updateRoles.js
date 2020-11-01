@@ -37,7 +37,7 @@ function findMember(id, members) {
 }
 
 async function getMembers() {
-  const limit = 2
+  const limit = 1000
   let doneLoading = false
   let allMembers = []
   let after = '0'
