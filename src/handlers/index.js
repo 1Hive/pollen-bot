@@ -12,6 +12,7 @@ const official = require('./getOfficialAccounts')
 const xDai = require('./getxDai')
 const saveWallet = require('./saveWallet')
 const ayuda = require('./ayuda')
+const updateroles = require('./updateRoles')
 
 const handlers = new Map([
   ['address', address],
@@ -29,6 +30,7 @@ const handlers = new Map([
   ['official', official],
   ['network', xDai],
   ['ayuda', ayuda],
+  ['updateroles', updateroles]
 ])
 
 module.exports = handlers
