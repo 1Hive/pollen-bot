@@ -32,8 +32,6 @@ module.exports = async function updateroles(message) {
       ).json()
       const accounts = credAccounts.accounts
 
-      const members = await message.guild.members.fetch()
-
       for(var i = 0; i < accounts.length; i++) {
         if(accounts[i].account.identity.subtype !== 'USER') continue
 
@@ -47,15 +45,15 @@ module.exports = async function updateroles(message) {
 
         let totalCred = 0
         let id
-        let member
 
         discordAliases.forEach(alias => {
           id = NodeAddress.toParts(alias.address)[4]
           totalCred = accounts[i].totalCred
         })
 
-        member = members.get(id)
+        const member = await message.guild.member(id)
         if(member) {
+          console.log('found a member with id: ', id)
           await manageRoles(member, totalCred)
         }
       }
