@@ -55,6 +55,39 @@ async function delay(seconds) {
   })
 }
 
+function findMember(id, members) {
+  for(let i = 0; i < members.length; i++) {
+    if(members[i].user.id === id) {
+      return members[i]
+    }
+  }
+  return null
+}
+
+async function getMembers() {
+  const limit = 1000
+  let doneLoading = false
+  let allMembers = []
+  let after = '0'
+  while (!doneLoading) {
+    const newMembers = await(
+      await fetch(`https://discord.com/api/guilds/${process.env.GUILD_ID}/members?after=${after}&limit=${limit}`, {
+        method: 'get',
+        headers: {
+          'Authorization': 'Bot ' + process.env.DISCORD_API_TOKEN,
+        }
+      }
+      )).json()
+    if (newMembers.length < limit) {
+      doneLoading = true
+    } else {
+      after = newMembers[newMembers.length - 1].user.id
+    }
+    allMembers = allMembers.concat(newMembers)
+  }
+  return allMembers
+}
+
 module.exports = async function updateroles(message) {
   if(message.channel.type !== 'dm' && message.author.id === process.env.POLLEN_ADMIN) {
     let count = 0
