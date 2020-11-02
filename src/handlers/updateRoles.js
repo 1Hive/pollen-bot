@@ -11,20 +11,17 @@ const NodeAddress = sc.core.address.makeAddressModule({
   otherNonces: new Map().set('E', 'EdgeAddress'),
 })
 
-async function manageRoles(member, totalCred) {
-  const roles = ['771534379696259133', '771534378110287913', '771534371588276274']
-  for(let i = 0; i < member.roles.cache.size; i++) {
-    if(member.roles.cache.has(roles[i])) {
-      member.roles.remove(roles[i])
-    }
-  }
+function manageRoles(member, totalCred) {
+  const roles = ['771499754970415105', '771499759886008390', '772552300266651668']
+  member.roles = member.roles.filter((role) => !roles.includes(role))
   if(totalCred < 40) {
-    await member.roles.add(roles[0])
+    member.roles.push(roles[0])
   } else if(totalCred >= 40 && totalCred < 100) {
-    await member.roles.add(roles[1])
+    member.roles.push(roles[1])
   } else if(totalCred >= 100) {
-    await member.roles.add(roles[2])
+    member.roles.push(roles[2])
   }
+  return member
 }
 
 function findMember(id, members) {
@@ -34,6 +31,21 @@ function findMember(id, members) {
     }
   }
   return null
+}
+
+async function patchMember(member) {
+  const document = {
+    roles: member.roles
+  }
+  const patchedMember = await fetch(`https://discord.com/api/guilds/${process.env.GUILD_ID}/members/${member.user.id}`, {
+    method: 'patch',
+    body: JSON.stringify(document),
+    headers: {
+      'Authorization': 'Bot ' + process.env.DISCORD_API_TOKEN,
+      'Content-Type': 'application/json'
+    }
+  })
+  return patchedMember
 }
 
 async function getMembers() {
@@ -91,9 +103,9 @@ module.exports = async function updateroles(message) {
 
         let member = findMember(id, members)
         if(member) {
-          member = await message.guild.member(id)
-          await manageRoles(member, totalCred)
+          member = manageRoles(member, totalCred)
           count++
+          await patchMember(member)
         }
       }
       message.reply(`${count} users had their roles changed.`)
