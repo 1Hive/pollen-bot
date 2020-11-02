@@ -12,25 +12,26 @@ const NodeAddress = sc.core.address.makeAddressModule({
 })
 
 function manageRoles(member, totalCred) {
-  const roles = ['771499754970415105', '771499759886008390', '772552300266651668']
+  const roles = ['771534378110287913', '771534371588276274']
   member.roles = member.roles.filter((role) => !roles.includes(role))
-  if(totalCred < 40) {
+  if(totalCred >= 40 && totalCred < 100) {
     member.roles.push(roles[0])
-  } else if(totalCred >= 40 && totalCred < 100) {
-    member.roles.push(roles[1])
   } else if(totalCred >= 100) {
-    member.roles.push(roles[2])
+    member.roles.push(roles[1])
   }
   return member
 }
 
-function findMember(id, members) {
-  for(let i = 0; i < members.length; i++) {
-    if(members[i].user.id === id) {
-      return members[i]
+async function getMember(id) {
+  const res = await(
+    await fetch(`https://discord.com/api/guilds/${process.env.GUILD_ID}/members/${id}`, {
+      method: 'get',
+      headers: {
+        'Authorization': 'Bot ' + process.env.DISCORD_API_TOKEN,
+      }
     }
-  }
-  return null
+    )).json()
+  return res
 }
 
 async function patchMember(member) {
@@ -48,34 +49,16 @@ async function patchMember(member) {
   return patchedMember
 }
 
-async function getMembers() {
-  const limit = 1000
-  let doneLoading = false
-  let allMembers = []
-  let after = '0'
-  while (!doneLoading) {
-    const newMembers = await(
-      await fetch(`https://discord.com/api/guilds/${process.env.GUILD_ID}/members?after=${after}&limit=${limit}`, {
-        method: 'get',
-        headers: {
-          'Authorization': 'Bot ' + process.env.DISCORD_API_TOKEN,
-        }
-      }
-      )).json()
-    if (newMembers.length < limit) {
-      doneLoading = true
-    } else {
-      after = newMembers[newMembers.length - 1].user.id
-    }
-    allMembers = allMembers.concat(newMembers)
-  }
-  return allMembers
+async function delay(seconds) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, seconds * 1000)
+  })
 }
 
 module.exports = async function updateroles(message) {
   if(message.channel.type !== 'dm' && message.author.id === process.env.POLLEN_ADMIN) {
     let count = 0
-    const members = await getMembers()
+    let map = new Map()
     try {
       const credAccounts = await(
         await fetch('https://raw.githubusercontent.com/1Hive/pollen/gh-pages/output/accounts.json')
@@ -101,11 +84,22 @@ module.exports = async function updateroles(message) {
           totalCred = accounts[i].totalCred
         })
 
-        let member = findMember(id, members)
-        if(member) {
-          member = manageRoles(member, totalCred)
-          count++
+        if(id && totalCred >= 40) {
+          map.set(id, totalCred)
+        }
+      }
+
+      for (const [key, value] of map.entries()) {
+        let member = await getMember(key)
+        if(member.retry_after > 0) {
+          await delay(member.retry_after)
+          member = await getMember(key)
+        }
+        if((member.code !== 10007)) {
+          member = await manageRoles(member, value)
           await patchMember(member)
+          console.log(`User ${member.user.username} had their roles changed to: ${member.roles}`)
+          count++
         }
       }
       message.reply(`${count} users had their roles changed.`)
