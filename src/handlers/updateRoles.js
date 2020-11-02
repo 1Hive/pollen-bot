@@ -18,9 +18,7 @@ function manageRoles(member, totalCred) {
     '771534371588276274',
   ]
   member.roles = member.roles.filter((role) => !roles.includes(role))
-  if (totalCred < 40) {
-    member.roles.push(roles[0])
-  } else if (totalCred >= 40 && totalCred < 100) {
+  if (totalCred >= 40 && totalCred < 100) {
     member.roles.push(roles[1])
   } else if (totalCred >= 100) {
     member.roles.push(roles[2])
