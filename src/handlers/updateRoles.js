@@ -23,6 +23,7 @@ function manageRoles(member, totalCred) {
 }
 
 async function getMember(id) {
+  console.log('fetching member')
   const res = await(
     await fetch(`https://discord.com/api/guilds/${process.env.GUILD_ID}/members/${id}`, {
       method: 'get',
@@ -35,6 +36,7 @@ async function getMember(id) {
 }
 
 async function patchMember(member) {
+  console.log('patching member')
   const document = {
     roles: member.roles
   }
@@ -53,39 +55,6 @@ async function delay(seconds) {
   return new Promise((resolve) => {
     setTimeout(resolve, seconds * 1000)
   })
-}
-
-function findMember(id, members) {
-  for(let i = 0; i < members.length; i++) {
-    if(members[i].user.id === id) {
-      return members[i]
-    }
-  }
-  return null
-}
-
-async function getMembers() {
-  const limit = 1000
-  let doneLoading = false
-  let allMembers = []
-  let after = '0'
-  while (!doneLoading) {
-    const newMembers = await(
-      await fetch(`https://discord.com/api/guilds/${process.env.GUILD_ID}/members?after=${after}&limit=${limit}`, {
-        method: 'get',
-        headers: {
-          'Authorization': 'Bot ' + process.env.DISCORD_API_TOKEN,
-        }
-      }
-      )).json()
-    if (newMembers.length < limit) {
-      doneLoading = true
-    } else {
-      after = newMembers[newMembers.length - 1].user.id
-    }
-    allMembers = allMembers.concat(newMembers)
-  }
-  return allMembers
 }
 
 module.exports = async function updateroles(message) {
@@ -125,6 +94,7 @@ module.exports = async function updateroles(message) {
       for (const [key, value] of map.entries()) {
         let member = await getMember(key)
         if(member.retry_after > 0) {
+          console.log(member)
           await delay(member.retry_after)
           member = await getMember(key)
         }
