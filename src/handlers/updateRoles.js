@@ -58,30 +58,35 @@ async function delay(seconds) {
 }
 
 module.exports = async function updateroles(message) {
-  if(message.channel.type !== 'dm' && message.author.id === process.env.POLLEN_ADMIN) {
+  if (
+    message.channel.type !== 'dm' &&
+    message.author.id === process.env.POLLEN_ADMIN
+  ) {
     let count = 0
     let map = new Map()
     try {
-      const credAccounts = await(
-        await fetch('https://raw.githubusercontent.com/1Hive/pollen/gh-pages/output/accounts.json')
+      const credAccounts = await (
+        await fetch(
+          'https://raw.githubusercontent.com/1Hive/pollen/gh-pages/output/accounts.json',
+        )
       ).json()
       const accounts = credAccounts.accounts
 
-      for(var i = 0; i < accounts.length; i++) {
-        if(accounts[i].account.identity.subtype !== 'USER') continue
+      for (var i = 0; i < accounts.length; i++) {
+        if (accounts[i].account.identity.subtype !== 'USER') continue
 
         const discordAliases = accounts[i].account.identity.aliases.filter(
-          alias => {
+          (alias) => {
             const parts = NodeAddress.toParts(alias.address)
             return parts.indexOf('discord') > 0
           },
         )
-        if(!discordAliases.length) continue
+        if (!discordAliases.length) continue
 
         let totalCred = 0
         let id
 
-        discordAliases.forEach(alias => {
+        discordAliases.forEach((alias) => {
           id = NodeAddress.toParts(alias.address)[4]
           totalCred = accounts[i].totalCred
         })
@@ -103,10 +108,11 @@ module.exports = async function updateroles(message) {
           await patchMember(member)
           console.log(`User ${member.user.username} had their roles changed to: ${member.roles}`)
           count++
+          await patchMember(member)
         }
       }
       message.reply(`${count} users had their roles changed.`)
-    } catch(err) {
+    } catch (err) {
       error(err)
       message.reply(`${err}`)
     }
