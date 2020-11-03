@@ -14,9 +14,9 @@ const NodeAddress = sc.core.address.makeAddressModule({
 function manageRoles(member, totalCred) {
   const roles = ['771534378110287913', '771534371588276274']
   member.roles = member.roles.filter((role) => !roles.includes(role))
-  if(totalCred >= 40 && totalCred < 100) {
+  if (totalCred >= 40 && totalCred < 100) {
     member.roles.push(roles[0])
-  } else if(totalCred >= 100) {
+  } else if (totalCred >= 100) {
     member.roles.push(roles[1])
   }
   return member
@@ -24,30 +24,34 @@ function manageRoles(member, totalCred) {
 
 async function getMember(id) {
   console.log('fetching member')
-  const res = await(
-    await fetch(`https://discord.com/api/guilds/${process.env.GUILD_ID}/members/${id}`, {
+  const res = await fetch(
+    `https://discord.com/api/guilds/${process.env.GUILD_ID}/members/${id}`,
+    {
       method: 'get',
       headers: {
-        'Authorization': 'Bot ' + process.env.DISCORD_API_TOKEN,
-      }
-    }
-    )).json()
-  return res
+        Authorization: 'Bot ' + process.env.DISCORD_API_TOKEN,
+      },
+    },
+  )
+  return res.json()
 }
 
 async function patchMember(member) {
   console.log('patching member')
   const document = {
-    roles: member.roles
+    roles: member.roles,
   }
-  const patchedMember = await fetch(`https://discord.com/api/guilds/${process.env.GUILD_ID}/members/${member.user.id}`, {
-    method: 'patch',
-    body: JSON.stringify(document),
-    headers: {
-      'Authorization': 'Bot ' + process.env.DISCORD_API_TOKEN,
-      'Content-Type': 'application/json'
-    }
-  })
+  const patchedMember = await fetch(
+    `https://discord.com/api/guilds/${process.env.GUILD_ID}/members/${member.user.id}`,
+    {
+      method: 'patch',
+      body: JSON.stringify(document),
+      headers: {
+        Authorization: 'Bot ' + process.env.DISCORD_API_TOKEN,
+        'Content-Type': 'application/json',
+      },
+    },
+  )
   return patchedMember
 }
 
@@ -83,33 +87,32 @@ module.exports = async function updateroles(message) {
         )
         if (!discordAliases.length) continue
 
-        let totalCred = 0
-        let id
+        let discordId,
+          totalCred = 0
 
         discordAliases.forEach((alias) => {
-          id = NodeAddress.toParts(alias.address)[4]
+          discordId = NodeAddress.toParts(alias.address)[4]
           totalCred = accounts[i].totalCred
         })
 
-        if(id && totalCred >= 40) {
-          map.set(id, totalCred)
+        if (discordId && totalCred >= 40) {
+          map.set(discordId, totalCred)
         }
       }
 
       for (const [key, value] of map.entries()) {
         let member = await getMember(key)
-        if(member.retry_after > 0) {
-          console.log(member)
-          await delay(member.retry_after)
-          member = await getMember(key)
-        }
-        if((member.code !== 10007)) {
+        console.log(member)
+        if (member.code !== 10007) {
           member = await manageRoles(member, value)
           await patchMember(member)
-          console.log(`User ${member.user.username} had their roles changed to: ${member.roles}`)
+          console.log(
+            `User ${member.user.username} had their roles changed to: ${member.roles}`,
+          )
           count++
           await patchMember(member)
         }
+        await delay(5)
       }
       message.reply(`${count} users had their roles changed.`)
     } catch (err) {
@@ -117,6 +120,6 @@ module.exports = async function updateroles(message) {
       message.reply(`${err}`)
     }
   } else {
-    message.reply('You do not have access to this command')
+    message.reply('You do not have access to this command.')
   }
 }
