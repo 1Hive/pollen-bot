@@ -8,7 +8,7 @@ const HONEYSWAP_FACTORY_ID = '0xa818b4f111ccac7aa31d0bcc0806d64f2e0737d7'
 let HNY_FACTORY_QUERY = gql`
   query {
     uniswapFactory(id: "${HONEYSWAP_FACTORY_ID}") {
-      totalVolumeUSD
+      dailyVolumeUSD
       totalLiquidityUSD
       txCount
     }
