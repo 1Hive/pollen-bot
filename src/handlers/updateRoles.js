@@ -12,12 +12,16 @@ const NodeAddress = sc.core.address.makeAddressModule({
 })
 
 function manageRoles(member, totalCred) {
-  const roles = ['771534378110287913', '771534371588276274']
+  const roles = ['774874504358133780', '771534378110287913', '774874617432244284', '771534371588276274']
   member.roles = member.roles.filter((role) => !roles.includes(role))
-  if (totalCred >= 40 && totalCred < 100) {
+  if (totalCred >= 30 && totalCred < 60) {
     member.roles.push(roles[0])
-  } else if (totalCred >= 100) {
+  } else if (totalCred >= 60 && totalCred < 90) {
     member.roles.push(roles[1])
+  } else if (totalCred >= 90 && totalCred < 120) {
+    member.roles.push(roles[2])
+  } else if (totalCred >= 120) {
+    member.roles.push(roles[3])
   }
   return member
 }
