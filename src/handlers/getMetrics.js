@@ -8,7 +8,7 @@ const HONEYSWAP_FACTORY_ID = '0xa818b4f111ccac7aa31d0bcc0806d64f2e0737d7'
 let HNY_FACTORY_QUERY = gql`
   query {
     uniswapFactory(id: "${HONEYSWAP_FACTORY_ID}") {
-      dailyVolumeUSD
+      totalVolumeUSD
       totalLiquidityUSD
       txCount
     }
@@ -25,8 +25,8 @@ module.exports = async function honeyPrice(message) {
 
   let { uniswapFactory } = result.data
   let honeyFactoryLiquidity = numberWithSpaces(Math.round(uniswapFactory.totalLiquidityUSD))
-  let honeyFactoryVolume = numberWithSpaces(Math.round(uniswapFactory.dailyVolumeUSD))
-  let honeyFactoryFees = numberWithSpaces(Math.round(uniswapFactory.dailyVolumeUSD * 0.003))
+  let honeyFactoryVolume = numberWithSpaces(Math.round(uniswapFactory.totalVolumeUSD))
+  let honeyFactoryFees = numberWithSpaces(Math.round(uniswapFactory.totalVolumeUSD * 0.0003))
 
   message.channel.send(`<@${message.author.id}>`)
   message.channel.send(honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFactoryFees))
