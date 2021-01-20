@@ -4,7 +4,7 @@ function welcomeEmbed() {
     embed: {
       title: 'Welcome to 1Hive! 🍯',
       description:
-        'Please say hi in #:wave:intros to share how you found us and what interests you!',
+        'Please say hi in [#:coffee:cafe](https://discord.com/channels/698287700834517064/708187392594411521) to share how you found us and what interests you!\nYou could also head over to [Introduce yourself to 1Hive thread](https://forum.1hive.org/t/introduce-yourself-to-1hive-thread/130)-!',
       color: 16769024,
       fields: [
         {
