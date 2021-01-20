@@ -13,7 +13,7 @@ function welcomeEmbed() {
         },
         {
           name: 'Frequently Asked Questions (FAQ) ❓',
-          value: 'https://hackmd.io/ObCMUJUxTumG2z6FJ5cnkg',
+          value: 'https://1hive.gitbook.io/1hive/guides/faq',
         },
         {
           name: 'Get free honey 🤑',
@@ -25,20 +25,23 @@ function welcomeEmbed() {
         },
         {
           name: 'Learn more about Honey (HNY) 🍯',
-          value: 'https://blog.1hive.org/honey/',
+          value: 'https://1hive.gitbook.io/1hive/projects/honey',
         },
         {
           name: 'Announcements and recaps of all the things 📰',
-          value: 'https://1hive.substack.com/ ',
+          value: 'https://1hive.gitbook.io/1hive/projects/milestones ',
         },
         {
           name: 'Documentation of our DAO 📝',
-          value: 'https://about.1hive.org/docs/dao/',
+          value: 'https://1hive.gitbook.io/1hive/',
         },
         {
-          name: 'Detailed description all of our channels',
-          value:
-            'https://discordapp.com/channels/698287700834517064/758821739202347038/758886904078008363',
+          name: 'Detailed description of all of our channels ℹ️',
+          value: 'https://1hive.gitbook.io/1hive/getting-started/discord#channels',
+        },
+        {
+          name: 'Our community covenant',
+          value: 'https://1hive.gitbook.io/1hive/community-covenant',
         },
       ],
       timestamp: new Date(),
