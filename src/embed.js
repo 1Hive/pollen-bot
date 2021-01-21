@@ -192,12 +192,7 @@ function helpEmbed() {
         {
           name: 'Wiki',
           value:
-            'The [1Hive Wiki](https://1hive.gitbook.io/1hive/) contains all of the up to date info about 1Hive.',
-        },
-        {
-          name: 'FAQ',
-          value:
-            '[1Hive FAQ\'s](https://1hive.gitbook.io/1hive/guides/faq)',
+            'The [1Hive Wiki](https://1hive.gitbook.io/1hive/) contains up to date info about 1Hive, including [FAQ\'s](https://1hive.gitbook.io/1hive/guides/faq).',
         },
         {
           name: '!hny address',
