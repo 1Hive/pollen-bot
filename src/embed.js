@@ -4,12 +4,16 @@ function welcomeEmbed() {
     embed: {
       title: 'Welcome to 1Hive! 🍯',
       description:
-        'Please say hi in [#:coffee:cafe](https://discord.com/channels/698287700834517064/708187392594411521) to share how you found us and what interests you!\nYou could also head over to [Introduce yourself to 1Hive thread](https://forum.1hive.org/t/introduce-yourself-to-1hive-thread/130)!',
+        'Please say hi in the [#:coffee:cafe](https://discord.com/channels/698287700834517064/708187392594411521) to share how you found us and what interests you!\nYou could also head over to the [Introduce yourself to 1Hive thread](https://forum.1hive.org/t/introduce-yourself-to-1hive-thread/130)!',
       color: 16769024,
       fields: [
         {
           name: 'Bot Commands :bee:',
           value: 'Need help? Try `!hny help`'
+        },
+        {
+          name: '1Hive Wiki with up to date info 📝',
+          value: 'https://1hive.gitbook.io/1hive/',
         },
         {
           name: 'Frequently Asked Questions (FAQ) ❓',
@@ -20,7 +24,7 @@ function welcomeEmbed() {
           value: 'https://faucet.1hive.org/',
         },
         {
-          name: 'Share your thoughts and feeling on our blog! 💭',
+          name: 'Share your thoughts on our forum! 💭',
           value: 'https://forum.1hive.org/',
         },
         {
@@ -28,16 +32,12 @@ function welcomeEmbed() {
           value: 'https://1hive.gitbook.io/1hive/projects/honey',
         },
         {
-          name: 'Announcements and recaps of all the things 📰',
+          name: 'Milestones and weekly updates of all the things 📰',
           value: 'https://1hive.gitbook.io/1hive/projects/milestones ',
         },
         {
-          name: 'Documentation of our DAO 📝',
-          value: 'https://1hive.gitbook.io/1hive/',
-        },
-        {
-          name: 'Detailed description of all of our channels ℹ️',
-          value: 'https://1hive.gitbook.io/1hive/getting-started/discord#channels',
+          name: 'Detailed description of all of our Discord ℹ️',
+          value: 'https://1hive.gitbook.io/1hive/getting-started/discord',
         },
         {
           name: 'Our community covenant',
@@ -190,9 +190,14 @@ function helpEmbed() {
       },
       fields: [
         {
+          name: 'Wiki',
+          value:
+            'The [1Hive Wiki](https://1hive.gitbook.io/1hive/) contains all of the up to date info about 1Hive.',
+        },
+        {
           name: 'FAQ',
           value:
-            '[FAQ\'s about 1Hive and HNY](https://1hive.gitbook.io/1hive/guides/faq).',
+            '[1Hive FAQ\'s](https://1hive.gitbook.io/1hive/guides/faq)',
         },
         {
           name: '!hny address',
