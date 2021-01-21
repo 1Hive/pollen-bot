@@ -46,7 +46,7 @@ function welcomeEmbed() {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -72,7 +72,7 @@ function brightidWarningEmbed() {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -94,7 +94,7 @@ function wrongChannelWarningEmbed() {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -119,7 +119,7 @@ function walletWarningEmbed() {
       },
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -192,7 +192,7 @@ function helpEmbed() {
         {
           name: 'FAQ',
           value:
-            'For a full overview on 1hive, HNY and brightID verification, please check out the [FAQ](https://forum.1hive.org/t/everything-about-1hive-in-one-place-newfaq-in-development/180).',
+            '[FAQ\'s about 1Hive and HNY](https://1hive.gitbook.io/1hive/guides/faq).',
         },
         {
           name: '!hny address',
@@ -201,7 +201,7 @@ function helpEmbed() {
         {
           name: '!hny pollen',
           value:
-            '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) is a contributor rank used to recognize contributions to the Hive. Refer to the command for more information.',
+            '[Pollen](https://1hive.gitbook.io/1hive/getting-started/pollen) is a contributor rank used to recognize contributions to the Hive. Refer to the command for more information.',
         },
         {
           name: '!hny save-wallet <address>',
@@ -238,7 +238,7 @@ function helpEmbed() {
       },
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -271,7 +271,7 @@ function helpEmbedES() {
         {
           name: '!hny pollen',
           value:
-            '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) es un rango de colaborador que se usa para reconocer las contribuciones a la colmena (Hive). Consulta el comando para obtener más información.',
+            '[Pollen](https://1hive.gitbook.io/1hive/v/espanol/getting-started-1/pollen) es un rango de colaborador que se usa para reconocer las contribuciones a la colmena (Hive). Consulta el comando para obtener más información.',
         },
         {
           name: '!hny brightid',
@@ -304,7 +304,7 @@ function helpEmbedES() {
       },
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -320,7 +320,7 @@ function pollenEmbed() {
         url: 'https://github.com/crisog/assistant-bee',
       },
       description:
-        '[Pollen](https://about.1hive.org/docs/dao/Participation/pollen/) is a contributor rank used to recognize contributions to 1hive’s discord, discourse, and github communities. These contributions are rewarded with weekly distributions of Honey.',
+        '[Pollen](https://1hive.gitbook.io/1hive/getting-started/pollen) is a contributor rank used to recognize contributions to 1hive’s discord, discourse, and github communities. These contributions are rewarded with weekly distributions of Honey.',
       thumbnail: {
         url: 'https://i.imgur.com/dRxtULu.png',
       },
@@ -341,7 +341,7 @@ function pollenEmbed() {
       },
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -371,7 +371,7 @@ function verifyDiscourseEmbed(verificationCode, discourseUsername) {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -394,7 +394,7 @@ function successDiscourseVerificationEmbed(discourseUsername) {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -417,7 +417,7 @@ function errorDiscourseVerificationEmbed(errorMessage) {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -450,7 +450,7 @@ function verifyGithubEmbed(verificationCode, githubUsername) {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -473,7 +473,7 @@ function successGithubVerificationEmbed(githubUsername) {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -496,7 +496,7 @@ function errorGithubVerificationEmbed(errorMessage) {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -515,7 +515,7 @@ function honeyAddy() {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
@@ -666,7 +666,7 @@ function credEmbed(totalCred, length, cred) {
       ],
       timestamp: new Date(),
       footer: {
-        text: 'about.1hive.org',
+        text: '1hive.gitbook.io',
       },
     },
   }
