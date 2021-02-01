@@ -619,25 +619,25 @@ function officialAccountsEmbed() {
         url: 'https://audiologydesign.com/wp-content/uploads/2017/05/header-social.jpg',
       },
       color: 16769024,
-      fields: [
-        {
-          name: 'Reddit',
-          value: `http://reddit.com/r/HNY `,
-        },
-        {
-          name: 'Twitter',
-          value: `https://twitter.com/Honeyswap`,
-        },
-        {
-          name: 'Telegram',
-          value: `https://t.me/honeyswapofficial`,
-        },
-        {
-          name: 'Youtube',
-          value: `https://www.youtube.com/channel/UCDgC-6bMv9YxJZJGuItr3NQ`,
-
-        },
-      ],
+      description: `
+        - [Instagram - 1Hive](https://www.instagram.com/honeyswap.1hive/)
+        - [Instagram - 1Hive in Spanish](https://www.instagram.com/honeyswap.1hive_es/)
+        - [Instagram - Honeyswap](https://www.instagram.com/honeyswap/)
+        - [Twitter - 1Hive](https://twitter.com/1HiveOrg)
+        - [Twitter - Honeyswap](https://twitter.com/Honeyswap)
+        - [Twitter - Honeyswap in Chinese](https://twitter.com/HoneySwap_CN)
+        - [Twitter - Honeyswap in Spanish](https://twitter.com/HoneyswapEs)
+        - [Twitter - Honeyswap in Hindi](https://twitter.com/honeyswap_IN)
+        - [Reddit](https://www.reddit.com/r/HNY/)
+        - [Facebook](https://www.facebook.com/honeyswapdex/)
+        - [Telegram](https://t.me/honeyswapDEX)
+        - [YouTube](https://www.youtube.com/channel/UCg0yASRY6TmXDryitYvsJOQ)
+        - [Medium - 1Hive](https://medium.com/1hive)
+        - [Medium - Honeyswap](https://medium.com/honeyswap)
+        - [Blog](https://about.1hive.org/blog/)
+        - [Wechat](https://bit.ly/38UuWeJ)
+        - Kuaishou: honeyswap
+      `,
       timestamp: new Date(),
       footer: {
         text: 'info.honeyswap.org',
