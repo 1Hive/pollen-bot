@@ -23,6 +23,9 @@ module.exports = async function honeyPrice(message) {
 
   const { pair } = result.data
   const hnyPrice = parseFloat(pair.token1Price).toFixed(2)
-  message.channel.send(`<@${message.author.id}>`)
-  message.channel.send(honeyPriceEmbed(hnyPrice))
+  
+  if (message) {
+    message.channel.send(`<@${message.author.id}>`)
+    message.channel.send(honeyPriceEmbed(hnyPrice))
+  } else return hnyPrice
 }
