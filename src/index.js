@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 const detectHandler = require('./parser/detectHandler')
 const { RequestHandlerError } = require('./error-utils')
 const { log } = require('./utils')
+const fetchPrice = require('./handlers/price')
 
 const {
   welcomeEmbed,
@@ -112,5 +113,10 @@ client.on('message', (message) => {
     // Sentry.captureException(err)
   }
 })
+
+client.setInterval(async () => {
+  const price = await fetchPrice()
+  await client.user.setActivity(`HNY price: $${price}`, { type: 'WATCHING' })
+}, 1 * 60 * 1000)
 
 client.login(process.env.DISCORD_API_TOKEN)
