@@ -543,7 +543,7 @@ function honeyPriceEmbed(honeyPrice) {
   }
 }
 
-function honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFactoryFees) {
+function honeyMetricsEmbed(liquidity, yesterdayVolume, yesterdayFees, todayVolume, todayFees) {
   return {
     embed: {
       title: 'Metrics',
@@ -554,15 +554,23 @@ function honeyMetricsEmbed(honeyFactoryLiquidity, honeyFactoryVolume, honeyFacto
       fields: [
         {
           name: 'Total Liquidity 💰',
-          value: `$${honeyFactoryLiquidity}`,
+          value: `$${liquidity}`,
         },
         {
-          name: 'Total Volume (24h)',
-          value: `$${honeyFactoryVolume}`,
+          name: 'Total Volume - Yesterday',
+          value: `$${yesterdayVolume}`,
         },
         {
-          name: 'Total Fees (24h)',
-          value: `$${honeyFactoryFees}`,
+          name: 'Total Fees - Yesterday',
+          value: `$${yesterdayFees}`,
+        },
+        {
+          name: 'Total Volume - Today',
+          value: `$${todayVolume}`,
+        },
+        {
+          name: 'Total Fees - Today',
+          value: `$${todayFees}`,
         },
       ],
       timestamp: new Date(),
