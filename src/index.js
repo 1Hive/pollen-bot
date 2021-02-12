@@ -63,6 +63,12 @@ client.on('messageReactionAdd', async (reaction, user) => {
 
 client.on('message', (message) => {
   if (message.author.bot) return
+
+  // Gets the Bot-commands channel ID.
+  const BOT_COMMANDS_CHANNEL_ID = message.guild.channels.cache.find(channel => {
+    return channel.name.includes('bot-commands')
+  }).id
+  
   try {
     if (message.content.includes('app.brightid.org/connection-code')) {
       // Deletes the message inmediately.
@@ -77,7 +83,7 @@ client.on('message', (message) => {
       // Check if external bot command && if channel is #bot-commands
     } else if (
       externalCommands.indexOf(message.content) > -1 &&
-      message.channel.id !== process.env.CHANNEL_ID
+      message.channel.id !== BOT_COMMANDS_CHANNEL_ID
     ) {
       message.delete({ timeout: 500 })
       message.author.send(wrongChannelWarningEmbed())
@@ -86,7 +92,7 @@ client.on('message', (message) => {
       if (handler) {
         // Checks if channel is #bot-commands or message is NOT from guild
         if (
-          message.channel.id === process.env.CHANNEL_ID ||
+          message.channel.id === BOT_COMMANDS_CHANNEL_ID ||
           message.guild === null
         ) {
           handler(message)
@@ -95,7 +101,7 @@ client.on('message', (message) => {
           )
         } else {
           message.delete({ timeout: 500 })
-          client.channels.fetch(process.env.CHANNEL_ID).then((channel) => {
+          client.channels.fetch(BOT_COMMANDS_CHANNEL_ID).then((channel) => {
             channel.send(`<@${message.author.id}>`)
             channel.send(wrongChannelWarningEmbed())
           })
