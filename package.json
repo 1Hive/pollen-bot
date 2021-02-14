@@ -20,6 +20,7 @@
   "dependencies": {
     "@aragon/connect-thegraph": "^0.7.0",
     "@sentry/node": "^5.15.4",
+    "cron": "^1.8.2",
     "discord.js": "^12.4.0",
     "dotenv": "^8.2.0",
     "graphql-tag": "^2.11.0",
