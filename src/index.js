@@ -7,6 +7,8 @@ const { log } = require('./utils')
 const fetchPrice = require('./handlers/price')
 const updateroles = require('./handlers/updateRoles')
 
+const CronJob = require('cron').CronJob
+
 const {
   welcomeEmbed,
   brightidWarningEmbed,
@@ -128,17 +130,17 @@ client.setInterval(async () => {
 }, 1 * 60 * 1000)
 
 // Runs the pollen updateRoles function periodically at 12am and 12pm UTC
-client.setTimeout(() => {
+const midnightRoleUpdate = new CronJob('00 00 00 * * *', () => {
   console.log('Updating roles...')
   updateroles()
+}, null, false, 'Europe/London')
 
-  setInterval(() => {
-    console.log('Updating roles...')
-    updateroles()
-    // Every 12 hours
-  }, 12 * 60 * 60 * 1000)
-},
-// Calculates time until midnight and sets timeout at that time
-new Date().setUTCHours(23, 59, 59) - new Date().getTime())
+const middayRoleUpdate = new CronJob('00 00 12 * * *', () => {
+  console.log('Updating roles...')
+  updateroles()
+}, null, false, 'Europe/London')
+
+midnightRoleUpdate.start()
+middayRoleUpdate.start()
 
 client.login(process.env.DISCORD_API_TOKEN)
