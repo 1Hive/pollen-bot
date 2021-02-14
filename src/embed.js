@@ -164,7 +164,7 @@ function brightidEmbed() {
         {
           name: '5. Type the `!me` command in the designated channel',
           value:
-            'Once you have scanned the QR code you can return to the designated channels and type the `!me` command which should grant you the orange verified role.',
+            'Once you have scanned the QR code you can return to the designated channels and type the `!me` command which should grant you the Bee :bee: role',
         },
       ],
       timestamp: new Date(),

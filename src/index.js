@@ -5,6 +5,7 @@ const detectHandler = require('./parser/detectHandler')
 const { RequestHandlerError } = require('./error-utils')
 const { log } = require('./utils')
 const fetchPrice = require('./handlers/price')
+const updateroles = require('./handlers/updateRoles')
 
 const {
   welcomeEmbed,
@@ -120,9 +121,24 @@ client.on('message', (message) => {
   }
 })
 
+// Updates HNY price on bot's activity description every X amount of time
 client.setInterval(async () => {
   const price = await fetchPrice()
   await client.user.setActivity(`HNY price: $${price}`, { type: 'WATCHING' })
 }, 1 * 60 * 1000)
+
+// Runs the pollen updateRoles function periodically at 12am and 12pm UTC
+client.setTimeout(() => {
+  console.log('Updating roles...')
+  updateroles()
+
+  setInterval(() => {
+    console.log('Updating roles...')
+    updateroles()
+    // Every 12 hours
+  }, 12 * 60 * 60 * 1000)
+},
+// Calculates time until midnight and sets timeout at that time
+new Date().setUTCHours(23, 59, 59) - new Date().getTime())
 
 client.login(process.env.DISCORD_API_TOKEN)

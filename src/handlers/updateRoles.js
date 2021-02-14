@@ -12,6 +12,7 @@ const NodeAddress = sc.core.address.makeAddressModule({
 })
 
 function manageRoles(member, totalCred) {
+  // Roles 0.25x, 0.5x, 0.75x and 1x respectively
   const roles = ['774874504358133780', '771534378110287913', '774874617432244284', '771534371588276274']
   member.roles = member.roles.filter((role) => !roles.includes(role))
   if (totalCred >= 30 && totalCred < 60) {
@@ -66,9 +67,11 @@ async function delay(seconds) {
 }
 
 module.exports = async function updateroles(message) {
+  // Checks if called by the 12 hour interval or by the Pollen Admin
   if (
-    message.channel.type !== 'dm' &&
-    message.author.id === process.env.POLLEN_ADMIN
+    (!message) ||
+    (message.channel.type !== 'dm' &&
+    message.author.id === process.env.POLLEN_ADMIN)
   ) {
     let count = 0
     let map = new Map()
@@ -80,7 +83,7 @@ module.exports = async function updateroles(message) {
       ).json()
       const accounts = credAccounts.accounts
 
-      for (var i = 0; i < accounts.length; i++) {
+      for (let i = 0; i < accounts.length; i++) {
         if (accounts[i].account.identity.subtype !== 'USER') continue
 
         const discordAliases = accounts[i].account.identity.aliases.filter(
@@ -99,7 +102,7 @@ module.exports = async function updateroles(message) {
           totalCred = accounts[i].totalCred
         })
 
-        if (discordId && totalCred >= 40) {
+        if (discordId && totalCred >= 30) {
           map.set(discordId, totalCred)
         }
       }
@@ -118,10 +121,11 @@ module.exports = async function updateroles(message) {
         }
         await delay(5)
       }
-      message.reply(`${count} users had their roles changed.`)
+      // If called by Pollen Admin on Discord...
+      if (message) message.reply(`${count} users had their roles changed.`)
     } catch (err) {
       error(err)
-      message.reply(`${err}`)
+      if (message) message.reply(`${err}`)
     }
   } else {
     message.reply('You do not have access to this command.')
