@@ -68,10 +68,12 @@ client.on('message', (message) => {
   if (message.author.bot) return
 
   // Gets the Bot-commands channel ID.
-  const BOT_COMMANDS_CHANNEL_ID = message.guild.channels.cache.find(channel => {
-    return channel.name.includes('bot-commands')
-  }).id
-  
+  const BOT_COMMANDS_CHANNEL_ID = message.channel.type === 'dm' 
+    ? message.channel.id
+    : message.guild.channels.cache.find(channel => {
+      return channel.name.includes('bot-commands')
+    }).id
+    
   try {
     if (message.content.includes('app.brightid.org/connection-code')) {
       // Deletes the message inmediately.
