@@ -13,6 +13,7 @@ const xDai = require('./getxDai')
 const saveWallet = require('./saveWallet')
 const ayuda = require('./ayuda')
 const updateroles = require('./updateRoles')
+const sites = require('./sites')
 
 const handlers = new Map([
   ['address', address],
@@ -25,6 +26,7 @@ const handlers = new Map([
   //['check-discourse', checkDiscourse],
   //['verify-github', verifyGithub],
   //['check-github', checkGithub],
+  ['sites', sites],
   ['save-wallet', saveWallet],
   ['mycred', mycred],
   ['official', official],

@@ -680,6 +680,30 @@ function credEmbed(totalCred, length, cred) {
   }
 }
 
+function sitesEmbed(siteData) {
+  return {
+    embed: {
+      title: '1Hive sites and links',
+      url: 'https://wiki.1hive.org/',
+      color: 16769024,
+      author: {
+        name: 'Assistant Bee',
+        url: 'https://github.com/crisog/assistant-bee',
+      },
+      description:
+        `Following is a list of all 1Hive sites and resources:\n${siteData}`,
+      thumbnail: {
+        url: 'https://i.imgur.com/dRxtULu.png',
+      },
+      timestamp: new Date(),
+      footer: {
+        text: 'For more info, checkout- https://forum.1hive.org/t/everything-about-1hive-in-one-place-newfaq-in-development/180/10',
+      },
+    },
+  }
+}
+
+
 module.exports = {
   welcomeEmbed,
   brightidWarningEmbed,
@@ -693,6 +717,7 @@ module.exports = {
   honeyMetricsEmbed,
   honeyPriceEmbed,
   credEmbed,
+  sitesEmbed,
   verifyDiscourseEmbed,
   successDiscourseVerificationEmbed,
   errorDiscourseVerificationEmbed,
