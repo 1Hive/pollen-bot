@@ -67,6 +67,9 @@ client.on('messageReactionAdd', async (reaction, user) => {
 client.on('message', (message) => {
   if (message.author.bot) return
 
+  // Command prefixes for all bots
+  const EXTERNAL_COMMAND_PREFIXES = ['$', '!']
+
   // Gets the Bot-commands channel ID.
   const BOT_COMMANDS_CHANNEL_ID = message.channel.type === 'dm' 
     ? message.channel.id
@@ -93,6 +96,15 @@ client.on('message', (message) => {
       message.delete({ timeout: 500 })
       message.author.send(wrongChannelWarningEmbed())
     } else {
+      
+      // If message is an external bot command, deletes the message after bot reacted to it 
+      if (
+        EXTERNAL_COMMAND_PREFIXES.some(prefix => message.content.startsWith(prefix)) &&
+        !message.content.startsWith('!hny')
+      ) {
+        message.delete({ timeout: 3000 })
+      }
+
       const handler = detectHandler(message.content)
       if (handler) {
         // Checks if channel is #bot-commands or message is NOT from guild
@@ -101,6 +113,8 @@ client.on('message', (message) => {
           message.guild === null
         ) {
           handler(message)
+          // Deletes the message after bot reacted to it 
+          message.delete({ timeout: 3000 })
           log(
             `Served command ${message.content} successfully for ${message.author.username}.`,
           )
