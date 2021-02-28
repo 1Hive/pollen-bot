@@ -68,7 +68,7 @@ client.on('message', (message) => {
   if (message.author.bot) return
 
   // Command prefixes for all bots
-  const EXTERNAL_COMMAND_PREFIXES = ['$', '!']
+  const EXTERNAL_COMMAND_PREFIXES = ['$airdrop']
 
   // Gets the Bot-commands channel ID.
   const BOT_COMMANDS_CHANNEL_ID = message.channel.type === 'dm' 
@@ -98,10 +98,7 @@ client.on('message', (message) => {
     } else {
       
       // If message is an external bot command, deletes the message after bot reacted to it 
-      if (
-        EXTERNAL_COMMAND_PREFIXES.some(prefix => message.content.startsWith(prefix)) &&
-        !message.content.startsWith('!hny')
-      ) {
+      if (EXTERNAL_COMMAND_PREFIXES.some(prefix => message.content.startsWith(prefix))) {
         message.delete({ timeout: 3000 })
       }
 
@@ -113,8 +110,6 @@ client.on('message', (message) => {
           message.guild === null
         ) {
           handler(message)
-          // Deletes the message after bot reacted to it 
-          message.delete({ timeout: 3000 })
           log(
             `Served command ${message.content} successfully for ${message.author.username}.`,
           )
@@ -146,17 +141,17 @@ client.setInterval(async () => {
 }, 1 * 60 * 1000)
 
 // Runs the pollen updateRoles function periodically at 12am and 12pm UTC
-const midnightRoleUpdate = new CronJob('00 00 00 * * *', () => {
-  console.log('Updating roles...')
-  updateroles()
-}, null, false, 'Europe/London')
+// const midnightRoleUpdate = new CronJob('00 00 00 * * *', () => {
+//   console.log('Updating roles...')
+//   updateroles()
+// }, null, false, 'Europe/London')
 
-const middayRoleUpdate = new CronJob('00 00 12 * * *', () => {
-  console.log('Updating roles...')
-  updateroles()
-}, null, false, 'Europe/London')
+// const middayRoleUpdate = new CronJob('00 00 12 * * *', () => {
+//   console.log('Updating roles...')
+//   updateroles()
+// }, null, false, 'Europe/London')
 
-midnightRoleUpdate.start()
-middayRoleUpdate.start()
+// midnightRoleUpdate.start()
+// middayRoleUpdate.start()
 
 client.login(process.env.DISCORD_API_TOKEN)
