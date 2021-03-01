@@ -67,6 +67,9 @@ client.on('messageReactionAdd', async (reaction, user) => {
 client.on('message', (message) => {
   if (message.author.bot) return
 
+  // Command prefixes for all bots
+  const EXTERNAL_COMMAND_PREFIXES = ['$airdrop']
+
   // Gets the Bot-commands channel ID.
   const BOT_COMMANDS_CHANNEL_ID = message.channel.type === 'dm' 
     ? message.channel.id
@@ -93,6 +96,12 @@ client.on('message', (message) => {
       message.delete({ timeout: 500 })
       message.author.send(wrongChannelWarningEmbed())
     } else {
+      
+      // If message is an external bot command, deletes the message after bot reacted to it 
+      if (EXTERNAL_COMMAND_PREFIXES.some(prefix => message.content.startsWith(prefix))) {
+        message.delete({ timeout: 3000 })
+      }
+
       const handler = detectHandler(message.content)
       if (handler) {
         // Checks if channel is #bot-commands or message is NOT from guild
@@ -132,17 +141,17 @@ client.setInterval(async () => {
 }, 1 * 60 * 1000)
 
 // Runs the pollen updateRoles function periodically at 12am and 12pm UTC
-const midnightRoleUpdate = new CronJob('00 00 00 * * *', () => {
-  console.log('Updating roles...')
-  updateroles()
-}, null, false, 'Europe/London')
+// const midnightRoleUpdate = new CronJob('00 00 00 * * *', () => {
+//   console.log('Updating roles...')
+//   updateroles()
+// }, null, false, 'Europe/London')
 
-const middayRoleUpdate = new CronJob('00 00 12 * * *', () => {
-  console.log('Updating roles...')
-  updateroles()
-}, null, false, 'Europe/London')
+// const middayRoleUpdate = new CronJob('00 00 12 * * *', () => {
+//   console.log('Updating roles...')
+//   updateroles()
+// }, null, false, 'Europe/London')
 
-midnightRoleUpdate.start()
-middayRoleUpdate.start()
+// midnightRoleUpdate.start()
+// middayRoleUpdate.start()
 
 client.login(process.env.DISCORD_API_TOKEN)
