@@ -696,9 +696,6 @@ function sitesEmbed(siteData) {
         url: 'https://i.imgur.com/dRxtULu.png',
       },
       timestamp: new Date(),
-      footer: {
-        text: 'For more info, checkout- https://forum.1hive.org/t/everything-about-1hive-in-one-place-newfaq-in-development/180/10',
-      },
     },
   }
 }
