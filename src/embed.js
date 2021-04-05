@@ -654,7 +654,7 @@ function officialAccountsEmbed() {
   }
 }
 
-function credEmbed(totalCred, length, cred) {
+function credEmbed(totalCred, lastWeekCred, thisWeekCred) {
   return {
     embed: {
       color: 16769024,
@@ -669,7 +669,11 @@ function credEmbed(totalCred, length, cred) {
         },
         {
           name: 'Last week',
-          value: Math.round(cred[length - 1]),
+          value: Math.round(lastWeekCred),
+        },
+        {
+          name: 'This week',
+          value: Math.round(thisWeekCred),
         },
       ],
       timestamp: new Date(),

@@ -1,55 +1,26 @@
-const sc = require('sourcecred').default
-const fetch = require('node-fetch')
+const { loadLedger, loadCredGraph } = require('../utils')
 
 const { credEmbed } = require('../embed')
 
-const NodeAddress = sc.core.address.makeAddressModule({
-  name: 'NodeAddress',
-  nonce: 'N',
-  otherNonces: new Map().set('E', 'EdgeAddress'),
-})
-
 module.exports = async function mycred(message) {
-  const credAccounts = await(
-    await fetch('https://raw.githubusercontent.com/1Hive/pollen/gh-pages/output/accounts.json')
-  ).json()
+  message.reply('Fetching cred...')
 
-  try {
-    const accounts = credAccounts.accounts
-    for(var i = 0; i < accounts.length; i++) {
-      if(accounts[i].account.identity.subtype !== 'USER') continue
+  const ledger = await loadLedger()
+  const credGraph = await loadCredGraph()
+  const accounts = ledger.accounts()
 
-      const discordAliases = accounts[i].account.identity.aliases.filter(
-        alias => {
-          const parts = NodeAddress.toParts(alias.address)
-          return parts.indexOf('discord') > 0
-        },
-      )
-      if(!discordAliases.length) continue
+  const accountFound = accounts
+    .find(account => account.identity.aliases.some(alias => alias.address.includes(message.author.id)))
+  
+  if(!accountFound) return message.reply('Alas, we cannot find you, try again tomorrow!')
 
-      let totalCred = 0
-      let length = 0
-      let cred = 0
-      let id
+  const credParticipant = Array.from(credGraph.participants())
+    .find(p => p.id === accountFound.identity.id)
+  const credHistory = credParticipant.credPerInterval
 
-      discordAliases.forEach(alias => {
-        id = NodeAddress.toParts(alias.address)[4]
-
-        if(id === message.author.id) {
-          totalCred = accounts[i].totalCred
-          length = accounts[i].cred.length
-          cred = accounts[i].cred
-        }
-      })
-
-      // now also responds to users with EXACTLY 0 cred
-      if (totalCred !== 0 || id === message.author.id) {
-        message.channel.send(`<@${message.author.id}>`)
-        message.channel.send(credEmbed(totalCred, length, cred))
-      }
-    }
-  } catch (err) {
-    console.log('error:', err)
-    message.channel.send('Alas, we cannot find you, try again tomorrow!')
-  }
+  message.channel.send(credEmbed(
+    credParticipant.cred,
+    credHistory[credHistory.length -2],
+    credHistory[credHistory.length - 1]
+  ))
 }
