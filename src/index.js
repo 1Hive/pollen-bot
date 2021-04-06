@@ -1,13 +1,13 @@
 /* eslint-disable quotes */
 const Discord = require('discord.js')
 const dotenv = require('dotenv')
+const CronJob = require('cron').CronJob
+
 const detectHandler = require('./parser/detectHandler')
 const { RequestHandlerError } = require('./error-utils')
 const { log } = require('./utils')
-const fetchPrice = require('./handlers/price')
 const updateroles = require('./handlers/updateRoles')
-
-const CronJob = require('cron').CronJob
+const { loadLedger, loadCredGraph } = require('./utils')
 
 const {
   welcomeEmbed,
@@ -109,7 +109,7 @@ client.on('message', (message) => {
           message.channel.id === BOT_COMMANDS_CHANNEL_ID ||
           message.guild === null
         ) {
-          handler(message)
+          handler(message, pollenData)
           log(
             `Served command ${message.content} successfully for ${message.author.username}.`,
           )
@@ -134,24 +134,36 @@ client.on('message', (message) => {
   }
 })
 
-// Updates HNY price on bot's activity description every X amount of time
-client.setInterval(async () => {
-  const price = await fetchPrice()
-  await client.user.setActivity(`HNY price: $${price}`, { type: 'WATCHING' })
-}, 1 * 60 * 1000)
+// Preloads pollen data on bot start as well as every 6 hours
+let pollenData
+
+const fetchPollenData = async () => {
+  const ledger = await loadLedger()
+  const accounts = ledger.accounts()
+
+  const credGraph = await loadCredGraph()
+  const credParticipants = await Array.from(credGraph.participants())
+
+  pollenData = { accounts, credParticipants }
+}
+
+fetchPollenData()
+
+const pollenDataUpdate = new CronJob('0 */6 * * *', () => fetchPollenData())
+pollenDataUpdate.start()
 
 // Runs the pollen updateRoles function periodically at 12am and 12pm UTC
-// const midnightRoleUpdate = new CronJob('00 00 00 * * *', () => {
-//   console.log('Updating roles...')
-//   updateroles()
-// }, null, false, 'Europe/London')
+const midnightRoleUpdate = new CronJob('00 00 00 * * *', () => {
+  console.log('Updating roles...')
+  updateroles(null, pollenData)
+}, null, false, 'Europe/London')
 
-// const middayRoleUpdate = new CronJob('00 00 12 * * *', () => {
-//   console.log('Updating roles...')
-//   updateroles()
-// }, null, false, 'Europe/London')
+const middayRoleUpdate = new CronJob('00 00 12 * * *', () => {
+  console.log('Updating roles...')
+  updateroles(null, pollenData)
+}, null, false, 'Europe/London')
 
-// midnightRoleUpdate.start()
-// middayRoleUpdate.start()
+midnightRoleUpdate.start()
+middayRoleUpdate.start()
 
 client.login(process.env.DISCORD_API_TOKEN)

@@ -678,7 +678,7 @@ function credEmbed(totalCred, lastWeekCred, thisWeekCred) {
       ],
       timestamp: new Date(),
       footer: {
-        text: '1hive.gitbook.io',
+        text: 'pollen.1hive.org',
       },
     },
   }
