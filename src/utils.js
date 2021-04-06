@@ -20,8 +20,12 @@ function warnOnce(domain, ...args) {
 }
 
 const loadLedger = async () => {
-  const ledgerFile = 'https://raw.githubusercontent.com/1Hive/pollen/gh-pages/data/ledger.json'
-  const ledgerRaw = await (await fetch(ledgerFile)).text()
+  const ledgerFileURI = 'https://raw.githubusercontent.com/1Hive/pollen/gh-pages/data/ledger.json'
+  const ledgerFileResponse = await fetch(ledgerFileURI)
+
+  if (!ledgerFileResponse.ok) throw new Error(`An error has occurred: ${ledgerFileResponse.status}`)
+
+  const ledgerRaw = await ledgerFileResponse.text()
   try {
     return sc.ledger.ledger.Ledger.parse(ledgerRaw)
   } catch (err) {
@@ -40,5 +44,15 @@ const loadCredGraph = async () => {
     return null
   }
 }
+
+const fetchPollenData = async () => {
+  const ledger = await loadLedger()
+  const accounts = ledger.accounts()
+
+  const credGraph = await loadCredGraph()
+  const credParticipants = await Array.from(credGraph.participants())
+
+  return { accounts, credParticipants }
+}
   
-module.exports = { error, log, warnOnce, loadLedger, loadCredGraph }
+module.exports = { error, log, warnOnce, loadLedger, loadCredGraph, fetchPollenData }

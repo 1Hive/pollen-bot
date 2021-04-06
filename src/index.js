@@ -7,7 +7,7 @@ const detectHandler = require('./parser/detectHandler')
 const { RequestHandlerError } = require('./error-utils')
 const { log } = require('./utils')
 const updateroles = require('./handlers/updateRoles')
-const { loadLedger, loadCredGraph } = require('./utils')
+const { fetchPollenData } = require('./utils')
 
 const {
   welcomeEmbed,
@@ -137,33 +137,25 @@ client.on('message', (message) => {
 // Preloads pollen data on bot start as well as every 6 hours
 let pollenData
 
-const fetchPollenData = async () => {
-  const ledger = await loadLedger()
-  const accounts = ledger.accounts()
-
-  const credGraph = await loadCredGraph()
-  const credParticipants = await Array.from(credGraph.participants())
-
-  pollenData = { accounts, credParticipants }
-}
-
-fetchPollenData()
-
-const pollenDataUpdate = new CronJob('0 */6 * * *', () => fetchPollenData())
-pollenDataUpdate.start()
+// eslint-disable-next-line
+const pollenDataUpdate = new CronJob('0 */6 * * *', async () => {
+  pollenData = await fetchPollenData()
+  // start: true, runOnInit: true
+}, null, true, null, null, true)
 
 // Runs the pollen updateRoles function periodically at 12am and 12pm UTC
+// eslint-disable-next-line
 const midnightRoleUpdate = new CronJob('00 00 00 * * *', () => {
   console.log('Updating roles...')
   updateroles(null, pollenData)
-}, null, false, 'Europe/London')
+  // start: true
+}, null, true, 'Europe/London')
 
+// eslint-disable-next-line
 const middayRoleUpdate = new CronJob('00 00 12 * * *', () => {
   console.log('Updating roles...')
   updateroles(null, pollenData)
-}, null, false, 'Europe/London')
-
-midnightRoleUpdate.start()
-middayRoleUpdate.start()
+  // start: true
+}, null, true, 'Europe/London')
 
 client.login(process.env.DISCORD_API_TOKEN)
