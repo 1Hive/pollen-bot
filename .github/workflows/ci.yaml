@@ -1,0 +1,57 @@
+name: Bot CI/CD
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-buildx-
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/1hive/assistant-bee:${{ github.sha }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@main
+        with:
+          service: assistant-bee-bot
+          image: ghcr.io/1hive/assistant-bee:${{ github.sha }}
+          credentials: ${{ secrets.GCP_SA_KEY }}
+          env_vars: |
+          DISCORD_API_TOKEN=${{ secrets.DISCORD_API_TOKEN }},
+          WEB3_URL=${{ secrets.WEB3_URL }},
+          MONGODB_URI=${{ secrets.MONGODB_URI }},
+          SENTRY_DSN=${{ secrets.SENTRY_DSN }},
+          POLLEN_ADMIN=${{ secrets.POLLEN_ADMIN }},
+          GUILD_ID=${{ secrets.GUILD_ID }}
