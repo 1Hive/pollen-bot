@@ -1,4 +1,4 @@
-const sc = require('sourcecred').default
+const { sourcecred: sc } = require('sourcecred')
 const fetch = require('node-fetch')
 const { error } = require('../utils')
 const dotenv = require('dotenv')
@@ -66,7 +66,7 @@ async function delay(seconds) {
   })
 }
 
-module.exports = async function updateroles(message) {
+module.exports = async function updateroles(message, pollenData) {
   // Checks if called by the 12 hour interval or by the Pollen Admin
   if (
     (!message) ||
@@ -76,35 +76,24 @@ module.exports = async function updateroles(message) {
     let count = 0
     let map = new Map()
     try {
-      const credAccounts = await (
-        await fetch(
-          'https://raw.githubusercontent.com/1Hive/pollen/gh-pages/output/accounts.json',
-        )
-      ).json()
-      const accounts = credAccounts.accounts
+      if (!pollenData) return message.reply('Still preloading pollen files, try again in a minute.')
+
+      await message.channel.send('Updating pollen roles...')
+
+      const { accounts, credParticipants } = pollenData
 
       for (let i = 0; i < accounts.length; i++) {
-        if (accounts[i].account.identity.subtype !== 'USER') continue
+        if (accounts[i].identity.subtype !== 'USER') continue
 
-        const discordAliases = accounts[i].account.identity.aliases.filter(
-          (alias) => {
-            const parts = NodeAddress.toParts(alias.address)
-            return parts.indexOf('discord') > 0
-          },
-        )
-        if (!discordAliases.length) continue
+        const discordAliases = accounts[i].identity.aliases.filter(alias => alias.address.includes('discord'))
 
-        let discordId,
-          totalCred = 0
+        if (!discordAliases || discordAliases.length === 0) continue
 
-        discordAliases.forEach((alias) => {
-          discordId = NodeAddress.toParts(alias.address)[4]
-          totalCred = accounts[i].totalCred
-        })
-
-        if (discordId && totalCred >= 30) {
-          map.set(discordId, totalCred)
-        }
+        let discordId
+        discordAliases.forEach((alias) => discordId = NodeAddress.toParts(alias.address)[4])
+        const totalCred = credParticipants.find(p => p.id === accounts[i].identity.id).cred
+        
+        if (discordId && totalCred >= 30) map.set(discordId, totalCred)
       }
 
       for (const [key, value] of map.entries()) {
