@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: assistant-bee-bot
+spec:
+  template:
+    spec:
+      containerConcurrency: 80
+      containers:
+      - image: gcr.io/hive-flora/assistant-bee
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+      timeoutSeconds: 300
