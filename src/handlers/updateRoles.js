@@ -1,6 +1,7 @@
 const { sourcecred: sc } = require('sourcecred')
 const fetch = require('node-fetch')
 const { error } = require('../utils')
+const getPollenBanned = require('./getPollenBanned')
 const dotenv = require('dotenv')
 
 dotenv.config()
@@ -78,6 +79,8 @@ module.exports = async function updateroles(message, pollenData) {
     try {
       if (!pollenData) return message.reply('Still preloading pollen files, try again in a minute.')
 
+      const bannedMembers = await getPollenBanned()
+
       await message.channel.send('Updating pollen roles...')
 
       const { accounts, credParticipants } = pollenData
@@ -91,6 +94,13 @@ module.exports = async function updateroles(message, pollenData) {
 
         let discordId
         discordAliases.forEach((alias) => discordId = NodeAddress.toParts(alias.address)[4])
+
+        if (
+          bannedMembers 
+          && bannedMembers.length 
+          && bannedMembers.some(member => member.discordId === discordId)
+        ) continue
+
         const totalCred = credParticipants.find(p => p.id === accounts[i].identity.id).cred
         
         if (discordId && totalCred >= 30) map.set(discordId, totalCred)

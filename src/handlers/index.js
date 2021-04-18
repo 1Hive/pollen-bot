@@ -14,6 +14,9 @@ const saveWallet = require('./saveWallet')
 const ayuda = require('./ayuda')
 const updateroles = require('./updateRoles')
 const sites = require('./sites')
+const pollenBan = require('./pollenBan')
+const pollenUnban = require('./pollenUnban')
+const getPollenBanned = require('./getPollenBanned')
 
 const handlers = new Map([
   ['address', address],
@@ -32,7 +35,10 @@ const handlers = new Map([
   ['official', official],
   ['network', xDai],
   ['ayuda', ayuda],
-  ['updateroles', updateroles]
+  ['updateroles', updateroles],
+  ['pollenban', pollenBan],
+  ['pollenunban', pollenUnban],
+  ['getpollenbanned', getPollenBanned]
 ])
 
 module.exports = handlers
