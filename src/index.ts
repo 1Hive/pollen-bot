@@ -1,9 +1,9 @@
 /* eslint-disable quotes */
 import { Client, TextChannel } from "discord.js";
-import dotenv = require("dotenv");
+import * as dotenv from "dotenv";
 import { CronJob } from "cron";
 
-import detectHandler = require("./parser/detectHandler");
+import detectHandler from "./parser/detectHandler";
 import { RequestHandlerError } from "./error-utils";
 import { log } from "./utils";
 import updateroles from "./handlers/updateRoles";

@@ -41,4 +41,4 @@ const handlers = new Map([
   ["getpollenbanned", getPollenBanned],
 ]);
 
-module.exports = handlers;
+export default handlers;

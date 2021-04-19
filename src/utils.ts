@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 // NOTE: As this is a "server bot",
 // we don't avoid logging on production, as users will be able
 // to see logs from their individual instances
-function error(...args: string[]): void {
+export function error(...args: string[]): void {
   console.error(`${Date.now()}:`, ...args);
 }
 export function log(...args: string[]): void {
@@ -19,7 +19,7 @@ function warnOnce(domain, ...args) {
   }
 }
 
-const loadLedger = async () => {
+export const loadLedger = async (): Promise<void> => {
   const ledgerFileURI =
     "https://raw.githubusercontent.com/1Hive/pollen/gh-pages/data/ledger.json";
   const ledgerFileResponse = await fetch(ledgerFileURI);
@@ -36,7 +36,7 @@ const loadLedger = async () => {
   }
 };
 
-const loadCredGraph = async () => {
+export const loadCredGraph = async (): Promise<void> => {
   const base = "https://raw.githubusercontent.com/1Hive/pollen/gh-pages/";
   const instance = sourcecred.instance.readInstance.getNetworkReadInstance(
     base
@@ -63,12 +63,3 @@ export async function fetchPollenData(): Promise<PollenData> {
 
   return { accounts, credParticipants };
 }
-
-module.exports = {
-  error,
-  log,
-  warnOnce,
-  loadLedger,
-  loadCredGraph,
-  fetchPollenData,
-};
