@@ -350,7 +350,7 @@ export function pollenEmbed(): unknown {
 
 export function verifyDiscourseEmbed(
   verificationCode: string,
-  discourseUsername: string,
+  discourseUsername: string
 ): unknown {
   return {
     embed: {
@@ -382,7 +382,7 @@ export function verifyDiscourseEmbed(
 }
 
 export function successDiscourseVerificationEmbed(
-  discourseUsername: string,
+  discourseUsername: string
 ): unknown {
   return {
     embed: {
@@ -431,7 +431,7 @@ export function errorDiscourseVerificationEmbed(errorMessage: string): unknown {
 
 export function verifyGithubEmbed(
   verificationCode: string,
-  githubUsername: string,
+  githubUsername: string
 ): unknown {
   return {
     embed: {
@@ -466,7 +466,7 @@ export function verifyGithubEmbed(
 }
 
 export function successGithubVerificationEmbed(
-  githubUsername: string,
+  githubUsername: string
 ): unknown {
   return {
     embed: {
@@ -559,7 +559,7 @@ export function honeyMetricsEmbed(
   yesterdayVolume: number,
   yesterdayFees: number,
   todayVolume: number,
-  todayFees: number,
+  todayFees: number
 ): unknown {
   return {
     embed: {
@@ -675,7 +675,7 @@ export function officialAccountsEmbed(): unknown {
 export function credEmbed(
   totalCred: number,
   lastWeekCred: number,
-  thisWeekCred: number,
+  thisWeekCred: number
 ): unknown {
   return {
     embed: {

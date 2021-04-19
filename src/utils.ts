@@ -39,7 +39,7 @@ const loadLedger = async () => {
 const loadCredGraph = async () => {
   const base = "https://raw.githubusercontent.com/1Hive/pollen/gh-pages/";
   const instance = sourcecred.instance.readInstance.getNetworkReadInstance(
-    base,
+    base
   );
   try {
     return instance.readCredGraph();

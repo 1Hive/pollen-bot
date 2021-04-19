@@ -25,7 +25,7 @@ function environment(name: string): string {
   // throw an error.
   if (envVar === ENV_VARS[name][1] && ENV_VARS[name][2]) {
     throw new EnvironmentError(
-      `The environment variable with name ${name} has not been set properly. Please edit it on the heroku config vars.`,
+      `The environment variable with name ${name} has not been set properly. Please edit it on the heroku config vars.`
     );
   }
 

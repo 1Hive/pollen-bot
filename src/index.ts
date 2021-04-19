@@ -46,7 +46,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
         if (user.id === reaction.message.author.id) {
           reaction.users.remove(reaction.message.author);
           log(
-            `Deleted partial self react from user with id: ${reaction.message.author.id}`,
+            `Deleted partial self react from user with id: ${reaction.message.author.id}`
           );
         }
       });
@@ -61,7 +61,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
     if (user.id === reaction.message.author.id) {
       reaction.users.remove(reaction.message.author);
       log(
-        `Deleted non partial self react from user with id: ${reaction.message.author.id}`,
+        `Deleted non partial self react from user with id: ${reaction.message.author.id}`
       );
     }
   }
@@ -90,7 +90,7 @@ client.on("message", (message) => {
       message.author.send(brightidWarningEmbed());
 
       log(
-        `Deleted message with BrightID connection link from ${message.author}.`,
+        `Deleted message with BrightID connection link from ${message.author}.`
       );
       // Check if external bot command && if channel is #bot-commands
     } else if (
@@ -103,7 +103,7 @@ client.on("message", (message) => {
       // If message is an external bot command, deletes the message after bot reacted to it
       if (
         EXTERNAL_COMMAND_PREFIXES.some((prefix) =>
-          message.content.startsWith(prefix),
+          message.content.startsWith(prefix)
         )
       ) {
         message.delete({ timeout: 3000 });
@@ -118,7 +118,7 @@ client.on("message", (message) => {
         ) {
           handler(message, pollenData);
           log(
-            `Served command ${message.content} successfully for ${message.author.username}.`,
+            `Served command ${message.content} successfully for ${message.author.username}.`
           );
         } else {
           message.delete({ timeout: 500 });
@@ -134,7 +134,7 @@ client.on("message", (message) => {
     if (err instanceof RequestHandlerError) {
       log(`${err}`);
       message.reply(
-        "Could not find the requested command. Please use !hny help for more info.",
+        "Could not find the requested command. Please use !hny help for more info."
       );
     }
     // Sentry.captureException(err)
@@ -155,7 +155,7 @@ const pollenDataUpdate = new CronJob(
   true,
   null,
   null,
-  true,
+  true
 );
 
 // Runs the pollen updateRoles function periodically at 12am and 12pm UTC
@@ -169,7 +169,7 @@ const midnightRoleUpdate = new CronJob(
   },
   null,
   true,
-  "Europe/London",
+  "Europe/London"
 );
 
 // eslint-disable-next-line
@@ -182,7 +182,7 @@ const middayRoleUpdate = new CronJob(
   },
   null,
   true,
-  "Europe/London",
+  "Europe/London"
 );
 
 client.login(process.env.DISCORD_API_TOKEN);
