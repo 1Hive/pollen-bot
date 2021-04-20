@@ -19,7 +19,8 @@ function warnOnce(domain, ...args) {
   }
 }
 
-export const loadLedger = async (): Promise<void> => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const loadLedger = async () => {
   const ledgerFileURI =
     "https://raw.githubusercontent.com/1Hive/pollen/gh-pages/data/ledger.json";
   const ledgerFileResponse = await fetch(ledgerFileURI);
@@ -36,7 +37,8 @@ export const loadLedger = async (): Promise<void> => {
   }
 };
 
-export const loadCredGraph = async (): Promise<void> => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const loadCredGraph = async () => {
   const base = "https://raw.githubusercontent.com/1Hive/pollen/gh-pages/";
   const instance = sourcecred.instance.readInstance.getNetworkReadInstance(
     base
@@ -50,8 +52,8 @@ export const loadCredGraph = async (): Promise<void> => {
 };
 
 type PollenData = {
-  accounts: unknown;
-  credParticipants: unknown;
+  accounts: unknown,
+  credParticipants: unknown
 };
 
 export async function fetchPollenData(): Promise<PollenData> {
