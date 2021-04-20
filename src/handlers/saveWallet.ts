@@ -1,4 +1,4 @@
-import Web3 from "web3";
+import { ethers } from "ethers";
 import { Message } from "discord.js";
 import { walletWarningEmbed } from "../embed";
 import * as dotenv from "dotenv";
@@ -7,16 +7,13 @@ import { error } from "../utils";
 
 dotenv.config();
 
-const web3 = new Web3(process.env.WEB3_URL);
-
 export default async function saveWallet(message: Message): Promise<void> {
   const rawAddress = message.content.split(" ")[2];
-  if (typeof rawAddress !== undefined) {
+  if (typeof rawAddress !== "undefined") {
     try {
-      const xdaiAddress = web3.utils.toChecksumAddress(rawAddress);
+      const xdaiAddress = ethers.utils.getAddress(rawAddress);
       dbHandler(message, null, null, xdaiAddress);
       message.channel.send(`<@${message.author.id}> wallet address succesfully saved.`);
-      return;
     } catch(err) {
       error(err);
       message.channel.send(walletWarningEmbed());
