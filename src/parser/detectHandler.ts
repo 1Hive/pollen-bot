@@ -1,16 +1,8 @@
-import { Message } from "discord.js";
-
+import { CommandHandler } from "../types"
 import { RequestHandlerError } from "../error-utils";
 import handlers from "../handlers";
 
 const noop = () => undefined;
-
-type PollenData = {
-  accounts: unknown,
-  credParticipants: unknown
-};
-
-type CommandHandler = (message: Message, pollenData?: PollenData ) => Promise<void>
 
 export default function detectHandler(message: string): CommandHandler {
 
