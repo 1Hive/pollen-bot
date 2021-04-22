@@ -24,7 +24,14 @@ dotenv.config();
 
 const client = new Client({
   partials: ["MESSAGE", "REACTION"],
-  ws: { intents: "GUILD_MEMBERS" },
+  ws: { 
+    intents: [
+      "GUILDS",
+      "GUILD_MESSAGES",
+      "GUILD_MESSAGE_REACTIONS",
+      "GUILD_MEMBERS"
+    ]
+  },
 });
 
 client.on("ready", () => {
