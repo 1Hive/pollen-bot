@@ -25,7 +25,7 @@ export default async function mycred(message: Message, pollenData: PollenData): 
       credHistory[credHistory.length - 1]
     ));
   } catch (err) {
-    error(err);
+    if (typeof err !== "string") error(err);
     message.reply(`An error has occurred: ${err}`);
   }
 }
