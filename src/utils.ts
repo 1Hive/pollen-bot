@@ -1,6 +1,8 @@
 import { sourcecred } from "sourcecred";
 import fetch from "node-fetch";
 
+import { PollenData } from "./types";
+
 // NOTE: As this is a "server bot",
 // we don't avoid logging on production, as users will be able
 // to see logs from their individual instances
@@ -19,8 +21,8 @@ function warnOnce(domain, ...args) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const loadLedger = async () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const loadLedger = async (): Promise<any> => {
   const ledgerFileURI =
     "https://raw.githubusercontent.com/1Hive/pollen/gh-pages/data/ledger.json";
   const ledgerFileResponse = await fetch(ledgerFileURI);
@@ -37,8 +39,8 @@ export const loadLedger = async () => {
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const loadCredGraph = async () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const loadCredGraph = async (): Promise<any> => {
   const base = "https://raw.githubusercontent.com/1Hive/pollen/gh-pages/";
   const instance = sourcecred.instance.readInstance.getNetworkReadInstance(
     base
@@ -51,11 +53,7 @@ export const loadCredGraph = async () => {
   }
 };
 
-type PollenData = {
-  accounts: unknown,
-  credParticipants: unknown
-};
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function fetchPollenData(): Promise<PollenData> {
   const ledger = await loadLedger();
   const accounts = ledger.accounts();
