@@ -10,13 +10,13 @@ import metrics from "./getMetrics";
 import mycred from "./mycred";
 import official from "./getOfficialAccounts";
 import xDai from "./getxDai";
-import saveWallet from "./saveWallet";
+// import saveWallet from "./saveWallet";
 import ayuda from "./ayuda";
 import updateroles from "./updateRoles";
 import sites from "./sites";
-import pollenBan from "./pollenBan";
-import pollenUnban from "./pollenUnban";
-import getPollenBanned from "./getPollenBanned";
+// import pollenBan from "./pollenBan";
+// import pollenUnban from "./pollenUnban";
+// import getPollenBanned from "./getPollenBanned";
 
 const handlers = new Map([
   ["address", address],
@@ -30,15 +30,15 @@ const handlers = new Map([
   //['verify-github', verifyGithub],
   //['check-github', checkGithub],
   ["sites", sites],
-  ["save-wallet", saveWallet],
+  // ["save-wallet", saveWallet],
   ["mycred", mycred],
   ["official", official],
   ["network", xDai],
   ["ayuda", ayuda],
   ["updateroles", updateroles],
-  ["pollenban", pollenBan],
-  ["pollenunban", pollenUnban],
-  ["getpollenbanned", getPollenBanned],
+  // ["pollenban", pollenBan],
+  // ["pollenunban", pollenUnban],
+  // ["getpollenbanned", getPollenBanned],
 ]);
 
 export default handlers;
