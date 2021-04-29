@@ -1,5 +1,6 @@
 import gql from "graphql-tag";
-import { GraphQLWrapper } from "@aragon/connect-thegraph";
+import fetch from "cross-fetch";
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client/core";
 import { Message } from "discord.js";
 
 const HONEY_MAKER_ADDRESS = "0x076b64f9f966e3bbd0fcdc79d490ab71cf961bb0";
@@ -32,16 +33,19 @@ const QUERY_24HR_DEPOSITS_ADDRESS = gql`
 
 export default async function getHoneyFlow(message: Message): Promise<void> {
   // Create the GraphQL wrapper using the specific Subgraph URL
-  const wrapper = new GraphQLWrapper(SUBGRAPH_URL);
+  const wrapper = new ApolloClient({ 
+    link: new HttpLink({ uri: SUBGRAPH_URL, fetch }),
+    cache: new InMemoryCache() 
+  });
 
   // Inbound queries
-  const { data: honeyMakerData } = await wrapper.performQuery(
-    QUERY_24HR_DEPOSITS_ADDRESS,
-    {
+  const { data: honeyMakerData } = await wrapper.query({
+    query: QUERY_24HR_DEPOSITS_ADDRESS,
+    variables: {
       timestamp,
       address: HONEY_MAKER_ADDRESS,
     }
-  );
+  });
 
   let totalHoneyMakerInbound = 0;
 
@@ -49,13 +53,13 @@ export default async function getHoneyFlow(message: Message): Promise<void> {
     honeyMakerData.forEach(({ amount }) => (totalHoneyMakerInbound += amount));
   }
 
-  const { data: issuanceData } = await wrapper.performQuery(
-    QUERY_24HR_DEPOSITS_ADDRESS,
-    {
+  const { data: issuanceData } = await wrapper.query({
+    query: QUERY_24HR_DEPOSITS_ADDRESS,
+    variables: {
       timestamp,
       address: ISSUER_ADDRESS,
     }
-  );
+  });
 
   let totalIssuanceInbound = 0;
 
@@ -76,12 +80,12 @@ export default async function getHoneyFlow(message: Message): Promise<void> {
   }
 
   // Outbound queries
-  const { data: outboundData } = await wrapper.performQuery(
-    QUERY_24HR_TRANSFERS,
-    {
+  const { data: outboundData } = await wrapper.query({
+    query: QUERY_24HR_TRANSFERS,
+    variables: {
       timestamp,
     }
-  );
+  });
 
   let totalOutbound = 0;
 

@@ -1,6 +1,7 @@
 import { Message } from "discord.js";
 import gql from "graphql-tag";
-import { GraphQLWrapper } from "@aragon/connect-thegraph";
+import fetch from "cross-fetch";
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client/core";
 
 import { honeyPriceEmbed } from "../embed";
 import { error } from "../utils";
@@ -16,11 +17,14 @@ const HNY_PRICE_QUERY = gql`
   }
 `;
 
-const graphqlClient = new GraphQLWrapper(UNISWAP_URL);
+const graphqlClient = new ApolloClient({ 
+  link: new HttpLink({ uri: UNISWAP_URL, fetch }),
+  cache: new InMemoryCache()
+});
 
 export default async function honeyPrice(message: Message): Promise<void> {
   try {
-    const result = await graphqlClient.performQuery(HNY_PRICE_QUERY);
+    const result = await graphqlClient.query({ query: HNY_PRICE_QUERY });
   
     if (!result.data || !result.data.pair) return;
   
