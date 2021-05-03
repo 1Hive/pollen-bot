@@ -13,11 +13,11 @@ export function welcomeEmbed(): unknown {
         },
         {
           name: "1Hive Wiki with up to date info 📝",
-          value: "https://1hive.gitbook.io/1hive/",
+          value: "https://wiki.1hive.org",
         },
         {
           name: "Frequently Asked Questions (FAQ) ❓",
-          value: "https://1hive.gitbook.io/1hive/guides/faq",
+          value: "https://wiki.1hive.org/guides/faq",
         },
         {
           name: "Get free honey 🤑",
@@ -29,24 +29,24 @@ export function welcomeEmbed(): unknown {
         },
         {
           name: "Learn more about Honey (HNY) 🍯",
-          value: "https://1hive.gitbook.io/1hive/projects/honey",
+          value: "https://wiki.1hive.org/projects/honey",
         },
         {
           name: "Milestones and weekly updates of all the things 📰",
-          value: "https://1hive.gitbook.io/1hive/projects/milestones ",
+          value: "https://wiki.1hive.org/projects/milestones",
         },
         {
           name: "Detailed description of all of our Discord ℹ️",
-          value: "https://1hive.gitbook.io/1hive/getting-started/discord",
+          value: "https://wiki.1hive.org/getting-started/discord",
         },
         {
           name: "Our community covenant",
-          value: "https://1hive.gitbook.io/1hive/community-covenant",
+          value: "https://wiki.1hive.org/community-covenant",
         },
       ],
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -72,7 +72,7 @@ export function brightidWarningEmbed(): unknown {
       ],
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -94,7 +94,7 @@ export function wrongChannelWarningEmbed(): unknown {
       ],
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -104,13 +104,13 @@ export function walletWarningEmbed(): unknown {
   return {
     embed: {
       title: "Warning 🚨",
-      description: "You are using the `!hny wallet` command incorrectly!",
+      description: "You are using the `!hny save-wallet` command incorrectly!",
       color: 16769024,
       fields: [
         {
-          name: "`!hny wallet <address>`",
+          name: "`!hny save-wallet <address>`",
           value:
-            "Correct usage of this command requires you to add your xdai wallet address. An example of how to properly use the command is included below!",
+            "Correct usage of this command requires you to add your xDai wallet address.",
         },
       ],
       image: {
@@ -118,7 +118,7 @@ export function walletWarningEmbed(): unknown {
       },
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -191,7 +191,7 @@ export function helpEmbed(): unknown {
         {
           name: "Wiki",
           value:
-            "The [1Hive Wiki](https://1hive.gitbook.io/1hive/) contains up to date info about 1Hive, including [FAQ's](https://1hive.gitbook.io/1hive/guides/faq).",
+            "The [1Hive Wiki](https://wiki.1hive.org/) contains up to date info about 1Hive, including [FAQ's](https://wiki.1hive.org/guides/faq).",
         },
         {
           name: "!hny address",
@@ -200,7 +200,7 @@ export function helpEmbed(): unknown {
         {
           name: "!hny pollen",
           value:
-            "[Pollen](https://1hive.gitbook.io/1hive/getting-started/pollen) is a contributor rank used to recognize contributions to the Hive. Refer to the command for more information.",
+            "[Pollen](https://wiki.1hive.org/getting-started/pollen) is a contributor rank used to recognize contributions to the Hive. Refer to the command for more information.",
         },
         {
           name: "!hny save-wallet <address>",
@@ -239,7 +239,7 @@ export function helpEmbed(): unknown {
       },
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -271,7 +271,7 @@ export function helpEmbedES(): unknown {
         {
           name: "!hny pollen",
           value:
-            "[Pollen](https://1hive.gitbook.io/1hive/v/espanol/getting-started-1/pollen) es un rango de colaborador que se usa para reconocer las contribuciones a la colmena (Hive). Consulta el comando para obtener más información.",
+            "[Pollen](https://wiki.1hive.org/v/espanol/getting-started-1/pollen) es un rango de colaborador que se usa para reconocer las contribuciones a la colmena (Hive). Consulta el comando para obtener más información.",
         },
         {
           name: "!hny brightid",
@@ -306,7 +306,7 @@ export function helpEmbedES(): unknown {
       },
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -321,7 +321,7 @@ export function pollenEmbed(): unknown {
         url: "https://github.com/crisog/assistant-bee",
       },
       description:
-        "[Pollen](https://1hive.gitbook.io/1hive/getting-started/pollen) is a contributor rank used to recognize contributions to 1hive’s discord, discourse, and github communities. These contributions are rewarded with weekly distributions of Honey.",
+        "[Pollen](https://wiki.1hive.org/getting-started/pollen) is a contributor rank used to recognize contributions to 1hive’s discord, discourse, and github communities. These contributions are rewarded with weekly distributions of Honey.",
       thumbnail: {
         url: "https://i.imgur.com/dRxtULu.png",
       },
@@ -342,7 +342,7 @@ export function pollenEmbed(): unknown {
       },
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -375,7 +375,7 @@ export function verifyDiscourseEmbed(
       ],
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -400,7 +400,7 @@ export function successDiscourseVerificationEmbed(
       ],
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -423,7 +423,7 @@ export function errorDiscourseVerificationEmbed(errorMessage: string): unknown {
       ],
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -459,7 +459,7 @@ export function verifyGithubEmbed(
       ],
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -484,7 +484,7 @@ export function successGithubVerificationEmbed(
       ],
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -507,7 +507,7 @@ export function errorGithubVerificationEmbed(errorMessage: string): unknown {
       ],
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };
@@ -526,7 +526,7 @@ export function honeyAddy(): unknown {
       ],
       timestamp: new Date(),
       footer: {
-        text: "1hive.gitbook.io",
+        text: "wiki.1hive.org",
       },
     },
   };

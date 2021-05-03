@@ -29,7 +29,9 @@ const client = new Client({
       "GUILDS",
       "GUILD_MESSAGES",
       "GUILD_MESSAGE_REACTIONS",
-      "GUILD_MEMBERS"
+      "GUILD_MEMBERS",
+      "DIRECT_MESSAGES",
+      "DIRECT_MESSAGE_REACTIONS"
     ]
   },
 });
