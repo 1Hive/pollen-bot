@@ -1,8 +1,11 @@
-import * as mongoose from "mongoose";
+import { model, Schema, Model } from "mongoose";
+import { IBannedUser } from "../types"
 
-const BannedUserSchema = new mongoose.Schema({
+
+const BannedUserSchema: Schema = new Schema({
   discordId: { type: String , unique: true, required: true },
   username: { type: String , unique: true, required: true },
 });
 
-export default mongoose.model("BannedUser", BannedUserSchema);
+const BannedUser: Model<IBannedUser> = model("BannedUser", BannedUserSchema);
+export default BannedUser;

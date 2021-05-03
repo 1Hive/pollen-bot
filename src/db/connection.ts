@@ -1,15 +1,16 @@
-// import * as mongoose from "mongoose";
-// import * as dotenv from "dotenv";
+import { connect, connection } from "mongoose";
+import * as dotenv from "dotenv";
 
-// dotenv.config();
+dotenv.config();
 
-// const URI = process.env.MONGODB_URI;
-// mongoose.set("useUnifiedTopology", true);
-// mongoose.set("useNewUrlParser", true);
-// mongoose.set("useCreateIndex", true);
+connect(
+  process.env.MONGODB_URI,
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true
+  }
+);
 
-// mongoose.connect(URI);
-
-// const db = mongoose.connection;
-// db.on("error", console.error.bind(console, "connection error:"));
-// db.once("open", () => console.log("we are connected!"));
+connection.on("error", console.error.bind(console, "connection error:"));
+connection.once("open", () => console.log("we are connected!"));
