@@ -6,7 +6,7 @@ import {
   parseDiscourseVerification,
   parseDiscourseCheck,
 } from "../parser/discourse";
-import { dbHandler } from "../utilities/db";
+import User from "../models/user";
 
 import { Message } from "discord.js";
 import { log } from "../utils";
@@ -42,7 +42,11 @@ async function checkDiscourse(message: Message): Promise<void> {
         username
       );
       message.author.send(response.message);
-      dbHandler(message, username, null, null);
+      await User.findOneAndUpdate(
+        { discordId: message.author.id, username: message.author.tag },
+        { discourse: username },
+        { upsert: true }
+      )
     }
   } catch (err) {
     log(err);

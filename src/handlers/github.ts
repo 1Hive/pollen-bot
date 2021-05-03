@@ -8,7 +8,7 @@ import {
   parseGithubVerification,
   parseGithubCheck,
 } from "../parser/github";
-import { dbHandler } from "../utilities/db";
+import User from "../models/user";
 import { log } from "../utils";
 
 export async function verifyGithub(message: Message): Promise<void> {
@@ -44,7 +44,11 @@ export async function checkGithub(message: Message): Promise<void> {
         username,
       );
       message.author.send(response.message);
-      dbHandler(message, null, username, null);
+      await User.findOneAndUpdate(
+        { discordId: message.author.id, username: message.author.tag },
+        { github: username },
+        { upsert: true }
+      )
     }
   } catch (err) {
     log(err);

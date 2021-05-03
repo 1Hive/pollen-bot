@@ -1,4 +1,4 @@
-import { CommandHandler } from "../types"
+import { CommandHandler } from "../types";
 import { RequestHandlerError } from "../error-utils";
 import handlers from "../handlers";
 
