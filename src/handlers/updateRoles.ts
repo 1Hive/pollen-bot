@@ -2,7 +2,7 @@ import { GuildMember, Message } from "discord.js";
 import { sourcecred } from "sourcecred";
 import * as dotenv from "dotenv";
 
-// import getPollenBanned from "./getPollenBanned";
+import getPollenBanned from "./getPollenBanned";
 import { error } from "../utils";
 import { PollenData } from "../types";
 
@@ -20,11 +20,11 @@ export default async function updateroles(message: Message, pollenData: PollenDa
     if (message && message.channel.type === "dm") throw "Try again in the bot-commands channel.";
     if (!pollenData) throw "Still preloading pollen files, try again in a minute.";
       
-    // const bannedMembers = await getPollenBanned();
+    const bannedMembers = await getPollenBanned();
     const { accounts, credParticipants } = pollenData;
     const usersToModify: Map<string, number> = new Map();
     
-    await message.channel.send("Updating pollen roles...");
+    if (message) await message.channel.send("Updating pollen roles...");
     
     for (const account of accounts) {
       if (account.identity.subtype !== "USER") continue;
@@ -36,11 +36,11 @@ export default async function updateroles(message: Message, pollenData: PollenDa
       let discordId: string;
       discordAliases.forEach(alias => discordId = NodeAddress.toParts(alias.address)[4]);
       
-      // if (
-      //   bannedMembers 
-      //   && bannedMembers.length 
-      //   && bannedMembers.some(member => member.discordId === discordId)
-      // ) continue;
+      if (
+        bannedMembers 
+        && bannedMembers.length 
+        && bannedMembers.some(member => member.discordId === discordId)
+      ) continue;
 
       const totalCred: number = credParticipants.find(p => p.id === account.identity.id).cred;
         
@@ -58,6 +58,9 @@ export default async function updateroles(message: Message, pollenData: PollenDa
         await member.roles.set(newMemberRoles);
         console.log(`User ${member.user.username} had their roles changed to: ${member.roles.cache.array()}`);
         count++;
+        
+        // Waits 1.15 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
+        await new Promise(resolve => setTimeout(resolve, 1150))
       }
     }
     // If called by Pollen Admin on Discord...
