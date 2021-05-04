@@ -1,43 +1,52 @@
 {
-  "name": "bee-guard",
+  "name": "assistant-bee",
   "version": "0.0.1",
-  "description": "A discord bot to regulate BrightID links on public channels.",
+  "description": "A multifunctional discord bot for 1Hive.",
   "keywords": [
     "discord",
-    "1hive",
-    "brightid"
+    "1hive"
   ],
   "main": "src/index.js",
   "scripts": {
     "lint": "npx eslint ./src",
     "lint-fix": "npx eslint ./src --fix",
     "test": "npx jest --passWithNoTests",
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "npm run build && node ./dist/index.js",
+    "dev": "ts-node-dev --watch --respawn --transpile-only ./src/index.ts",
+    "build": "tsc --build"
   },
   "author": "1Hive",
   "license": "MIT",
   "dependencies": {
-    "@aragon/connect-thegraph": "^0.7.0",
+    "@apollo/client": "^3.3.15",
     "@sentry/node": "^5.15.4",
+    "@types/mongoose": "^5.10.5",
+    "@types/node": "^14.14.41",
     "cron": "^1.8.2",
-    "discord.js": "^12.4.0",
+    "cross-fetch": "^3.1.4",
+    "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
+    "ethers": "^5.1.3",
+    "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.9",
-    "sourcecred": "^0.8.3",
-    "web3": "^1.3.0"
+    "sourcecred": "^0.8.3"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-jest": "^23.8.2",
-    "eslint-plugin-prettier": "^3.1.3",
+    "@types/cron": "^1.7.2",
+    "@types/node-fetch": "^2.5.10",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-plugin-jest": "^24.3.5",
+    "eslint-plugin-prettier": "^3.4.0",
     "husky": "^4.2.5",
     "jest": "^25.3.0",
     "lint-staged": "^10.1.3",
-    "nodemon": "^2.0.3"
+    "typescript": "^4.2.4",
+    "ts-node-dev": "^1.1.6"
   },
   "husky": {
     "hooks": {
