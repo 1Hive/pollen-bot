@@ -56,7 +56,8 @@ jobs:
           docker push "gcr.io/$PROJECT_ID/assistant-bee:$GITHUB_SHA"
       - name: Stop Instance
         run: |-
-          gcloud compute instances stop "$GCE_INSTANCE"
+          gcloud compute instances stop "$GCE_INSTANCE" \
+            --zone "$GCE_INSTANCE_ZONE" \
       - name: Deploy
         run: |-
           gcloud compute instances update-container "$GCE_INSTANCE" \
@@ -65,4 +66,5 @@ jobs:
             --container-env DISCORD_API_TOKEN=${{ secrets.DISCORD_API_TOKEN }},WEB3_URL=${{ secrets.WEB3_URL }},MONGODB_URI=${{ secrets.MONGODB_URI }},POLLEN_ADMIN=${{ secrets.POLLEN_ADMIN }},GUILD_ID=${{ secrets.GUILD_ID }}
       - name: Start Instance
         run: |-
-          gcloud compute instances start "$GCE_INSTANCE"
+          gcloud compute instances start "$GCE_INSTANCE" \
+            --zone "$GCE_INSTANCE_ZONE" \
