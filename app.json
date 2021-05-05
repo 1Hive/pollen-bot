@@ -1,10 +1,12 @@
 {
-    "name": "BeeGuard",
-    "description": "A discord bot to regulate BrightID links on public channels.",
-    "repository": "https://github.com/crisog/bee-guard",
+    "name": "Pollen bot",
+    "description": "A discord bot to support Pollen duties 🏵",
+    "repository": "https://github.com/1Hive/pollen-bot",
     "logo": "https://www.wholekidsfoundation.org/assets/images/Worker-Bee-Roles_Guard.png",
     "keywords": ["node", "discord", "1Hive"],
     "env": {
-      "DISCORD_API_TOKEN": "YOUR_DISCORD_API_TOKEN"
+      "DISCORD_API_TOKEN": "YOUR_DISCORD_API_TOKEN",
+      "MONGODB_URI": "Your MongoDB connection URI.",
+      "GUILD_ID": "Your Discord server ID."
     }
   }
