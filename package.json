@@ -13,7 +13,7 @@
     "test": "npx jest --passWithNoTests",
     "start": "npm run build && node ./dist/index.js",
     "dev": "ts-node-dev --watch --respawn --transpile-only ./src/index.ts",
-    "build": "tsc --build"
+    "build": "tsc"
   },
   "author": "1Hive",
   "license": "MIT",
