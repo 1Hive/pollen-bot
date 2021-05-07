@@ -8,7 +8,7 @@ export default function detectHandler(message: string): CommandHandler {
 
   const [requestedNamespace, requestedHandler] = message.split(" ");
   // If it's not a flag, we can safely ignore this command.
-  if (!requestedNamespace.includes("!hny")) return noop();
+  if (!requestedNamespace.includes("!pollen")) return noop();
 
   const receivedHandler = handlers.get(requestedHandler);
 
