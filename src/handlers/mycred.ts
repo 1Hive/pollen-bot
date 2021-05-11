@@ -1,21 +1,21 @@
 import { Message } from "discord.js";
 
-import { PollenData } from "../types";
+import Account from "../models/Account";
+import CredParticipant from "../models/CredParticipant";
+
 import { credEmbed } from "../embed";
 import { error } from "../utils";
 
-export default async function mycred(message: Message, pollenData: PollenData): Promise<void> {
+export default async function mycred(message: Message): Promise<void> {
   try {
-    if (!pollenData) throw "Still preloading pollen files, try again in a minute.";
+    const accountFound = await Account
+      .findOne({ "identity.aliases": new RegExp(message.author.id) })
+      .select("identity.id");
 
-    const { accounts, credParticipants } = pollenData;
+    if(!accountFound) throw "Alas, you have no cred yet, try again tomorrow!";
 
-    const accountFound = accounts
-      .find(account => account.identity.aliases.some(alias => alias.address.includes(message.author.id)));
+    const credParticipant = await CredParticipant.findOne({ id: accountFound.identity.id })
     
-    if(!accountFound) throw "Alas, we cannot find you, try again tomorrow!";
-
-    const credParticipant = credParticipants.find(p => p.id === accountFound.identity.id);
     const credHistory = credParticipant.credPerInterval;
 
     await message.channel.send(`<@${message.author.id}>`);
