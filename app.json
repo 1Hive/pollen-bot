@@ -7,6 +7,7 @@
     "env": {
       "DISCORD_API_TOKEN": "YOUR_DISCORD_API_TOKEN",
       "MONGODB_URI": "Your MongoDB connection URI.",
-      "GUILD_ID": "Your Discord server ID."
+      "GUILD_ID": "Your Discord server ID.",
+      "POLLEN_ADMIN": "Your pollen admin ID."
     }
   }

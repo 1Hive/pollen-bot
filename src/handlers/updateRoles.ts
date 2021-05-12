@@ -1,12 +1,14 @@
-import { GuildMember, Message } from "discord.js";
+import { GuildMember, Message, Client } from "discord.js";
 import { sourcecred } from "sourcecred";
-import * as dotenv from "dotenv";
+import { config } from "dotenv";
+
+import Account from "../models/Account";
+import CredParticipant from "../models/CredParticipant";
 
 import getPollenBanned from "./getPollenBanned";
 import { error } from "../utils";
-import { PollenData } from "../types";
 
-dotenv.config();
+config();
 
 const NodeAddress = sourcecred.core.address.makeAddressModule({
   name: "NodeAddress",
@@ -14,27 +16,28 @@ const NodeAddress = sourcecred.core.address.makeAddressModule({
   otherNonces: new Map().set("E", "EdgeAddress")
 });
 
-export default async function updateroles(message: Message, pollenData: PollenData): Promise<void> {
+export default async function updateroles(message: Message, client?: Client): Promise<void> {
   try {
     if (message && message.author.id !== process.env.POLLEN_ADMIN) throw "You do not have access to this command.";
     if (message && message.channel.type === "dm") throw "Try again in the bot-commands channel.";
-    if (!pollenData) throw "Still preloading pollen files, try again in a minute.";
       
     const bannedMembers = await getPollenBanned();
-    const { accounts, credParticipants } = pollenData;
+    const accounts = await Account.find({});
+    const credParticipants = await CredParticipant.find({});
     const usersToModify: Map<string, number> = new Map();
     
     if (message) await message.channel.send("Updating pollen roles...");
+    else console.log("Updating pollen roles...")
     
     for (const account of accounts) {
       if (account.identity.subtype !== "USER") continue;
 
-      const discordAliases = account.identity.aliases.filter(alias => alias.address.includes("discord"));
+      const discordAliases = account.identity.aliases.filter(alias => alias.includes("discord"));
 
       if (!discordAliases.length) continue;
 
       let discordId: string;
-      discordAliases.forEach(alias => discordId = NodeAddress.toParts(alias.address)[4]);
+      discordAliases.forEach(alias => discordId = NodeAddress.toParts(alias)[4]);
       
       if (
         bannedMembers 
@@ -42,13 +45,18 @@ export default async function updateroles(message: Message, pollenData: PollenDa
         && bannedMembers.some(member => member.discordId === discordId)
       ) continue;
 
-      const totalCred: number = credParticipants.find(p => p.id === account.identity.id).cred;
+      const participant = credParticipants.find(p => p.id === account.identity.id);
+      if (!participant) continue;
+
+      const totalCred = participant.cred;
         
       if (discordId && totalCred >= 30) usersToModify.set(discordId, totalCred);
     }
 
     let count = 0;
-    const guild = message.guild;
+    const guild = message 
+      ? message.guild
+      : await client.guilds.fetch(process.env.GUILD_ID);
 
     for (const [id, cred] of usersToModify.entries()) {
       const member = guild.members.cache.get(id);
@@ -58,16 +66,17 @@ export default async function updateroles(message: Message, pollenData: PollenDa
         await member.roles.set(newMemberRoles);
         console.log(`User ${member.user.username} had their roles changed to: ${member.roles.cache.array()}`);
         count++;
-        
-        // Waits 1.15 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
-        await new Promise(resolve => setTimeout(resolve, 1150))
       }
+      // Waits 1.15 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
+      await new Promise(resolve => setTimeout(resolve, 5000))
     }
+    
     // If called by Pollen Admin on Discord...
-    if (message) message.reply(`${count} users had their roles changed.`)
+    if (message) message.reply(`${count} users had their roles changed.`);
+    else console.log(`${count} users had their roles changed.`);
   } catch (err) {
     if (typeof err !== "string") error(err);
-    if (message) message.reply(err);
+    else if (message) message.reply(err);
   }
 }
 
