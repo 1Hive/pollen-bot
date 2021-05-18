@@ -24,4 +24,5 @@ export default async function saveWallet(message: Message): Promise<void> {
       else error(err);
     }
   }
+  else message.channel.send(walletWarningEmbed());
 }
