@@ -50,7 +50,7 @@ export async function checkGithub(message: Message): Promise<void> {
         await User.findOneAndUpdate(
           { discordId: message.author.id, username: message.author.tag },
           { github: username, modifiedAt: Date.now() },
-          { upsert: true }
+          { upsert: true, setDefaultsOnInsert: true }
         );
   
         message.author.send("GitHub user succesfully saved.");

@@ -6,7 +6,8 @@ interface IUser extends Document {
   username: string,
   github: string,
   discourse: string,
-  modifiedAt: number
+  modifiedAt: number,
+  createdAt: number
 }
 
 const UserSchema: Schema = new Schema({
@@ -15,7 +16,8 @@ const UserSchema: Schema = new Schema({
   discourse: { type: String },
   github: { type: String },
   address: { type: String, unique: true },
-  modifiedAt: { type: Number }
+  modifiedAt: { type: Number },
+  createdAt: { type: Number, default: Date.now() }
 }, { 
   versionKey: false,
   _id: false

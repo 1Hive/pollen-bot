@@ -49,7 +49,7 @@ export async function checkDiscourse(message: Message): Promise<void> {
         await User.findOneAndUpdate(
           { discordId: message.author.id, username: message.author.tag },
           { discourse: username, modifiedAt: Date.now() },
-          { upsert: true }
+          { upsert: true, setDefaultsOnInsert: true }
         );
   
         message.author.send("Discourse user succesfully saved.");

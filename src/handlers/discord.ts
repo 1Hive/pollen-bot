@@ -8,7 +8,7 @@ export default async function discord(message: Message): Promise<void> {
     const foundUser = await User.findOneAndUpdate(
       { discordId: message.author.id },
       { username: message.author.tag, modifiedAt: Date.now() },
-      { upsert: true }
+      { upsert: true, setDefaultsOnInsert: true }
     );
     
     message.channel.send(`Discord username successfully ${foundUser ? "updated" : "saved"}.`);
