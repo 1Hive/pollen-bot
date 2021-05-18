@@ -5,17 +5,20 @@ interface IUser extends Document {
   address: string,
   username: string,
   github: string,
-  discourse: string
+  discourse: string,
+  modifiedAt: number
 }
 
 const UserSchema: Schema = new Schema({
-  discordId: { type : String , unique: true, required: true, dropDups: true },
-  address: { type: String },
-  username: { type: String },
+  discordId: { type: String, unique: true, required: true, dropDups: true },
+  username: { type: String, unique: true, required: true, dropDups: true },
+  discourse: { type: String },
   github: { type: String },
-  discourse: { type: String }
+  address: { type: String, unique: true },
+  modifiedAt: { type: Number }
 }, { 
-  versionKey: false 
+  versionKey: false,
+  _id: false
 });
 
 const User: Model<IUser> = model("User", UserSchema);
