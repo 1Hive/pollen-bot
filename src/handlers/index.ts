@@ -10,6 +10,7 @@ import updateroles from "./updateRoles";
 import pollenBan from "./pollenBan";
 import pollenUnban from "./pollenUnban";
 import { getPollenBannedMsg } from "./getPollenBanned";
+import getLastModified from "./getLastModified";
 
 const handlers = new Map([
   ["info", info],
@@ -25,7 +26,8 @@ const handlers = new Map([
   ["updateroles", updateroles],
   ["pollenban", pollenBan],
   ["pollenunban", pollenUnban],
-  ["getpollenbanned", getPollenBannedMsg]
+  ["getpollenbanned", getPollenBannedMsg],
+  ["getlastmodified", getLastModified]
 ]);
 
 export default handlers;
