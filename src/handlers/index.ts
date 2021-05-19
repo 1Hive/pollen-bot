@@ -11,6 +11,7 @@ import pollenBan from "./pollenBan";
 import pollenUnban from "./pollenUnban";
 import { getPollenBannedMsg } from "./getPollenBanned";
 import getLastModified from "./getLastModified";
+import getAddressList from "./getAddressList";
 
 const handlers = new Map([
   ["info", info],
@@ -27,7 +28,8 @@ const handlers = new Map([
   ["pollenban", pollenBan],
   ["pollenunban", pollenUnban],
   ["getpollenbanned", getPollenBannedMsg],
-  ["getlastmodified", getLastModified]
+  ["getlastmodified", getLastModified],
+  ["getaddresslist", getAddressList]
 ]);
 
 export default handlers;
