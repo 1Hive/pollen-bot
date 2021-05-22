@@ -15,9 +15,8 @@
 name: Build and Deploy to Google Compute Engine
 
 on:
-  push:
-    branches:
-      - master
+  # manual trigger
+  workflow_dispatch:
 
 env:
   PROJECT_ID: ${{ secrets.GCE_PROJECT }}
