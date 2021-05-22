@@ -18,15 +18,15 @@ config();
 
 const client = new Client({
   partials: ["MESSAGE", "REACTION"],
-  ws: { 
+  ws: {
     intents: [
       "GUILDS",
       "GUILD_MESSAGES",
       "GUILD_MESSAGE_REACTIONS",
       "GUILD_MEMBERS",
       "DIRECT_MESSAGES",
-      "DIRECT_MESSAGE_REACTIONS"
-    ]
+      "DIRECT_MESSAGE_REACTIONS",
+    ],
   },
 });
 
@@ -81,7 +81,12 @@ client.on("message", (message) => {
 // eslint-disable-next-line
 const halfDayRoleUpdate = new CronJob(
   // start: true
-  "0 0,12 * * *", () => updateroles(null, client), null, true, "Europe/London", null
+  "0 0,12 * * *",
+  () => updateroles(null, client),
+  null,
+  true,
+  "Europe/London",
+  null
 );
 
 client.login(process.env.DISCORD_API_TOKEN);

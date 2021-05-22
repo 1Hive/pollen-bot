@@ -8,7 +8,6 @@ const ENV_VARS = {
     "YOUR_DISCORD_API_TOKEN",
     true,
   ],
-  WEB3_URL: [process.env.WEB3_URL, "YOUR_WEB3_URL", true],
   MONGODB_URI: [process.env.MONGODB_URI, "YOUR_MONGODB_URI", true],
   CHANNEL_ID: [process.env.CHANNEL_ID, "YOUR_CHANNEL_ID", true],
   POLLEN_ADMIN: [process.env.POLLEN_ADMIN, "YOUR_POLLEN_ADMIN_ID", true],
