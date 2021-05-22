@@ -16,7 +16,7 @@ export default async function saveWallet(message: Message): Promise<void> {
       await User.findOneAndUpdate(
         { discordId: message.author.id, username: message.author.tag },
         { address: xdaiAddress },
-        { upsert: true }
+        { upsert: true, setDefaultsOnInsert: true }
       )
       message.channel.send(`<@${message.author.id}> wallet address succesfully saved.`);
     } catch(err) {
@@ -24,4 +24,5 @@ export default async function saveWallet(message: Message): Promise<void> {
       else error(err);
     }
   }
+  else message.channel.send(walletWarningEmbed());
 }

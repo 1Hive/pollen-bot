@@ -25,7 +25,7 @@ export async function verifyGithub(message: Message): Promise<void> {
   } catch (err) {
     log(err);
     message.reply(
-      "Command parsing failed. Please use the !hny help command to see how to use the requested command properly."
+      "Command parsing failed. Please use the !pollen info command to see how to use the requested command properly."
     );
   }
 };
@@ -43,17 +43,23 @@ export async function checkGithub(message: Message): Promise<void> {
         verification_code,
         username,
       );
+
       message.author.send(response.message);
-      await User.findOneAndUpdate(
-        { discordId: message.author.id, username: message.author.tag },
-        { github: username },
-        { upsert: true }
-      )
+
+      if (response.ok) {
+        await User.findOneAndUpdate(
+          { discordId: message.author.id, username: message.author.tag },
+          { github: username, modifiedAt: Date.now() },
+          { upsert: true, setDefaultsOnInsert: true }
+        );
+  
+        message.author.send("GitHub user succesfully saved.");
+      }
     }
   } catch (err) {
     log(err);
     message.reply(
-      "Command parsing failed. Please use the !hny help command to see how to use the requested command properly."
+      "Command parsing failed. Please use the !pollen info command to see how to use the requested command properly."
     );
   }
 };
