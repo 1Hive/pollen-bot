@@ -20,7 +20,7 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GCE_PROJECT }}
-  GCE_INSTANCE: discord-bot
+  GCE_INSTANCE: pollen-bot
   GCE_INSTANCE_ZONE: us-central1-a
 
 jobs:
