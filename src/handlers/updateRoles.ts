@@ -36,13 +36,13 @@ export default async function updateroles(message: Message, client?: Client): Pr
 
       if (!discordAliases.length) continue;
 
-      let discordId: string;
-      discordAliases.forEach(alias => discordId = NodeAddress.toParts(alias)[4]);
+      let discordIds: string[];
+      discordAliases.forEach(alias => discordIds.push(NodeAddress.toParts(alias)[4]));
       
       if (
         bannedMembers 
         && bannedMembers.length 
-        && bannedMembers.some(member => member.discordId === discordId)
+        && bannedMembers.some(member => discordIds.includes(member.discordId))
       ) continue;
 
       const participant = credParticipants.find(p => p.id === account.identity.id);
@@ -50,7 +50,7 @@ export default async function updateroles(message: Message, client?: Client): Pr
 
       const totalCred = participant.cred;
         
-      if (discordId && totalCred >= 30) usersToModify.set(discordId, totalCred);
+      if (totalCred >= 30) discordIds.forEach(discordId => usersToModify.set(discordId, totalCred));
     }
 
     let count = 0;
@@ -69,7 +69,7 @@ export default async function updateroles(message: Message, client?: Client): Pr
       if (member) {
         const newMemberRoles = manageRoles(member, cred);
         await member.roles.set(newMemberRoles);
-//         console.log(`User ${member.user.username} had their roles changed to: ${member.roles.cache.array()}`);
+        console.log(`User ${member.user.username} had their roles changed to: ${member.roles.cache.array()}`);
         count++;
       }
       // Waits 1.15 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
@@ -88,7 +88,7 @@ export default async function updateroles(message: Message, client?: Client): Pr
 function manageRoles(member: GuildMember, totalCred: number): string[] {
   // Roles 0.25x, 0.5x, 0.75x and 1x respectively
   const roles = ["774874504358133780", "771534378110287913", "774874617432244284", "771534371588276274"];
-  console.log(`Member: ${member.user.username}, roles: ${member.roles.cache.map(role => role.name)}`)
+
   const memberRoles: string[] = member.roles.cache
     .map(role => role.id)
     .filter(role => !roles.includes(role));
