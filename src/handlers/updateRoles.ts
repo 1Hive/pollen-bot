@@ -36,7 +36,7 @@ export default async function updateroles(message: Message, client?: Client): Pr
 
       if (!discordAliases.length) continue;
 
-      let discordIds: string[];
+      let discordIds: string[] = [];
       discordAliases.forEach(alias => discordIds.push(NodeAddress.toParts(alias)[4]));
       
       if (
