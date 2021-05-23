@@ -69,11 +69,11 @@ export default async function updateroles(message: Message, client?: Client): Pr
       if (member) {
         const newMemberRoles = manageRoles(member, cred);
         await member.roles.set(newMemberRoles);
-        console.log(`User ${member.user.username} had their roles changed to: ${member.roles.cache.array()}`);
+//         console.log(`User ${member.user.username} had their roles changed to: ${member.roles.cache.array()}`);
         count++;
       }
-      // Waits 5 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
-      await new Promise(resolve => setTimeout(resolve, 5000))
+      // Waits 1.15 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
+      await new Promise(resolve => setTimeout(resolve, 1150))
     }
     
     // If called by Pollen Admin on Discord...
@@ -88,7 +88,7 @@ export default async function updateroles(message: Message, client?: Client): Pr
 function manageRoles(member: GuildMember, totalCred: number): string[] {
   // Roles 0.25x, 0.5x, 0.75x and 1x respectively
   const roles = ["774874504358133780", "771534378110287913", "774874617432244284", "771534371588276274"];
-
+  console.log(`Member: ${member.user.username}, roles: ${member.roles.cache.map(role => role.name)}`)
   const memberRoles: string[] = member.roles.cache
     .map(role => role.id)
     .filter(role => !roles.includes(role));
