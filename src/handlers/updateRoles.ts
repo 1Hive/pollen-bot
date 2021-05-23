@@ -36,7 +36,7 @@ export default async function updateroles(message: Message, client?: Client): Pr
 
       if (!discordAliases.length) continue;
 
-      let discordIds: string[] = [];
+      const discordIds: string[] = [];
       discordAliases.forEach(alias => discordIds.push(NodeAddress.toParts(alias)[4]));
       
       if (
@@ -54,6 +54,7 @@ export default async function updateroles(message: Message, client?: Client): Pr
     }
 
     let count = 0;
+    const updatedMembers: string[] = [];
     const guild = message 
       ? message.guild
       : await client.guilds.fetch(process.env.GUILD_ID);
@@ -69,13 +70,15 @@ export default async function updateroles(message: Message, client?: Client): Pr
       if (member) {
         const newMemberRoles = manageRoles(member, cred);
         await member.roles.set(newMemberRoles);
-        console.log(`User ${member.user.username} had their roles changed to: ${member.roles.cache.array()}`);
+        
+        updatedMembers.push(member.user.username);
         count++;
       }
-      // Waits 5 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
-      await new Promise(resolve => setTimeout(resolve, 5000))
+      // Waits 1.15 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
+      await new Promise(resolve => setTimeout(resolve, 1150))
     }
     
+    console.log(`Updated roles to the following members:\n${updatedMembers.join(", ")}`)
     // If called by Pollen Admin on Discord...
     if (message) message.reply(`${count} users had their roles changed.`);
     else console.log(`${count} users had their roles changed.`);
