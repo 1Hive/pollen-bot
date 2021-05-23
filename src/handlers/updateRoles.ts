@@ -52,8 +52,6 @@ export default async function updateroles(message: Message, client?: Client): Pr
         
       if (discordId && totalCred >= 30) usersToModify.set(discordId, totalCred);
     }
-    
-    console.log(usersToModify.size)
 
     let count = 0;
     const guild = message 
@@ -61,7 +59,7 @@ export default async function updateroles(message: Message, client?: Client): Pr
       : await client.guilds.fetch(process.env.GUILD_ID);
 
     for (const [id, cred] of usersToModify.entries()) {
-      const member = guild.members.cache.get(id);
+      const member = await guild.members.fetch(id);
       console.log(member)
 
       if (member) {
