@@ -72,8 +72,8 @@ export default async function updateroles(message: Message, client?: Client): Pr
         console.log(`User ${member.user.username} had their roles changed to: ${member.roles.cache.array()}`);
         count++;
       }
-      // Waits 1.15 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
-      await new Promise(resolve => setTimeout(resolve, 1150))
+      // Waits 5 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
+      await new Promise(resolve => setTimeout(resolve, 5000))
     }
     
     // If called by Pollen Admin on Discord...
