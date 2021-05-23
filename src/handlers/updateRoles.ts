@@ -59,9 +59,13 @@ export default async function updateroles(message: Message, client?: Client): Pr
       : await client.guilds.fetch(process.env.GUILD_ID);
 
     for (const [id, cred] of usersToModify.entries()) {
-      const member = await guild.members.fetch(id);
-      console.log(member)
-
+      let member: GuildMember;
+      try {
+        member = await guild.members.fetch(id);
+      } catch (err) {
+        member = null;
+      };
+ 
       if (member) {
         const newMemberRoles = manageRoles(member, cred);
         await member.roles.set(newMemberRoles);
@@ -69,7 +73,7 @@ export default async function updateroles(message: Message, client?: Client): Pr
         count++;
       }
       // Waits 1.15 seconds before executing next iteration to prevent hitting Discord API Rate Limitation
-      await new Promise(resolve => setTimeout(resolve, 5000))
+      await new Promise(resolve => setTimeout(resolve, 1150))
     }
     
     // If called by Pollen Admin on Discord...
