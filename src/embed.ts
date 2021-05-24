@@ -134,7 +134,7 @@ export function helpEmbed(): MessageEmbed {
           "Begins the process of verifying and saving your GitHub username in the database.",
       },
       {
-        name: "!hny save-wallet <address>",
+        name: "!pollen save-wallet <address>",
         value: "Saves your wallet address in the database to be used for pollen payouts.",
       }
     ],
