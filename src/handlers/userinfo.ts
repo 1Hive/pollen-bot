@@ -18,7 +18,8 @@ export default async function userinfo(message: Message): Promise<void> {
         .substring(2, strUser.length - 2)
         .replace(/, /g, "\n");
 
-      message.reply(
+      message.reply('Check DM.');
+      message.author.send(
         "this is your current pollen saved information:\n```" + formattedUser + "```"
       );
     }
