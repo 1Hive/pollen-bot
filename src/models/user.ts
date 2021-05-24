@@ -15,7 +15,7 @@ const UserSchema: Schema = new Schema({
   username: { type: String, unique: true, required: true, dropDups: true },
   discourse: { type: String },
   github: { type: String },
-  address: { type: String, unique: true },
+  address: { type: String },
   modifiedAt: { type: Number },
   createdAt: { type: Number, default: Date.now() }
 }, { 
