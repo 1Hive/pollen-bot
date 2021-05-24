@@ -9,6 +9,7 @@ lerna-debug.log*
 # TS compile folder
 dist/
 
+lastModifiedUsers.json
 addressList.json
 
 # Diagnostic reports (https://nodejs.org/api/report.html)

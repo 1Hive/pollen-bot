@@ -1,4 +1,5 @@
-import { Message } from "discord.js";
+import { Message, MessageAttachment } from "discord.js";
+import { writeFileSync } from "fs";
 
 import User from "../models/user";
 import { error } from "../utils";
@@ -14,14 +15,19 @@ export default async function getLastModified(message: Message): Promise<void> {
       .find({ modifiedAt: { $gte: Date.now() - (1000 * 60 * 60 * 24 * 7 * weeks) } })
       .select("-_id -createdAt -modifiedAt -address");
 
-    const formattedModifiedUsers = modifiedUsers
-      .toString()
-      .replace(/{/g, "{\n")
-      .replace(/}/g, "\n}")
-      .replace(/,/g, ",\n");
+    const formattedModifiedUsers = JSON.stringify(modifiedUsers, null, 2);
+    // modifiedUsers
+    //   .toString()
+    //   .replace(/{/g, "{\n")
+    //   .replace(/}/g, "\n}")
+    //   .replace(/,/g, ",\n");
+
+    writeFileSync("lastModifiedUsers.json", formattedModifiedUsers);
   
-    message.author.send(`Here's the list of users created or modified last ${weeks} week(s):`);
-    message.author.send("```" + formattedModifiedUsers + "```");
+    message.author.send(
+      `Here's the list of users created or modified last ${weeks} week(s):`,
+      new MessageAttachment("lastModifiedUsers.json")
+    );
   } catch (err) {
     if (typeof err !== "string") error(err);
     message.reply(err)
