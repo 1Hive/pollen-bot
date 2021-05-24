@@ -12,9 +12,11 @@ export default async function mycred(message: Message): Promise<void> {
       .findOne({ "identity.aliases": new RegExp(message.author.id) })
       .select("identity.id");
 
-    if(!accountFound) throw "Alas, you have no cred yet, try again tomorrow!";
+    if(!accountFound) throw "Oops, we cannot find you, try again tomorrow!";
 
-    const credParticipant = await CredParticipant.findOne({ id: accountFound.identity.id })
+    const credParticipant = await CredParticipant.findOne({ id: accountFound.identity.id });
+    
+    if(!credParticipant) throw "Alas, you have no cred yet, try again tomorrow!";
     
     const credHistory = credParticipant.credPerInterval;
 
