@@ -16,14 +16,10 @@ export default async function getLastModified(message: Message): Promise<void> {
       .select("-_id -createdAt -modifiedAt -address");
 
     const formattedModifiedUsers = JSON.stringify(modifiedUsers, null, 2);
-    // modifiedUsers
-    //   .toString()
-    //   .replace(/{/g, "{\n")
-    //   .replace(/}/g, "\n}")
-    //   .replace(/,/g, ",\n");
 
     writeFileSync("lastModifiedUsers.json", formattedModifiedUsers);
   
+    message.reply('Check DM');
     message.author.send(
       `Here's the list of users created or modified last ${weeks} week(s):`,
       new MessageAttachment("lastModifiedUsers.json")
