@@ -17,7 +17,7 @@ const handlers = new Map([
   ["info", info],
   ["help", help],
   ["userinfo", userinfo],
-  ["save-discord", discord],
+  ["update-discord", discord],
   ["verify-discourse", verifyDiscourse],
   ["check-discourse", checkDiscourse],
   ["verify-github", verifyGithub],
