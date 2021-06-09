@@ -15,13 +15,16 @@ export default async function saveWallet(message: Message): Promise<void> {
       const xdaiAddress = ethers.utils.getAddress(rawAddress);
       await User.findOneAndUpdate(
         { discordId: message.author.id, username: message.author.tag },
-        { address: xdaiAddress },
+        { address: xdaiAddress, modifiedAt: Date.now() },
         { upsert: true, setDefaultsOnInsert: true }
       )
       message.channel.send(`<@${message.author.id}> wallet address succesfully saved.`);
     } catch(err) {
       if (err.code === "INVALID_ARGUMENT") message.channel.send(walletWarningEmbed());
-      else error(err);
+      else{
+        message.reply(err);
+        error(err);
+      }
     }
   }
   else message.channel.send(walletWarningEmbed());

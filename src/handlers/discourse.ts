@@ -13,6 +13,11 @@ import { log } from "../utils";
 
 export async function verifyDiscourse(message: Message): Promise<void> {
   try {
+    const foundUser = await User.findOne({ discordId: message.author.id })
+
+    if (!foundUser) 
+      throw "You first need to save your wallet address with the `!pollen save-wallet <wallet-address>` command.";
+
     const [username] = parseDiscourseVerification(
       message.content,
       message.author.id
@@ -22,15 +27,23 @@ export async function verifyDiscourse(message: Message): Promise<void> {
       message.author.send(response.message);
     }
   } catch (err) {
-    log(err);
-    message.reply(
-      "Command parsing failed. Please use the !pollen info command to see how to use the requested command properly."
-    );
+    if (typeof err === "string") message.reply(err)
+    else {
+      log(err);
+      message.reply(
+        "Command parsing failed. Please use the !pollen info command to see how to use the requested command properly."
+      );
+    }
   }
 }
 
 export async function checkDiscourse(message: Message): Promise<void> {
   try {
+    const foundUser = await User.findOne({ discordId: message.author.id })
+
+    if (!foundUser) 
+      throw "You first need to save your wallet address with the `!pollen save-wallet <wallet-address>` command.";
+
     const [verification_code, username] = parseDiscourseCheck(
       message.content,
       message.author.id
@@ -46,19 +59,20 @@ export async function checkDiscourse(message: Message): Promise<void> {
       message.author.send(response.message);
 
       if (response.ok) {
-        await User.findOneAndUpdate(
-          { discordId: message.author.id, username: message.author.tag },
-          { discourse: username, modifiedAt: Date.now() },
-          { upsert: true, setDefaultsOnInsert: true }
+        await foundUser.updateOne(
+          { discourse: username, modifiedAt: Date.now() }
         );
   
         message.author.send("Discourse user succesfully saved.");
       }
     }
   } catch (err) {
-    log(err);
-    message.reply(
-      "Command parsing failed. Please use the !pollen info command to see how to use the requested command properly."
-    );
+    if (typeof err === "string") message.reply(err)
+    else {
+      log(err);
+      message.reply(
+        "Command parsing failed. Please use the !pollen info command to see how to use the requested command properly."
+      );
+    }
   }
 }

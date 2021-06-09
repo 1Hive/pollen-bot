@@ -34,7 +34,7 @@ export function walletWarningEmbed(): MessageEmbed {
       },
     ],
     image: {
-      url: "https://i.imgur.com/E7x8s0j.png",
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
     },
     timestamp: new Date(),
     footer: {
@@ -53,7 +53,7 @@ export function infoEmbed(): MessageEmbed {
     description:
       "[Pollen](https://wiki.1hive.org/getting-started/pollen) is a contributor rank used to recognize contributions to 1Hive's Discord, Discourse, and GitHub communities. These contributions are rewarded with weekly distributions of Honey.",
     thumbnail: {
-      url: "https://i.imgur.com/dRxtULu.png",
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
     },
     fields: [
       {
@@ -62,25 +62,25 @@ export function infoEmbed(): MessageEmbed {
           "To sign up for Pollen, you need to send your information to the DB using some of the following commands.",
       },
       {
-        name: "Save Discord account",
+        name: "Save wallet address - required",
         value:
-          "Send `!pollen save-discord` to add your Discord ID and tag to the Pollen DB.",
+          "Send `!pollen save-wallet <wallet-address>` to add your wallet address to the Pollen DB as well as your Discord ID and Discord tag.",
       },
       {
         name: "Save Discourse (Forum) account - optional",
         value:
-          "Send `!pollen verify-discourse <discourse-username>` and follow the process to verify and add your Discourse username to the Pollen DB.",
+          "Send `!pollen verify-discourse <discourse-username>` and follow the process to verify and add your Discourse account (if you have one) to the Pollen DB.",
       },
       {
         name: "Save GitHub account - optional",
         value:
-          "Send `!pollen verify-github <github-username>` and follow the process to verify and add your GitHub username to the Pollen DB.",
+          "Send `!pollen verify-github <github-username>` and follow the process to verify and add your GitHub account (if you have one) to the Pollen DB.",
       },
       {
-        name: "Save wallet address - optional",
+        name: "Update Discord account",
         value:
-          "Send `!pollen save-wallet <wallet-address>` to add your wallet address to the Pollen DB (Although this step is optional, you won't be able to receive HNY until you save a valid address).",
-      },
+          "Send `!pollen update-discord` in case you want to update your Discord tag in the DB",
+      }
     ],
     timestamp: new Date(),
     footer: {
@@ -99,7 +99,7 @@ export function helpEmbed(): MessageEmbed {
     description:
       "Hi, my name's Pollen Bot, I handle some Pollen related actions. All my commands are prefixed by `!pollen`. Refer to the list below for a list of my commands!",
     thumbnail: {
-      url: "https://i.imgur.com/dRxtULu.png",
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
     },
     fields: [
       {
@@ -120,8 +120,8 @@ export function helpEmbed(): MessageEmbed {
         value: "Shows your pollen user info saved in the database."
       },
       {
-        name: "!pollen save-discord",
-        value: "Saves your Discord ID and tag in the database."
+        name: "!pollen save-wallet <address>",
+        value: "Saves your wallet address, Discord ID and Discord tag in the database (address will be used for pollen payouts).",
       },
       {
         name: "!pollen verify-discourse <discourse-username>",
@@ -134,8 +134,8 @@ export function helpEmbed(): MessageEmbed {
           "Begins the process of verifying and saving your GitHub username in the database.",
       },
       {
-        name: "!pollen save-wallet <address>",
-        value: "Saves your wallet address in the database to be used for pollen payouts.",
+        name: "!pollen update-discord",
+        value: "Updates your Discord ID and tag in the database."
       }
     ],
     image: {
@@ -157,7 +157,7 @@ export function verifyDiscourseEmbed(
     description:
       "Process to verify your account to opt-in for pollen distributions.",
     thumbnail: {
-      url: "https://i.imgur.com/dRxtULu.png",
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
     },
     color: 16769024,
     fields: [
@@ -186,7 +186,7 @@ export function successDiscourseVerificationEmbed(
     title: "Congratulations!",
     description: "The verification process was completed successfully",
     thumbnail: {
-      url: "https://i.imgur.com/dRxtULu.png",
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
     },
     color: 16769024,
     fields: [
@@ -207,7 +207,7 @@ export function errorDiscourseVerificationEmbed(errorMessage: string): MessageEm
     title: "Bad news!",
     description: "There was an error in the discourse verification process.",
     thumbnail: {
-      url: "https://i.imgur.com/dRxtULu.png",
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
     },
     color: 16769024,
     fields: [
@@ -232,7 +232,7 @@ export function verifyGithubEmbed(
     description:
       "Process to verify your account to opt-in for pollen distributions.",
     thumbnail: {
-      url: "https://i.imgur.com/dRxtULu.png",
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
     },
     color: 16769024,
     fields: [
@@ -264,7 +264,7 @@ export function successGithubVerificationEmbed(
     title: "Congratulations!",
     description: "The verification process was completed successfully",
     thumbnail: {
-      url: "https://i.imgur.com/dRxtULu.png",
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
     },
     color: 16769024,
     fields: [
@@ -285,7 +285,7 @@ export function errorGithubVerificationEmbed(errorMessage: string): MessageEmbed
     title: "Bad news!",
     description: "There was an error in the github verification process.",
     thumbnail: {
-      url: "https://i.imgur.com/dRxtULu.png",
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
     },
     color: 16769024,
     fields: [
@@ -310,7 +310,7 @@ export function credEmbed(
     color: 16769024,
     title: "Your cred:",
     thumbnail: {
-      url: "https://i.imgur.com/dRxtULu.png",
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
     },
     fields: [
       {
