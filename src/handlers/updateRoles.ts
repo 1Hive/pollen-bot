@@ -96,10 +96,10 @@ function manageRoles(member: GuildMember, totalCred: number): string[] {
     .map(role => role.id)
     .filter(role => !roles.includes(role));
 
-  if (totalCred >= 30 && totalCred < 60) memberRoles.push(roles[0]);
-  else if (totalCred >= 60 && totalCred < 90) memberRoles.push(roles[1]);
-  else if (totalCred >= 90 && totalCred < 120) memberRoles.push(roles[2]);
-  else if (totalCred >= 120) memberRoles.push(roles[3]);
+  if (totalCred >= 40 && totalCred < 80) memberRoles.push(roles[0]);
+  else if (totalCred >= 80 && totalCred < 120) memberRoles.push(roles[1]);
+  else if (totalCred >= 120 && totalCred < 160) memberRoles.push(roles[2]);
+  else if (totalCred >= 160) memberRoles.push(roles[3]);
 
   return memberRoles;
 }
