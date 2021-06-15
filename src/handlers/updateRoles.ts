@@ -50,7 +50,7 @@ export default async function updateroles(message: Message, client?: Client): Pr
 
       const totalCred = participant.cred;
         
-      if (totalCred >= 30) discordIds.forEach(discordId => usersToModify.set(discordId, totalCred));
+      if (totalCred >= 40) discordIds.forEach(discordId => usersToModify.set(discordId, totalCred));
     }
 
     let count = 0;
