@@ -27,7 +27,7 @@ export async function handleDiscourseCheck(
   discord_id: string,
   verification_code: string,
   discourse_username: string,
-): Promise<{ message: MessageEmbed, ok: boolean }> {
+): Promise<{ message: MessageEmbed, ok: boolean, username: string }> {
   const response = await matchUser(
     discord_id,
     verification_code,
@@ -56,7 +56,7 @@ async function matchUser(
   discord_id: string, 
   verification_code: string, 
   discourse_username: string
-): Promise<{ message: MessageEmbed, ok: boolean }> {
+): Promise<{ message: MessageEmbed, ok: boolean, username: string }> {
   let message: MessageEmbed, ok: boolean;
 
   if (verification_code !== tempStorage[discord_id]) {
@@ -66,7 +66,7 @@ async function matchUser(
     );
     ok = false;
 
-    return { message, ok }
+    return { message, ok, username: "" }
   };
 
   const { user } = await getSpecificUser(discourse_username);
@@ -83,7 +83,7 @@ async function matchUser(
     ok = false;
   };
 
-  return { message, ok }
+  return { message, ok, username: user.username }
 }
 
 // generate random code for user

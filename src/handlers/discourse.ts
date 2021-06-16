@@ -59,8 +59,9 @@ export async function checkDiscourse(message: Message): Promise<void> {
       message.author.send(response.message);
 
       if (response.ok) {
-        await foundUser.updateOne(
-          { discourse: username, modifiedAt: Date.now() }
+        await User.updateOne(
+          { discordId: message.author.id },
+          { discourse: response.username, modifiedAt: Date.now() }
         );
   
         message.author.send("Discourse user succesfully saved.");

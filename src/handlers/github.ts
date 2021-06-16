@@ -60,8 +60,9 @@ export async function checkGithub(message: Message): Promise<void> {
       message.author.send(response.message);
 
       if (response.ok) {
-        await foundUser.updateOne(
-          { github: username, modifiedAt: Date.now() }
+        await User.updateOne(
+          { discordId: message.author.id },
+          { github: response.username, modifiedAt: Date.now() }
         );
   
         message.author.send("GitHub user succesfully saved.");

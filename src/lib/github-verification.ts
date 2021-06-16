@@ -22,7 +22,7 @@ export async function handleGithubCheck(
   discord_id: string,
   verification_code: string,
   github_username: string,
-): Promise<{ message: MessageEmbed, ok: boolean }> {
+): Promise<{ message: MessageEmbed, ok: boolean, username: string }> {
   const response = await matchUser(
     discord_id,
     verification_code,
@@ -44,7 +44,7 @@ async function getUserGist(github_username: string) {
     }
   });
 
-  let gistPollen;
+  let gistPollen, username;
 
   for (let i = 0; i < responseJson.length; i++) {
     if (responseJson[i].files["pollen.md"]) {
@@ -57,10 +57,11 @@ async function getUserGist(github_username: string) {
       });
 
       gistPollen = gistJson.files["pollen.md"];
+      username = gistJson.owner.login;
     }
   }
 
-  return gistPollen
+  return { gistPollen, username }
 }
 
 // main logic to match user
@@ -68,7 +69,7 @@ async function matchUser(
   discord_id: string, 
   verification_code: string, 
   github_username: string
-): Promise<{ message: MessageEmbed, ok: boolean }> {
+): Promise<{ message: MessageEmbed, ok: boolean, username: string }> {
   let message: MessageEmbed, ok: boolean;
 
   if (verification_code !== tempStorage[discord_id]) {
@@ -78,10 +79,10 @@ async function matchUser(
     );
     ok = false;
 
-    return { message, ok }
+    return { message, ok, username: "" }
   }
 
-  const { content } = await getUserGist(github_username);
+  const { gistPollen: { content }, username } = await getUserGist(github_username);
 
   if (content === verification_code) {
     message = successGithubVerificationEmbed(github_username);
@@ -95,7 +96,7 @@ async function matchUser(
     ok = false;
   }
 
-  return { message, ok }
+  return { message, ok, username }
 }
 
 // generate random code for user

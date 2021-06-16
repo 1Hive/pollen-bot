@@ -10,7 +10,8 @@ export default async function discord(message: Message): Promise<void> {
     if (!foundUser) 
       throw "You first need to save your wallet address with the `!pollen save-wallet <wallet-address>` command.";
 
-    await foundUser.updateOne(
+    await User.updateOne(
+      { discordId: message.author.id },
       { username: message.author.tag, modifiedAt: Date.now() }
     );
     
