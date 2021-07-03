@@ -1,5 +1,6 @@
 import info from "./info";
 import help from "./help";
+import adminHelp from "./adminHelp";
 import userinfo from "./userinfo";
 import discord from "./discord";
 import { verifyDiscourse, checkDiscourse } from "./discourse";
@@ -16,6 +17,7 @@ import getAddressList from "./getAddressList";
 const handlers = new Map([
   ["info", info],
   ["help", help],
+  ["adminhelp", adminHelp],
   ["userinfo", userinfo],
   ["update-discord", discord],
   ["verify-discourse", verifyDiscourse],
@@ -25,9 +27,9 @@ const handlers = new Map([
   ["save-wallet", saveWallet],
   ["mycred", mycred],
   ["updateroles", updateroles],
-  ["pollenban", pollenBan],
-  ["pollenunban", pollenUnban],
-  ["getpollenbanned", getPollenBannedMsg],
+  ["ban", pollenBan],
+  ["unban", pollenUnban],
+  ["getbanned", getPollenBannedMsg],
   ["getlastmodified", getLastModified],
   ["getaddresslist", getAddressList]
 ]);

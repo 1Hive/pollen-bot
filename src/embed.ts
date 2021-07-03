@@ -148,6 +148,55 @@ export function helpEmbed(): MessageEmbed {
   })
 }
 
+export function adminHelpEmbed(): MessageEmbed {
+  return new MessageEmbed({
+    color: 16769024,
+    author: {
+      name: "Pollen bot",
+      url: "https://github.com/1Hive/pollen-bot",
+    },
+    description:
+      "Refer to the list below for a list of admin commands",
+    thumbnail: {
+      url: "https://cdn.discordapp.com/attachments/762754727620378634/847572341910274180/01.png",
+    },
+    fields: [
+      {
+        name: "!pollen updateroles",
+        value: "Updates cred minting roles."
+      },
+      {
+        name: "!pollen getlastmodified [weeks]",
+        value: "Gets the list of users modified in the DB for the past [weeks].",
+      },
+      {
+        name: "!pollen getaddresslist",
+        value:
+          "Gets the list of user addresses from the DB to be used for the Aragon labels.",
+      },
+      {
+        name: "!pollen getbanned",
+        value: "Gets the list of pollen banned users."
+      },
+      {
+        name: "!pollen ban [user ID or IDs separated by spaces (' ')]",
+        value: "Bans the specified users from pollen.",
+      },
+      {
+        name: "!pollen uban [user ID or IDs separated by spaces (' ')]",
+        value: "Unbans the specified users from pollen.",
+      }
+    ],
+    image: {
+      url: "https://i.imgur.com/E7x8s0j.png",
+    },
+    timestamp: new Date(),
+    footer: {
+      text: "wiki.1hive.org",
+    }
+  })
+}
+
 export function verifyDiscourseEmbed(
   verificationCode: string,
   discourseUsername: string
