@@ -120,16 +120,16 @@ export function helpEmbed(): MessageEmbed {
         value: "Shows your pollen user info saved in the database."
       },
       {
-        name: "!pollen save-wallet <address>",
+        name: "!pollen save-wallet YourWalletAddress",
         value: "Saves your wallet address, Discord ID and Discord tag in the database (address will be used for pollen payouts).",
       },
       {
-        name: "!pollen verify-discourse <discourse-username>",
+        name: "!pollen verify-discourse YourDiscourseUsername",
         value:
           "Begins the process of verifying and saving your Discourse username in the database.",
       },
       {
-        name: "!pollen verify-github <github-username>",
+        name: "!pollen verify-github YourGithubUsername",
         value:
           "Begins the process of verifying and saving your GitHub username in the database.",
       },
