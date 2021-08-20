@@ -33,8 +33,17 @@ export default async function getAddressList(message: Message): Promise<void> {
       })
 
     const baseAddressList = JSON.parse(readFileSync("./base-addresses.json", "utf-8"))
+
+    // Removes duplicates by filtering out the first address found per user 
+    // in case more than 1 is found (second address is the one updated on the DB)
+    const mergedList = [...baseAddressList, ...userAddressList].reverse()
+    const filteredList = mergedList
+      .filter(
+        (user, index) => index === mergedList.findIndex(elem => elem.name === user.name)
+      )
+      .reverse()
     
-    writeFileSync("addressList.json", JSON.stringify([...baseAddressList, ...userAddressList]))
+    writeFileSync("addressList.json", JSON.stringify(filteredList))
   
     message.author.send(
       "Here's the list of users and their corresponding address:",
