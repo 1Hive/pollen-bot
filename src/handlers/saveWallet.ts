@@ -20,12 +20,12 @@ export default async function saveWallet(message: Message): Promise<void> {
       )
       message.channel.send(`<@${message.author.id}> wallet address succesfully saved.`);
     } catch(err) {
-      if (err.code === "INVALID_ARGUMENT") message.channel.send(walletWarningEmbed());
+      if (err.code === "INVALID_ARGUMENT") message.channel.send({ embeds: [ walletWarningEmbed() ] });
       else{
         message.reply(err);
         error(err);
       }
     }
   }
-  else message.channel.send(walletWarningEmbed());
+  else message.channel.send({ embeds: [ walletWarningEmbed() ] });
 }

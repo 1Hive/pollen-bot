@@ -13,7 +13,7 @@ export default async function userinfo(message: Message): Promise<void> {
       "We could not find you on the DB, please send `!pollen info` to know how to get onboarded."
     );
     else {
-      if (message.channel.type !== "dm") message.reply("Check DM.");
+      if (message.channel.type !== "DM") message.reply("Check DM.");
       message.author.send(
         "this is your current pollen saved information:\n```" + JSON.stringify(foundUser,  null, 2) + "```"
       );

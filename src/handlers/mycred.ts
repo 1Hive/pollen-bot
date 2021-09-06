@@ -21,11 +21,13 @@ export default async function mycred(message: Message): Promise<void> {
     const credHistory = credParticipant.credPerInterval;
 
     await message.channel.send(`<@${message.author.id}>`);
-    await message.channel.send(credEmbed(
-      credParticipant.cred,
-      credHistory[credHistory.length -2],
-      credHistory[credHistory.length - 1]
-    ));
+    await message.channel.send({ embeds: [
+      credEmbed(
+        credParticipant.cred,
+        credHistory[credHistory.length -2],
+        credHistory[credHistory.length - 1]
+      )
+    ]});
   } catch (err) {
     if (typeof err !== "string") error(err);
     message.reply(`An error has occurred: ${err}`);

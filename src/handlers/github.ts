@@ -25,7 +25,7 @@ export async function verifyGithub(message: Message): Promise<void> {
 
     if (username) {
       const response = await handleGithubVerify(message.author.id, username);
-      message.author.send(response.message);
+      message.author.send({ embeds: [ response.message ]});
     }
   } catch (err) {
     if (typeof err === "string") message.reply(err)
@@ -57,7 +57,7 @@ export async function checkGithub(message: Message): Promise<void> {
         username,
       );
 
-      message.author.send(response.message);
+      message.author.send({ embeds: [ response.message ]});
 
       if (response.ok) {
         await User.updateOne(

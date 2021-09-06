@@ -24,7 +24,7 @@ export async function verifyDiscourse(message: Message): Promise<void> {
     );
     if (username) {
       const response = await handleDiscourseVerify(message.author.id, username);
-      message.author.send(response.message);
+      message.author.send({ embeds: [ response.message ]});
     }
   } catch (err) {
     if (typeof err === "string") message.reply(err)
@@ -56,7 +56,7 @@ export async function checkDiscourse(message: Message): Promise<void> {
         username
       );
 
-      message.author.send(response.message);
+      message.author.send({ embeds: [ response.message ]});
 
       if (response.ok) {
         await User.updateOne(

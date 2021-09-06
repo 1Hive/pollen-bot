@@ -364,15 +364,15 @@ export function credEmbed(
     fields: [
       {
         name: "Total",
-        value: Math.round(totalCred),
+        value: Math.round(totalCred).toString(),
       },
       {
         name: "Last week",
-        value: Math.round(lastWeekCred),
+        value: Math.round(lastWeekCred).toString(),
       },
       {
         name: "This week",
-        value: Math.round(thisWeekCred),
+        value: Math.round(thisWeekCred).toString(),
       },
     ],
     timestamp: new Date(),

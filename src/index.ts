@@ -18,28 +18,26 @@ config();
 
 const client = new Client({
   partials: ["MESSAGE", "REACTION"],
-  ws: {
-    intents: [
+  intents: [
       "GUILDS",
       "GUILD_MESSAGES",
       "GUILD_MESSAGE_REACTIONS",
       "GUILD_MEMBERS",
       "DIRECT_MESSAGES",
       "DIRECT_MESSAGE_REACTIONS",
-    ],
-  },
+    ]
 });
 
 client.on("ready", () => {
   log(`Bot successfully started as ${client.user.tag} 🐝`);
 });
 
-client.on("message", (message) => {
+client.on("messageCreate", (message) => {
   if (message.author.bot) return;
 
   // Gets the Bot-commands channel ID.
   const BOT_COMMANDS_CHANNEL_ID =
-    message.channel.type === "dm"
+    message.channel.type === "DM"
       ? message.channel.id
       : message.guild.channels.cache.find((channel) => {
           return channel.name.includes("bot-commands");
@@ -58,10 +56,10 @@ client.on("message", (message) => {
           `Served command ${message.content} successfully for ${message.author.username}.`
         );
       } else {
-        message.delete({ timeout: 500 });
+        message.delete();
         client.channels.fetch(BOT_COMMANDS_CHANNEL_ID).then((channel) => {
           (channel as TextChannel).send(`<@${message.author.id}>`);
-          (channel as TextChannel).send(wrongChannelWarningEmbed());
+          (channel as TextChannel).send({ embeds: [ wrongChannelWarningEmbed() ] })
         });
         return;
       }
