@@ -29,4 +29,4 @@ For the bot to run properly, you need to create a `.env` file and add these vari
 - `DISCORD_API_TOKEN`: Your discord API token. [See this guide on how to obtain one](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token).
 - `MONGODB_URI`: Your MongoDB connection URI.
 - `GUILD_ID`: Your Discord server ID.
-- `POLLEN_ADMIN`: Your Pollen Admin ID.
+- `POLLEN_ADMIN`: Your Pollen Admin IDs array.

@@ -18,8 +18,8 @@ const NodeAddress = sourcecred.core.address.makeAddressModule({
 
 export default async function updateroles(message: Message, client?: Client): Promise<void> {
   try {
-    if (message && message.author.id !== process.env.POLLEN_ADMIN) throw "You do not have access to this command.";
-    if (message && message.channel.type === "dm") throw "Try again in the bot-commands channel.";
+    if (message && !process.env.POLLEN_ADMIN.includes(message.author.id)) throw "You do not have access to this command.";
+    if (message && message.channel.type === "DM") throw "Try again in the bot-commands channel.";
       
     const bannedMembers = await getPollenBanned();
     const accounts = await Account.find({});

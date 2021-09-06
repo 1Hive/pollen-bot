@@ -6,7 +6,7 @@ import { error } from "../utils";
 
 export default async function getLastModified(message: Message): Promise<void> {
   try {          
-    if (message.author.id !== process.env.POLLEN_ADMIN) 
+    if (!process.env.POLLEN_ADMIN.includes(message.author.id)) 
       throw "You do not have access to this command.";
 
     const weeks: number = +message.content.split(" ")[2] || 1 ;
@@ -19,11 +19,11 @@ export default async function getLastModified(message: Message): Promise<void> {
 
     writeFileSync("lastModifiedUsers.json", formattedModifiedUsers);
   
-    message.reply('Check DM');
-    message.author.send(
-      `Here's the list of users created or modified last ${weeks} week(s):`,
-      new MessageAttachment("lastModifiedUsers.json")
-    );
+    message.reply("Check DM");
+    message.author.send({
+      content: `Here's the list of users created or modified last ${weeks} week(s):`,
+      files: [ new MessageAttachment("lastModifiedUsers.json") ]
+    });
   } catch (err) {
     if (typeof err !== "string") error(err);
     message.reply(err)

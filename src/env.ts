@@ -9,7 +9,7 @@ const ENV_VARS = {
     true,
   ],
   MONGODB_URI: [process.env.MONGODB_URI, "YOUR_MONGODB_URI", true],
-  POLLEN_ADMIN: [process.env.POLLEN_ADMIN, "YOUR_POLLEN_ADMIN_ID", true],
+  POLLEN_ADMIN: [process.env.POLLEN_ADMIN, "YOUR_POLLEN_ADMIN_IDS_ARRAY", true],
   GUILD_ID: [process.env.GUILD_ID, "YOUR_GUILD_ID", true],
   SENTRY_DSN: [process.env.SENTRY_DSN, "", false],
 };

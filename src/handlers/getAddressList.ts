@@ -8,7 +8,7 @@ export default async function getAddressList(message: Message): Promise<void> {
   try {
     const ledger = await loadLedger()
 
-    if (message.author.id !== process.env.POLLEN_ADMIN) 
+    if (process.env.POLLEN_ADMIN.includes(message.author.id)) 
       throw "You do not have access to this command.";
 
     const userAddressQuery = await User
@@ -45,10 +45,10 @@ export default async function getAddressList(message: Message): Promise<void> {
     
     writeFileSync("addressList.json", JSON.stringify(filteredList))
   
-    message.author.send(
-      "Here's the list of users and their corresponding address:",
-      new MessageAttachment("addressList.json")
-    );
+    message.author.send({
+      content: "Here's the list of users and their corresponding address:",
+      files: [ new MessageAttachment("addressList.json") ]
+    });
   } catch (err) {
     if (typeof err !== "string") error(err);
     message.reply(err)

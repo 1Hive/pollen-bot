@@ -4,8 +4,8 @@ import BannedUser from "../models/BannedUser";
 import { error } from "../utils";
 
 export default async function pollenunban(message: Message): Promise<void> {
-  if (message.author.id !== process.env.POLLEN_ADMIN) throw "You do not have access to this command.";
-  if (message.channel.type === "dm") throw "Try again in the Bot Commands channel.";
+  if (!process.env.POLLEN_ADMIN.includes(message.author.id)) throw "You do not have access to this command.";
+  if (message.channel.type === "DM") throw "Try again in the Bot Commands channel.";
 
   const userIds: string[] = message.content.split(" ").slice(2);
 

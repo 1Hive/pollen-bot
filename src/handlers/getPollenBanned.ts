@@ -7,7 +7,7 @@ import { error } from "../utils";
 export async function getPollenBannedMsg(message: Message): Promise<void> {
   try {          
     if (
-      message && message.author.id !== process.env.POLLEN_ADMIN
+      message && !process.env.POLLEN_ADMIN.includes(message.author.id)
     ) throw "You do not have access to this command.";
 
     const bannedMembers = await getPollenBanned();

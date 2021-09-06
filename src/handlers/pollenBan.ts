@@ -1,12 +1,12 @@
-import { GuildEmoji, GuildMember, Message, MessageReaction } from "discord.js";
+import { GuildEmoji, Message, MessageReaction, User } from "discord.js";
 
 import BannedUser from "../models/BannedUser";
 import { error } from "../utils";
 
 export default async function pollenban(message: Message): Promise<void> {
   try {
-    if (message.author.id !== process.env.POLLEN_ADMIN) throw "You do not have access to this command.";
-    if (message.channel.type === "dm") throw "Try again in the Bot Commands channel.";
+    if (!process.env.POLLEN_ADMIN.includes(message.author.id)) throw "You do not have access to this command.";
+    if (message.channel.type === "DM") throw "Try again in the Bot Commands channel.";
 
     const userIds: string[] = message.content.split(" ").slice(2);
     if (!userIds.length) throw "Please, specify the users IDs";
@@ -26,10 +26,10 @@ export default async function pollenban(message: Message): Promise<void> {
     const messageToConfirm = await message.channel.send("- " + userList.join("\n- "));
     messageToConfirm.react(emoji);
 
-    const filter = (reaction: MessageReaction, user: GuildMember) => 
-      reaction.emoji === emoji && user.id === process.env.POLLEN_ADMIN;
+    const filter = (reaction: MessageReaction, user: User) => 
+      reaction.emoji === emoji && user.id === message.author.id;
 
-    const collector = messageToConfirm.createReactionCollector(filter, { max: 1, time: 30000 });
+    const collector = messageToConfirm.createReactionCollector({ filter, max: 1, time: 30000 });
     collector.on("collect", () => banUsers(userList, message));
 
   } catch(err) {
