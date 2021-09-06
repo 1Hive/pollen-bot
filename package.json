@@ -57,5 +57,8 @@
     "src/**/*.js": [
       "npx eslint --fix"
     ]
+  },
+  "engines": {
+    "node": ">=16.6.0"
   }
 }
