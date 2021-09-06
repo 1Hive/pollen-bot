@@ -8,7 +8,7 @@ export default async function getAddressList(message: Message): Promise<void> {
   try {
     const ledger = await loadLedger()
 
-    if (process.env.POLLEN_ADMIN.includes(message.author.id)) 
+    if (!process.env.POLLEN_ADMIN.includes(message.author.id)) 
       throw "You do not have access to this command.";
 
     const userAddressQuery = await User

@@ -5,7 +5,7 @@ import User from "../models/user";
 import { error } from "../utils";
 
 export default async function getLastModified(message: Message): Promise<void> {
-  try {          
+  try {
     if (!process.env.POLLEN_ADMIN.includes(message.author.id)) 
       throw "You do not have access to this command.";
 
