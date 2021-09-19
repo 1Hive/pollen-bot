@@ -28,7 +28,7 @@ export function walletWarningEmbed(): MessageEmbed {
     color: 16769024,
     fields: [
       {
-        name: "`!pollen save-wallet <address>`",
+        name: "`!pollen save-wallet walletAddress`",
         value:
           "Correct usage of this command requires you to add your xDai wallet address.",
       },
@@ -64,17 +64,17 @@ export function infoEmbed(): MessageEmbed {
       {
         name: "Save wallet address - required",
         value:
-          "Send `!pollen save-wallet <wallet-address>` to add your wallet address to the Pollen DB as well as your Discord ID and Discord tag.",
+          "Send `!pollen save-wallet walletAddress` to add your wallet address to the Pollen DB as well as your Discord ID and Discord tag.",
       },
       {
         name: "Save Discourse (Forum) account - optional",
         value:
-          "Send `!pollen verify-discourse <discourse-username>` and follow the process to verify and add your Discourse account (if you have one) to the Pollen DB.",
+          "Send `!pollen verify-discourse discourseUsername` and follow the process to verify and add your Discourse account (if you have one) to the Pollen DB.",
       },
       {
         name: "Save GitHub account - optional",
         value:
-          "Send `!pollen verify-github <github-username>` and follow the process to verify and add your GitHub account (if you have one) to the Pollen DB.",
+          "Send `!pollen verify-github githubUsername` and follow the process to verify and add your GitHub account (if you have one) to the Pollen DB.",
       },
       {
         name: "Update Discord account",
