@@ -38,6 +38,7 @@ export default async function getAddressList(message: Message): Promise<void> {
     // in case more than 1 is found (second address is the one updated on the DB)
     const mergedList = [...baseAddressList, ...userAddressList].reverse()
     const filteredList = mergedList
+      .filter(user => user !== 'undefined')
       .filter(
         (user, index) => index === mergedList.findIndex(elem => elem.name === user.name)
       )
